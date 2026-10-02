@@ -35,8 +35,15 @@ const About = () => {
     { t: 'i?' },
   ];
   const descriptionText =
-    'I am a BCA Student  a passion for building clean, intuitive, and reliable digital experiences.';
-  const aboutMeText = `I build web applications that bridge thoughtful frontend interfaces with robust backend systems. To me, software is more than code on a screen; it is about making technology feel effortless and genuinely useful to real people.\n\nMy journey began with a simple curiosity for how things work under the hood. Over time, that curiosity evolved into a genuine passion for fluid interface animations, reliable backend architecture, and building user journeys that feel effortless and alive.\n\nWhether I am polishing micro-interactions or engineering full-stack systems, my core focus remains unchanged: creating software that brings people joy, solves real problems, and leaves a lasting positive impact.`;
+    'I am a BCA student and Full-Stack Developer who loves turning ideas into clean, intuitive, and meaningful digital experiences.';
+
+  const aboutMeText = `I am a BCA student and Full-Stack Developer passionate about creating modern, scalable, and user-focused web applications. I enjoy combining thoughtful frontend experiences with reliable backend systems to turn ideas into products that are both useful and enjoyable.
+
+My journey started with a simple curiosity about how technology works. Over time, that curiosity evolved into a passion for web development, interactive interfaces, problem-solving, and building products that make a real difference.
+
+My primary focus is modern full-stack development, working with technologies such as React, Next.js, TypeScript, Node.js, Express, MongoDB, and the MERN stack. I care about clean architecture, intuitive UX, performance, and writing code that is easy to maintain and evolve.
+
+Outside of development, I participate in hackathons, contribute to open-source projects, and build developer communities. I am always exploring new technologies, learning through real-world projects, and looking for better ways to turn ideas into impactful digital experiences.`;
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
