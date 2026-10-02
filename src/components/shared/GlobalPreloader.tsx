@@ -4,12 +4,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 
 export const preloaderWords = [
-  'السلام علیکم',
-  'नमस्ते',
-  'Hola',
-  'مرحباً',
-  'په خیر راغلي',
-  'Welcome',
+  'नमस्ते 👋',
+  'Welcome 🚀',
+  'राम राम 🙏',
+  'जै देव ✨',
+  'Loading... थोड़ा इंतज़ार 😄',
+  'Compiling awesomeness... ⚡',
+  'Coffee → Code → Repeat ☕',
+  '404: Boring Portfolio Not Found 😎',
+  'Almost there... 👀',
+  'Let’s build something! 🚀',
 ];
 
 const MIN_DISPLAY_MS = 1400;
