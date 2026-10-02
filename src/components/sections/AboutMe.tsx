@@ -35,7 +35,7 @@ const About = () => {
     { t: 'i?' },
   ];
 
-  
+
  const descriptionText =
   'I am a BCA student and Full-Stack Developer passionate about building clean, scalable, and impactful digital experiences.';
 
@@ -261,9 +261,9 @@ Beyond development, I actively participate in hackathons, contribute to open-sou
                 (Experience)
               </span>
               <h3 className="mt-5 font-display text-[clamp(2.5rem,7vw,6.5rem)] font-black uppercase tracking-tight leading-none text-light">
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">The</span></span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="serif-accent block normal-case tracking-[-0.05em] text-accent">path</span></span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">so far.</span></span>
+                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">My </span></span>{' '}
+                <span className="experience-word inline-block overflow-hidden align-top"><span className="serif-accent block normal-case tracking-[-0.05em] text-accent">Professional e</span></span>{' '}
+                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">Experience </span></span>
               </h3>
             </div>
 
