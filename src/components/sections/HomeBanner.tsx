@@ -302,7 +302,7 @@ const HomeBanner = () => {
               ref={paragraphRef}
               className="text-warm font-sans text-base sm:text-lg md:text-xl leading-relaxed mb-8 md:mb-10 text-center mx-auto"
             >
-              Full-stack engineer building fast, scalable, and reliable web applications.
+             Full-Stack Developer focused on building fast, scalable, and production-ready web applications.
             </p>
 
             <div ref={tickerRef} className="w-full flex justify-center">

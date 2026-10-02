@@ -6,7 +6,7 @@ export const siteMetadata: Metadata = {
     template: '%s | Suraj Rawat',
   },
   description:
-    'Web developer specializing in React, Next.js, and MERN Stack development. Building fast, scalable, and user-focused web applications.',
+    'Full-Stack Developer focused on building fast, scalable, and production-ready web applications.',
   keywords: [
     'Suraj Rawat',
     'Web Developer',
