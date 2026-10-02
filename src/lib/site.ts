@@ -21,10 +21,10 @@ export const site = {
 export type SocialKey = 'github' | 'linkedin' | 'instagram' | 'source';
 
 export const socials: Record<SocialKey, { label: string; href: string }> = {
-  github: { label: 'GitHub', href: 'https://github.com/aitezazdev' },
-  linkedin: { label: 'Linkedin', href: 'https://linkedin.com/in/aitezaz-sikandar' },
-  instagram: { label: 'Instagram', href: 'https://instagram.com/ur_zaz' },
-  source: { label: 'Source Code', href: 'https://github.com/aitezazdev/Portfolio' },
+  github: { label: 'GitHub', href: 'https://github.com/SurajRawatr07' },
+  linkedin: { label: 'Linkedin', href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/' },
+  instagram: { label: 'Instagram', href: 'https://www.instagram.com/surajrwt07_' },
+  source: { label: 'Source Code', href: 'https://github.com/SurajRawatr07' },
 };
 
 export const socialList: Array<{ label: string; href: string }> = [
