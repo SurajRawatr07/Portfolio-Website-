@@ -11,9 +11,11 @@ const Services = () => {
 
   useEffect(() => {
     if (window.innerWidth < 768) return;
+
     const ctx = gsap.context(() => {
       const allSections = servicesRef.current.filter(Boolean);
       const pinOffset = 50;
+
       allSections.forEach((section, index) => {
         ScrollTrigger.create({
           trigger: section,
@@ -25,6 +27,7 @@ const Services = () => {
         });
       });
     }, sectionRef);
+
     return () => ctx.revert();
   }, []);
 
@@ -33,41 +36,42 @@ const Services = () => {
     { t: 'i', serif: true },
     { t: 'DO' },
   ];
+
   const descriptionText =
-    "I specialize in building full-stack web applications that are fast, reliable, and user-friendly. With a solid foundation in both frontend and backend technologies, I help bring ideas to life whether it's for a business, a startup, or a product team.";
+    'I build modern, production-ready web applications that combine thoughtful UI, powerful backend systems, and reliable performance — from idea to deployment.';
 
   const services = [
     {
       id: '01',
-      title: 'Full Stack Development',
+      title: 'Full-Stack Development',
       description:
-        'End-to-end development of modern web applications, covering everything from frontend interfaces to backend APIs. I build complete, maintainable, and scalable systems using the MERN stack and modern tooling.',
+        'Building complete, production-ready web applications with scalable architecture, seamless APIs, secure authentication, and modern user experiences.',
       items: [
-        'MERN Stack (MongoDB, Express.js, React, Node.js)',
-        'REST APIs & Integration',
-        'Authentication & Authorization',
+        'MERN Stack — MongoDB, Express.js, React, Node.js',
+        'REST APIs, Authentication & Authorization',
+        'Scalable Architecture & Database Integration',
       ],
     },
     {
       id: '02',
       title: 'Frontend Development',
       description:
-        'Crafting responsive, accessible, and elegant interfaces that deliver exceptional user experiences. I focus on clarity, performance, and seamless interaction across devices.',
+        'Creating responsive, interactive, and visually polished interfaces focused on usability, accessibility, performance, and smooth user experiences across every device.',
       items: [
-        'React, Next.js, TailwindCSS, GSAP',
-        'Optimized Rendering & Animations',
-        'Figma to Code Implementation',
+        'React, Next.js, TypeScript & Tailwind CSS',
+        'GSAP Animations & Interactive Experiences',
+        'Responsive UI & Figma to Production',
       ],
     },
     {
       id: '03',
-      title: 'Optimization & Performance',
+      title: 'Performance & Deployment',
       description:
-        'Optimizing codebases, APIs, and assets for speed, scalability, and maintainability. I ensure your applications run efficiently with best practices in caching, SEO, and deployment.',
+        'Optimizing applications for speed, SEO, scalability, and maintainability while preparing them for reliable production deployment.',
       items: [
-        'Performance Tuning & Code Refactoring',
-        'SEO & Accessibility Optimization',
-        'Deployment (Vercel, AWS, Docker)',
+        'Performance Optimization & Code Refactoring',
+        'SEO, Accessibility & Web Best Practices',
+        'Deployment with Vercel, AWS & Docker',
       ],
     },
   ];
@@ -129,10 +133,14 @@ const Services = () => {
 
                   <div className="divide-y divide-border-subtle">
                     {service.items.map((item, i) => (
-                      <div key={i} className="py-3 flex items-center gap-3 md:gap-4">
+                      <div
+                        key={i}
+                        className="py-3 flex items-center gap-3 md:gap-4"
+                      >
                         <span className="text-accent-light text-xs md:text-sm font-mono font-bold">
                           0{i + 1}
                         </span>
+
                         <span className="text-base sm:text-base md:text-lg font-bold font-sans text-light">
                           {item}
                         </span>
