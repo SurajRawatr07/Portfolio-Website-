@@ -34,16 +34,16 @@ const About = () => {
     { t: 'am', serif: true },
     { t: 'i?' },
   ];
-  const descriptionText =
-    'I am a BCA student and Full-Stack Developer who loves turning ideas into clean, intuitive, and meaningful digital experiences.';
 
-  const aboutMeText = `I am a BCA student and Full-Stack Developer passionate about creating modern, scalable, and user-focused web applications. I enjoy combining thoughtful frontend experiences with reliable backend systems to turn ideas into products that are both useful and enjoyable.
+  
+ const descriptionText =
+  'I am a BCA student and Full-Stack Developer passionate about building clean, scalable, and impactful digital experiences.';
 
-My journey started with a simple curiosity about how technology works. Over time, that curiosity evolved into a passion for web development, interactive interfaces, problem-solving, and building products that make a real difference.
+const aboutMeText = `I am a BCA student, Full-Stack Developer, and Freelancer specializing in the MERN Stack, React, Next.js, and TypeScript. I enjoy turning ideas into scalable, user-focused web applications.
 
-My primary focus is modern full-stack development, working with technologies such as React, Next.js, TypeScript, Node.js, Express, MongoDB, and the MERN stack. I care about clean architecture, intuitive UX, performance, and writing code that is easy to maintain and evolve.
+I am also an Open-Source Contributor, Hackathon Participant, Campus Ambassador, and the Founder of Tech Circle — a developer community focused on learning, collaboration, and growth.
 
-Outside of development, I participate in hackathons, contribute to open-source projects, and build developer communities. I am always exploring new technologies, learning through real-world projects, and looking for better ways to turn ideas into impactful digital experiences.`;
+Beyond development, I actively participate in hackathons, contribute to open-source projects, and build communities while continuously exploring new technologies and real-world opportunities.`;
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
