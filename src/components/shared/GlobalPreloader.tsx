@@ -6,12 +6,7 @@ import { gsap } from '@/lib/gsap';
 export const preloaderWords = [
   'नमस्ते 👋',
   'Welcome 🚀',
-  'राम राम 🙏',
-  'जै देव ✨',
   'Loading... थोड़ा इंतज़ार 😄',
-  'Compiling awesomeness... ⚡',
-  'Coffee → Code → Repeat ☕',
-  '404: Boring Portfolio Not Found 😎',
   'Almost there... 👀',
   'Let’s build something! 🚀',
 ];
