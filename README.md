@@ -1,8 +1,8 @@
 # Portfolio
 
-The personal portfolio of [**Aitezaz Sikandar**](https://github.com/aitezazdev). Built with **Next.js 15**, **React 19**, **GSAP 3**, and **Lenis**, featuring hardware-accelerated motion choreography, interactive HTML5 canvas simulations, seamless page transitions, and an emerald-accented dark editorial design.
+The personal portfolio of [**Suraj Rawat**](https://github.com/aitezazdev). Built with **Next.js 15**, **React 19**, **GSAP 3**, and **Lenis**, featuring hardware-accelerated motion choreography, interactive HTML5 canvas simulations, seamless page transitions, and an emerald-accented dark editorial design.
 
-**Live Site:** [aitezazdev.vercel.app](https://aitezazdev.vercel.app)
+**Live Site:** [https://surajrawatportfoliowebsite.vercel.app/)
 
 ---
 
