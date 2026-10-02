@@ -91,20 +91,19 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   return (
     <div ref={rootRef} className={containerClassName}>
       <h2
-        className={`font-display font-black uppercase tracking-tighter leading-none ${className}`}
+        className={`font-bold-serif uppercase tracking-[-0.02em] leading-[0.96] ${className}`}
         aria-label={plainText}
       >
-        <span aria-hidden="true" className="flex flex-wrap items-baseline gap-x-[0.24em]">
+        <span aria-hidden="true" className="flex flex-wrap items-baseline gap-x-[0.2em]">
           {resolvedWords.map((word, i) => (
             <span
               key={`${word.t}-${i}`}
               className={`ah-word relative inline-block overflow-visible ${
-                word.serif ? 'serif-accent normal-case font-normal text-[1.06em] text-accent' : ''
+                word.serif ? 'font-bold-italic normal-case text-[1.05em] tracking-[-0.01em] text-accent' : ''
               }`}
               style={{
-                paddingBottom: '0.14em',
-                marginBottom: '-0.14em',
-                ...(word.serif ? {} : {}),
+                paddingBottom: '0.12em',
+                marginBottom: '-0.12em',
               }}
             >
               {word.t}
@@ -112,7 +111,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
           ))}
         </span>
       </h2>
-      {showLine && <div className="ah-line h-1 w-24 origin-left bg-gradient-to-r from-accent to-transparent mt-1" />}
+      {showLine && <div className="ah-line h-[2px] w-20 sm:w-24 origin-left bg-gradient-to-r from-accent to-transparent mt-2" />}
     </div>
   );
 };

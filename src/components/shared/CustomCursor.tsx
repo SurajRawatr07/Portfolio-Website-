@@ -192,7 +192,7 @@ export default function CustomCursor() {
         ref={cursorTextRef}
         className="pointer-events-none fixed top-0 left-0 z-[10001] opacity-0"
       >
-        <span className="text-accent-light text-[11px] font-bold tracking-[0.15em]">
+        <span className="text-accent-light text-[11px] font-bold-serif font-bold uppercase tracking-[0.14em]">
           {cursorText}
         </span>
       </div>

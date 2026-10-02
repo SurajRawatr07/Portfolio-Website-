@@ -133,7 +133,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleButtonMouseLeave}
         disabled={disabled}
-        className={`relative text-xs md:text-sm outline-none overflow-hidden h-10 md:h-12 px-4 sm:px-6 md:px-8 rounded-full ${bgColor} ${textColor} ${borderColor} group cursor-pointer font-medium inline-flex items-center justify-center ${className}`}
+        className={`relative text-[11px] sm:text-xs md:text-[13px] font-bold-serif uppercase tracking-[0.1em] outline-none overflow-hidden h-10 md:h-12 px-4 sm:px-6 md:px-8 rounded-full ${bgColor} ${textColor} ${borderColor} group cursor-pointer inline-flex items-center justify-center transition-colors duration-200 select-none ${className}`}
         style={{ transformOrigin: 'center' }}
         {...props}
       >
@@ -143,11 +143,11 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
           style={{ backgroundColor: rippleColor, opacity: 0 }}
         />
 
-        <span className="flex items-center justify-center h-full transition-transform duration-300 ease-in-out group-hover:-translate-y-full relative z-10">
+        <span className="flex items-center justify-center h-full font-bold-serif transition-transform duration-300 ease-in-out group-hover:-translate-y-full relative z-10 whitespace-nowrap">
           {topText}
         </span>
 
-        <span aria-hidden="true" className="flex items-center justify-center h-full absolute inset-0 top-full transition-transform duration-300 ease-in-out group-hover:-translate-y-full z-10">
+        <span aria-hidden="true" className="flex items-center justify-center h-full font-bold-italic absolute inset-0 top-full transition-transform duration-300 ease-in-out group-hover:-translate-y-full z-10 whitespace-nowrap">
           {bottomText}
         </span>
       </Component>

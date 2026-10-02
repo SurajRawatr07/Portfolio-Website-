@@ -7,51 +7,40 @@
  * Website: https://aitezazdev.vercel.app
  */
 
-import { Geist, Geist_Mono, Space_Grotesk, Instrument_Serif } from 'next/font/google';
+import { Playfair_Display, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import ClientLayout from './ClientLayout';
 import { siteMetadata } from '@/lib/metadata';
-import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
   subsets: ['latin'],
-  preload: true,
+  weight: ['400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
   display: 'swap',
 });
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  preload: true,
-  display: 'swap',
-});
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
-  subsets: ['latin'],
-  preload: true,
-  display: 'swap',
-});
+
 const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
   subsets: ['latin'],
   weight: '400',
   style: ['normal', 'italic'],
-  preload: true,
   display: 'swap',
 });
+
 export const metadata = siteMetadata;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${instrumentSerif.variable} antialiased bg-cream`}
+        className={`${playfair.variable} ${instrumentSerif.variable} antialiased bg-cream font-serif text-ink selection:bg-accent selection:text-ink overflow-x-hidden`}
       >
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <ClientLayout>{children}</ClientLayout>
-        <Analytics />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}

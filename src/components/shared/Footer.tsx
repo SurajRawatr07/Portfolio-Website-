@@ -64,10 +64,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-10 md:mb-12">
           <div>
-            <h3 className="text-light/90 text-base sm:text-lg font-sans tracking-wide font-semibold mb-4 md:mb-6">
+            <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
               Menu
             </h3>
-            <ul className="flex flex-col gap-3 sm:gap-4 text-gray-soft text-xs sm:text-sm font-sans font-medium uppercase tracking-wide">
+            <ul className="flex flex-col gap-2.5 sm:gap-3 text-gray-soft text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.08em] font-medium">
               {links.map((link) => (
                 <AnimatedLink key={link.href}>
                   <a
@@ -76,6 +76,7 @@ const Footer = () => {
                       e.preventDefault();
                       handleLinkClick(link.href);
                     }}
+                    className="hover:text-cream transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -85,13 +86,13 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-light/90 text-base sm:text-lg font-sans tracking-wide font-semibold mb-4 md:mb-6">
+            <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
               Socials
             </h3>
-            <ul className="flex flex-col gap-3 sm:gap-4 text-gray-soft text-xs sm:text-sm font-sans font-medium uppercase tracking-wide">
+            <ul className="flex flex-col gap-2.5 sm:gap-3 text-gray-soft text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.08em] font-medium">
               {socialList.map((s) => (
                 <AnimatedLink key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer">
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors duration-200">
                     {s.label}
                   </a>
                 </AnimatedLink>
@@ -100,10 +101,10 @@ const Footer = () => {
           </div>
 
           <div className="col-span-2 md:col-span-1 mt-6 md:mt-0">
-            <h3 className="text-light/90 text-base sm:text-lg font-sans tracking-wide font-semibold mb-2 md:mb-6">
+            <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-2 md:mb-5">
               Local Time
             </h3>
-            <p className="text-gray-soft text-sm sm:text-base font-sans font-medium tracking-wide">
+            <p className="text-cream text-xs sm:text-sm font-bold-serif font-medium tracking-wide tabular-nums">
               {isMounted && currentTime ? `${currentTime} ${site.timeZoneLabel}` : 'Loading local time...'}
             </p>
           </div>

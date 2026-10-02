@@ -195,19 +195,19 @@ export default function GlobalPreloader({
       className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0B110E] cursor-wait text-cream select-none pointer-events-auto"
       style={{ willChange: 'transform' }}
     >
-      <div className="flex items-center text-3xl sm:text-4xl md:text-5xl font-display font-medium text-cream z-10 transition-opacity duration-700 opacity-90">
-        <p className="tracking-wide">{preloaderWords[index]}</p>
+      <div className="flex items-center text-2xl sm:text-3xl md:text-4xl font-bold-serif font-bold text-cream z-10 transition-opacity duration-700 opacity-95 tracking-tight">
+        <p>{preloaderWords[index]}</p>
       </div>
 
       <div
-        className="absolute bottom-8 left-8 z-10 flex items-baseline gap-3 font-mono"
+        className="absolute bottom-8 left-8 z-10 flex items-baseline gap-3"
         aria-hidden="true"
       >
-        <span className="text-accent text-sm uppercase tracking-widest">
+        <span className="text-accent text-xs uppercase tracking-[0.2em] font-bold-serif font-semibold">
           loading
         </span>
 
-        <span className="text-cream text-lg tabular-nums">
+        <span className="text-cream text-base sm:text-lg tabular-nums font-bold-serif font-medium">
           {Math.round(progress)}%
         </span>
       </div>

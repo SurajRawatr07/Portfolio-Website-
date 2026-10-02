@@ -176,13 +176,13 @@ const Contact = () => {
         >
           <AnimatedHeading
             words={headingWords}
-            className="text-[clamp(2.5rem,7vw,6.5rem)] tracking-tight mb-6 text-light"
+            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4 text-light"
           />
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mb-10">
             <ScrollWordReveal
               text="Have a project in mind or just want to say hello? Feel free to reach out."
               offset={['start 0.95', 'end 0.7']}
-              className="text-base sm:text-lg text-gray-soft font-sans leading-relaxed"
+              className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] font-normal"
             />
           </div>
 
@@ -190,8 +190,9 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="max-w-2xl space-y-6 p-6 sm:p-8 rounded-2xl mx-auto bg-surface-mid border border-white/[0.04]"
           >
+
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="font-medium text-sm sm:text-base text-muted">
+              <label htmlFor="name" className="font-bold-serif text-xs uppercase tracking-[0.12em] font-semibold text-muted">
                 Your Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -204,16 +205,16 @@ const Contact = () => {
                 autoComplete="name"
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? 'name-error' : undefined}
-                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 ${
+                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 font-serif ${
                   errors.name ? 'border-red-500 focus:border-red-500' : ''
                 }`}
                 disabled={isDisabled}
               />
-              {errors.name && <p id="name-error" className="text-red-400 text-xs sm:text-sm">{errors.name}</p>}
+              {errors.name && <p id="name-error" className="text-red-400 text-xs sm:text-sm font-serif">{errors.name}</p>}
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="font-medium text-sm sm:text-base text-muted">
+              <label htmlFor="email" className="font-bold-serif text-xs uppercase tracking-[0.12em] font-semibold text-muted">
                 Your Email <span className="text-red-400">*</span>
               </label>
               <input
@@ -226,16 +227,16 @@ const Contact = () => {
                 placeholder="you@example.com"
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? 'email-error' : undefined}
-                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 ${
+                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 font-serif ${
                   errors.email ? 'border-red-500 focus:border-red-500' : ''
                 }`}
                 disabled={isDisabled}
               />
-              {errors.email && <p id="email-error" className="text-red-400 text-xs sm:text-sm">{errors.email}</p>}
+              {errors.email && <p id="email-error" className="text-red-400 text-xs sm:text-sm font-serif">{errors.email}</p>}
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="font-medium text-sm sm:text-base text-muted">
+              <label htmlFor="message" className="font-bold-serif text-xs uppercase tracking-[0.12em] font-semibold text-muted">
                 Message <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -247,31 +248,31 @@ const Contact = () => {
                 placeholder="Write your message here..."
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? 'message-error' : undefined}
-                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] resize-none focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 ${
+                className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl bg-surface text-cream placeholder-[#6a6a68] resize-none focus:outline-none transition-all duration-300 border-white/[0.08] focus:border-accent focus:ring-1 focus:ring-accent/30 font-serif ${
                   errors.message ? 'border-red-500 focus:border-red-500' : ''
                 }`}
                 disabled={isDisabled}
               />
-              {errors.message && <p id="message-error" className="text-red-400 text-xs sm:text-sm">{errors.message}</p>}
-              <p className="text-xs text-gray-soft">{formData.message.length} / 30 minimum characters</p>
+              {errors.message && <p id="message-error" className="text-red-400 text-xs sm:text-sm font-serif">{errors.message}</p>}
+              <p className="text-xs font-bold-serif text-gray-soft tracking-wider tabular-nums">{formData.message.length} / 30 minimum characters</p>
             </div>
 
             <div role="status" aria-live="polite">
               {errors.server && (
                 <div className="p-4 bg-red-900/20 border border-red-600/40 rounded-xl mb-4">
-                  <p className="text-red-400 text-sm">{errors.server}</p>
+                  <p className="text-red-400 text-sm font-serif">{errors.server}</p>
                 </div>
               )}
 
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-900/20 border border-green-600/40 rounded-xl mb-4">
-                  <p className="text-green-400 text-sm">{successMessage}</p>
+                  <p className="text-green-400 text-sm font-bold-italic">{successMessage}</p>
                 </div>
               )}
 
               {submitStatus === 'error' && !errors.server && (
                 <div className="p-4 bg-red-900/20 border border-red-600/40 rounded-xl mb-4">
-                  <p className="text-red-400 text-sm">Something went wrong. Please try again later.</p>
+                  <p className="text-red-400 text-sm font-serif">Something went wrong. Please try again later.</p>
                 </div>
               )}
             </div>
@@ -293,13 +294,13 @@ const Contact = () => {
             </div>
           </form>
 
-          <div className="mt-16 pt-12 border-t border-elevated-dark flex flex-col items-center justify-center text-center w-full">
+          <div className="mt-14 pt-10 border-t border-elevated-dark flex flex-col items-center justify-center text-center w-full">
             <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
-              <p className="text-xs uppercase tracking-widest text-warm mb-3 font-mono text-center">
+              <p className="text-xs uppercase tracking-[0.2em] text-accent mb-2.5 font-bold-serif font-semibold text-center">
                 Direct Contact
               </p>
 
-              <div ref={ctaRef} className="inline-block">
+              <div ref={ctaRef} className="inline-block max-w-full">
                 <button
                   type="button"
                   aria-label={`Copy ${site.email} to clipboard`}
@@ -307,9 +308,9 @@ const Contact = () => {
                     navigator.clipboard.writeText(site.email);
                     setCopiedToast(true);
                   }}
-                  className="group relative inline-flex items-center justify-center cursor-pointer text-light font-display font-black uppercase leading-tight hover:text-accent transition-colors duration-300 max-w-full text-center"
+                  className="group relative inline-flex items-center justify-center cursor-pointer text-light font-bold-serif font-bold uppercase leading-tight hover:text-accent transition-colors duration-300 max-w-full text-center tracking-[-0.02em]"
                   style={{
-                    fontSize: 'clamp(1.1rem, 4.2vw, 3rem)',
+                    fontSize: 'clamp(1.1rem, 3.5vw, 2.4rem)',
                   }}
                 >
                   <span className="break-all sm:break-normal">{site.email}</span>
@@ -317,7 +318,7 @@ const Contact = () => {
                 </button>
               </div>
 
-              <span className="font-mono text-[11px] text-warm/70 uppercase tracking-widest mt-2 block text-center">
+              <span className="font-italic-serif text-xs text-warm-light/80 tracking-wide mt-2.5 block text-center">
                 Click to copy email address
               </span>
             </div>
@@ -334,8 +335,9 @@ const Contact = () => {
         style={{
           background: '#34D399',
           color: '#0A0F0D',
-          fontFamily: 'monospace',
-          fontSize: '0.75rem',
+          fontFamily: 'var(--font-serif)',
+          fontWeight: 700,
+          fontSize: '0.72rem',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           padding: '0.75rem 1.25rem',

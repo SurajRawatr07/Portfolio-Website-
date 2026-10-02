@@ -106,7 +106,7 @@ export const ScrollWordReveal: React.FC<ScrollWordRevealProps> = ({
         <span key={`${tok.t}-${i}`} className="relative inline-block mr-[0.28em] my-[0.04em]">
           <span
             className={`swr-word inline-block ${
-              tok.accent ? 'serif-accent normal-case text-[1.12em]' : ''
+              tok.accent ? 'font-bold-italic normal-case text-[1.05em]' : ''
             }`}
             data-accent={tok.accent}
           >

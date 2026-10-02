@@ -48,7 +48,7 @@ const RoleTicker = () => {
     <div className="h-6 overflow-hidden mb-8 flex justify-center items-center select-none">
       <div
         ref={containerRef}
-        className="relative h-6 w-80 text-center font-mono text-sm uppercase tracking-widest text-accent"
+        className="relative h-6 w-80 text-center font-bold-serif text-xs sm:text-[13px] uppercase tracking-[0.16em] text-accent"
       >
         <div className="ticker-word-current absolute inset-0 flex items-center justify-center">
           {roles[currentIdx]}
@@ -74,8 +74,8 @@ const StampBadge = ({ onClick }: { onClick: () => void }) => (
           <path id="stamp-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
         </defs>
         <text
-          className="fill-charcoal font-mono uppercase"
-          style={{ fontSize: '15.5px', letterSpacing: '0.305em' }}
+          className="fill-charcoal font-bold-serif uppercase"
+          style={{ fontSize: '13px', letterSpacing: '0.22em' }}
         >
           <textPath href="#stamp-circle">
             AVAILABLE FOR WORK • LET&apos;S BUILD • 
@@ -278,13 +278,13 @@ const HomeBanner = () => {
             <span aria-hidden="true" className="block">
               <span
                 data-hero-line
-                className="block font-display font-black uppercase text-hero tracking-tight"
+                className="block font-bold-serif uppercase text-hero tracking-[-0.03em] leading-[0.9] text-charcoal"
               >
                 Suraj 
               </span>
               <span
                 data-hero-line
-                className="serif-accent block text-hero-sm leading-[0.85] md:ml-[14vw]"
+                className="block font-bold-italic text-hero-sm leading-[0.86] md:ml-[10vw] tracking-[-0.015em] text-accent"
               >
                 Rawat 
               </span>
@@ -300,7 +300,7 @@ const HomeBanner = () => {
           <div className="max-w-xl w-full text-center mx-auto">
             <p
               ref={paragraphRef}
-              className="text-warm font-sans text-base sm:text-lg md:text-xl leading-relaxed mb-8 md:mb-10 text-center mx-auto"
+              className="text-warm/90 font-italic-serif text-base sm:text-lg md:text-[1.05rem] leading-[1.65] mb-6 md:mb-8 text-center mx-auto max-w-lg tracking-normal"
             >
              Full-Stack Developer focused on building fast, scalable, and production-ready web applications.
             </p>

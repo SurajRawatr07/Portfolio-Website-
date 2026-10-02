@@ -296,7 +296,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
       <div className="px-6 pt-16 pb-8">
         <AnimatedHeading
           words={[{ t: 'SELECTED' }, { t: 'works', serif: true }]}
-          className="text-[clamp(3rem,14vw,5rem)] leading-none text-charcoal"
+          className="text-[clamp(2.5rem,10vw,4.5rem)] leading-none text-charcoal tracking-[-0.035em]"
         />
       </div>
 
@@ -338,13 +338,11 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
             </div>
 
             <div className="px-5 pt-4 pb-5 text-left">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <span
-                  className="mc-num font-mono font-black leading-none"
+                  className="mc-num font-mono font-bold leading-none tabular-nums text-accent tracking-[-0.02em]"
                   style={{
-                    fontSize: 'clamp(2rem, 9vw, 2.6rem)',
-                    color: '#34D399',
-                    letterSpacing: '-0.03em',
+                    fontSize: 'clamp(1.75rem, 8vw, 2.25rem)',
                   }}
                 >
                   {String(index + 1).padStart(2, '0')}
@@ -355,9 +353,9 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
                 {project.tech.slice(0, 3).map((t) => (
                   <span
                     key={t}
-                    className="mc-tag font-mono uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    className="mc-tag font-bold-serif uppercase tracking-[0.08em] px-2.5 py-1 rounded-full font-medium"
                     style={{
-                      fontSize: 9,
+                      fontSize: '10px',
                       background: 'rgba(255,255,255,0.08)',
                       color: 'rgba(255,255,255,0.85)',
                       border: '1px solid rgba(255,255,255,0.15)',
@@ -369,23 +367,23 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
               </div>
 
               <h3
-                className="mc-title font-black uppercase leading-tight text-white mb-4"
-                style={{ fontSize: 'clamp(1.3rem, 5.5vw, 2rem)', letterSpacing: '-0.025em' }}
+                className="mc-title font-bold-serif uppercase leading-[1.08] text-white mb-3 text-balance"
+                style={{ fontSize: 'clamp(1.2rem, 4.5vw, 1.65rem)', letterSpacing: '-0.02em' }}
               >
                 {project.title}
               </h3>
 
               <div className="mc-cta" style={{ opacity: 0 }}>
-                <div className="h-px w-full mb-4" style={{ background: 'rgba(255,255,255,0.07)' }} />
+                <div className="h-px w-full mb-3" style={{ background: 'rgba(255,255,255,0.07)' }} />
                 <div className="flex items-center justify-between">
                   <span
-                    className="font-mono text-[11px] uppercase tracking-widest"
-                    style={{ color: 'rgba(255,255,255,0.45)' }}
+                    className="font-bold-serif text-[11px] uppercase tracking-[0.16em] font-semibold"
+                    style={{ color: 'rgba(255,255,255,0.7)' }}
                   >
                     View Project
                   </span>
                   <span
-                    className="flex items-center justify-center w-9 h-9 rounded-full text-[#0A0F0D] text-sm"
+                    className="flex items-center justify-center w-8 h-8 rounded-full text-[#0A0F0D] text-sm font-bold"
                     style={{ background: '#34D399', boxShadow: '0 0 16px rgba(52, 211, 153, 0.35)' }}
                   >
                     →
@@ -587,11 +585,11 @@ export default function ProjectsPage() {
       onMouseLeave={handleTableMouseLeave}
       className="relative w-full bg-cream text-charcoal overflow-hidden"
     >
-      <div className="hidden md:block pt-16 pb-20 md:pt-20 md:pb-24 px-6 sm:px-8 md:px-12 lg:px-16 max-w-7xl mx-auto">
-        <div className="mb-12">
+      <div className="hidden md:block pt-14 pb-18 md:pt-16 md:pb-20 px-6 sm:px-8 md:px-12 lg:px-16 max-w-7xl mx-auto">
+        <div className="mb-10">
           <AnimatedHeading
             words={[{ t: 'SELECTED' }, { t: 'works', serif: true }]}
-            className="text-[clamp(2.5rem,7vw,6.5rem)] leading-none text-charcoal"
+            className="text-[clamp(1.8rem,3.8vw,3.8rem)] leading-none text-charcoal tracking-[-0.025em]"
           />
         </div>
         <hr className="border-t border-border w-full mb-4" />
@@ -601,7 +599,7 @@ export default function ProjectsPage() {
             <Link
               key={project.id}
               href={`/projects/${project.slug}`}
-              className="project-row-desktop relative flex items-stretch border-b border-border py-8 min-h-[120px] group cursor-pointer no-underline"
+              className="project-row-desktop relative flex items-stretch border-b border-border py-6 min-h-[105px] group cursor-pointer no-underline"
               onMouseEnter={(e) => {
                 mouse.current.x = e.clientX;
                 mouse.current.y = e.clientY;
@@ -610,7 +608,7 @@ export default function ProjectsPage() {
               data-cursor="view"
               onClick={handleRowClick}
             >
-              <div className="flex-[0_0_80px] font-mono text-[13px] text-gray-soft pt-2 relative h-6 overflow-hidden">
+              <div className="flex-[0_0_60px] font-bold-serif text-[13px] text-gray-soft pt-2 relative h-6 overflow-hidden tabular-nums font-semibold tracking-wider">
                 <span className="block absolute transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0">
                   {String(index + 1).padStart(2, '0')}
                 </span>
@@ -620,7 +618,7 @@ export default function ProjectsPage() {
               </div>
 
               <div className="flex-1 pr-8">
-                <h3 className="relative text-[clamp(2rem,4vw,3.5rem)] font-extrabold uppercase leading-none tracking-tight overflow-hidden">
+                <h3 className="relative font-bold-serif text-[clamp(1.6rem,2.8vw,2.85rem)] font-bold uppercase leading-[1.02] tracking-[-0.025em] overflow-hidden">
                   <span className="block text-charcoal select-none">{project.title}</span>
                   <span
                     className="title-reveal-overlay block text-accent absolute inset-0 select-none"
@@ -633,17 +631,17 @@ export default function ProjectsPage() {
                   </span>
                 </h3>
 
-                <div className="mt-3 flex flex-wrap gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+                <div className="mt-2.5 flex flex-wrap gap-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
                   {project.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 rounded-full bg-transparent border border-gray-300 text-warm text-xs font-medium">
+                    <span key={t} className="px-2.5 py-0.5 rounded-full bg-transparent border border-border-dark text-warm text-[11px] font-bold-serif tracking-wider uppercase font-medium">
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="flex-[0_0_200px] text-right flex flex-col justify-end items-end pb-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-charcoal group-hover:text-accent transition-colors duration-250 flex items-center gap-1">
+              <div className="flex-[0_0_180px] text-right flex flex-col justify-end items-end pb-2">
+                <span className="font-bold-serif text-xs uppercase tracking-[0.16em] font-semibold text-charcoal group-hover:text-accent transition-colors duration-250 flex items-center gap-1.5">
                   <span>View Project</span>
                   <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">
                     →

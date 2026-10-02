@@ -197,23 +197,23 @@ const TechStack = () => {
         <div className="mb-10 md:mb-14 hidden md:block">
           <AnimatedHeading
             words={headingWords}
-            className="text-[clamp(2.5rem,7vw,6.5rem)] tracking-tight mb-4"
+            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
           />
           <ScrollWordReveal
             text={descriptionText}
             offset={['start 0.95', 'end 0.7']}
-            className="text-base sm:text-lg md:text-xl text-gray-soft font-sans leading-relaxed"
+            className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] max-w-2xl font-normal"
           />
         </div>
 
         <div className="mb-8 md:hidden">
           <AnimatedHeading
             words={[{ t: 'MY' }, { t: 'stack', serif: true }]}
-            className="text-[clamp(2.5rem,7vw,6.5rem)] tracking-tight mb-4"
+            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
           />
         </div>
 
-        <div className="mb-12 flex flex-wrap gap-2 sm:gap-3 items-center">
+        <div className="mb-10 flex flex-wrap gap-2 sm:gap-2.5 items-center">
           {filterOptions.map((option) => {
             const isActive = activeFilter === option.id;
             return (
@@ -221,10 +221,10 @@ const TechStack = () => {
                 key={option.id}
                 type="button"
                 onClick={() => setActiveFilter(option.id)}
-                className={`text-xs sm:text-sm font-mono tracking-wider px-3.5 py-1.5 rounded-full border transition-all duration-300 cursor-pointer ${
+                className={`text-xs sm:text-[12.5px] font-bold-serif uppercase tracking-[0.08em] px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border transition-all duration-300 cursor-pointer select-none ${
                   isActive
-                    ? 'bg-cream text-ink border-cream font-semibold shadow-md'
-                    : 'bg-elevated-dark/60 text-gray-soft border-white/10 hover:border-accent/40 hover:text-cream'
+                    ? 'bg-cream text-ink border-cream font-bold shadow-md'
+                    : 'bg-elevated-dark/60 text-gray-soft border-white/10 hover:border-accent/40 hover:text-cream font-medium'
                 }`}
               >
                 {option.label}
@@ -233,7 +233,7 @@ const TechStack = () => {
           })}
         </div>
 
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-12 md:space-y-18">
           {visibleSections.map((stack, index) => (
             <div
               key={stack.id}
@@ -247,11 +247,11 @@ const TechStack = () => {
                   ref={(el) => {
                     titleRefs.current[index] = el;
                   }}
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-accent-light tracking-tight font-display uppercase"
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold-serif text-accent uppercase tracking-[-0.02em] leading-tight"
                 >
                   {stack.title}
                 </h3>
-                <span className="font-mono text-xs text-warm tracking-widest uppercase block mt-2">
+                <span className="font-bold-serif text-[11px] sm:text-xs text-warm tracking-[0.16em] uppercase block mt-1.5 font-medium tabular-nums">
                   {stack.technologies.length} Technologies
                 </span>
               </div>
@@ -264,16 +264,16 @@ const TechStack = () => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <div className="w-10 h-10 flex items-center justify-center relative flex-shrink-0">
+                    <div className="w-9 h-9 flex items-center justify-center relative flex-shrink-0">
                       <Image
                         src={tech.icon}
                         alt={tech.name}
-                        width={40}
-                        height={40}
+                        width={36}
+                        height={36}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <p className="text-xs sm:text-sm font-mono font-bold text-cream break-words">
+                    <p className="text-xs sm:text-[13px] font-bold-serif text-cream/95 break-words tracking-tight">
                       {tech.name}
                     </p>
                   </div>

@@ -127,10 +127,16 @@ export default function MarqueeStrip() {
             <span key={i} className="inline-flex items-center gap-6 pr-6">
               {items.map((item, idx) => (
                 <React.Fragment key={idx}>
-                  <span className="font-mono text-[13px] uppercase tracking-[0.15em] text-warm font-medium">
+                  <span
+                    className={`text-[11px] sm:text-xs md:text-[13px] tracking-[0.12em] ${
+                      idx % 2 === 1
+                        ? 'font-bold-italic normal-case text-accent'
+                        : 'font-bold-serif uppercase text-ink font-bold'
+                    }`}
+                  >
                     {item}
                   </span>
-                  <span className="text-accent text-[10px]">◆</span>
+                  <span className="text-accent text-[9px] sm:text-[10px]">✦</span>
                 </React.Fragment>
               ))}
             </span>

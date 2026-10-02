@@ -1,18 +1,22 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --font-display: var(--font-space-grotesk), sans-serif;
-  --font-sans: var(--font-geist-sans), sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-serif: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
+  --font-display: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
+  --font-sans: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
+  --font-mono: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
 
-  --text-hero: clamp(4.25rem, 18vw, 12rem);
-  --text-hero-sm: clamp(3.6rem, 15.5vw, 9.5rem);
-  --text-section-xl: clamp(2.75rem, 8.5vw, 7.5rem);
-  --text-section: clamp(2.25rem, 6.5vw, 5.5rem);
-  --text-stat: clamp(2.5rem, 6vw, 4.75rem);
+  /* Strict compact editorial scales */
+  --text-hero: clamp(2.4rem, 6.2vw, 6.8rem);
+  --text-hero-sm: clamp(2.1rem, 5.4vw, 5.6rem);
+  --text-section-xl: clamp(1.8rem, 3.8vw, 4.25rem);
+  --text-section: clamp(1.75rem, 3.4vw, 3.5rem);
+  --text-project: clamp(1.6rem, 2.8vw, 3.25rem);
+  --text-stat: clamp(1.6rem, 3.2vw, 3rem);
+  --text-body: clamp(0.85rem, 1.05vw, 1.05rem);
+  --text-label: clamp(0.65rem, 0.85vw, 0.8rem);
 
-  --spacing-section: clamp(6rem, 12vw, 11rem);
+  --spacing-section: clamp(5rem, 10vw, 9rem);
 
   --color-cream: #E2E8E4;
   --color-ink: #0A0F0D;
@@ -79,6 +83,9 @@ body.preloader-active {
 html {
   touch-action: pan-y;
   scrollbar-width: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html::-webkit-scrollbar {
@@ -88,6 +95,9 @@ html::-webkit-scrollbar {
 body {
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
@@ -234,9 +244,10 @@ body.cursor-disabled * {
   padding: 0.75rem 1.25rem;
   background: #0A0F0D;
   color: #E2E8E4;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 999px;
@@ -246,11 +257,65 @@ body.cursor-disabled * {
   top: 1rem;
 }
 
-.serif-accent {
-  font-family: var(--font-instrument-serif), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   THE 3 MANDATORY FONT STYLES (NO OTHER FONT STYLES PERMITTED)
+   ========================================================================== */
+
+/* STYLE 1 — BOLD ITALIC (𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄) */
+.style-bold-italic,
+.font-bold-italic,
+.font-style-1 {
+  font-family: var(--font-serif) !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  letter-spacing: -0.015em;
+}
+
+/* STYLE 2 — ITALIC SERIF (𝑰𝒕𝒂𝒍𝒊𝒄 𝑺𝒆𝒓𝒊𝒇) */
+.style-italic-serif,
+.font-italic-serif,
+.serif-accent,
+.font-style-2 {
+  font-family: var(--font-instrument-serif), var(--font-serif) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: -0.005em;
+}
+
+/* STYLE 3 — BOLD SERIF (𝐁𝐨𝐥𝐝 𝐒𝐞𝐫𝐢𝐟) */
+.style-bold-serif,
+.font-bold-serif,
+.font-style-3 {
+  font-family: var(--font-serif) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  letter-spacing: -0.02em;
+}
+
+/* Base fallbacks and mappings to ensure complete site-wide serif consistency */
+.font-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.025em;
+}
+
+.font-sans {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-serif);
+  letter-spacing: 0.08em;
+  font-feature-settings: 'tnum' 1;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 .text-outline {

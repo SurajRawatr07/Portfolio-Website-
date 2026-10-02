@@ -86,19 +86,19 @@ const Services = () => {
         <div className="mb-10 md:mb-20">
           <AnimatedHeading
             words={headingWords}
-            className="text-[clamp(2.5rem,7vw,6.5rem)] tracking-tight mb-4"
+            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
           />
 
           <div className="grid md:grid-cols-12 gap-4 md:gap-8">
             <div className="md:col-start-6 md:col-span-7 flex flex-col md:flex-row gap-3 md:gap-10">
-              <span className="font-mono text-sm sm:text-base md:text-base text-warm uppercase tracking-[0.3em] font-medium whitespace-nowrap inline-block">
+              <span className="font-bold-serif text-xs uppercase tracking-[0.2em] text-accent font-semibold whitespace-nowrap inline-block">
                 (Services)
               </span>
 
               <ScrollWordReveal
                 text={descriptionText}
                 offset={['start 0.95', 'end 0.65']}
-                className="max-w-2xl text-base sm:text-lg md:text-xl text-gray-soft font-sans leading-relaxed"
+                className="max-w-2xl text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] font-normal"
               />
             </div>
           </div>
@@ -111,24 +111,24 @@ const Services = () => {
               ref={(el) => {
                 servicesRef.current[index] = el;
               }}
-              className="bg-ink pb-12 md:pb-20"
+              className="bg-ink pb-10 md:pb-16"
               style={{ zIndex: index + 1 }}
             >
-              <div className="grid md:grid-cols-12 gap-4 items-center py-4 md:py-8 border-t border-border-subtle">
+              <div className="grid md:grid-cols-12 gap-4 items-center py-4 md:py-6 border-t border-border-subtle">
                 <h3
-                  className="font-display md:col-span-9 md:col-start-2 text-light font-bold text-2xl sm:text-2xl md:text-4xl lg:text-5xl leading-none"
-                  style={{ transform: 'translateY(-0.1em)' }}
+                  className="font-bold-serif md:col-span-9 md:col-start-2 text-light font-bold text-xl sm:text-2xl md:text-3xl lg:text-[2.6rem] leading-[1.08] tracking-[-0.02em]"
+                  style={{ transform: 'translateY(-0.05em)' }}
                 >
                   {service.title}
                 </h3>
               </div>
 
-              <div className="grid md:grid-cols-12 gap-4 md:gap-8 pt-4 md:pt-6">
-                <div className="md:col-span-7 md:col-start-6 space-y-4 md:space-y-6">
+              <div className="grid md:grid-cols-12 gap-4 md:gap-8 pt-3 md:pt-5">
+                <div className="md:col-span-7 md:col-start-6 space-y-4 md:space-y-5">
                   <ScrollWordReveal
                     text={service.description}
                     offset={['start 0.95', 'end 0.7']}
-                    className="text-gray-soft text-base sm:text-base md:text-lg leading-relaxed font-sans"
+                    className="text-gray-soft/90 text-sm sm:text-[15px] md:text-[1rem] leading-[1.7] font-serif font-normal"
                   />
 
                   <div className="divide-y divide-border-subtle">
@@ -137,11 +137,11 @@ const Services = () => {
                         key={i}
                         className="py-3 flex items-center gap-3 md:gap-4"
                       >
-                        <span className="text-accent-light text-xs md:text-sm font-mono font-bold">
+                        <span className="text-accent text-xs sm:text-sm font-bold-serif tabular-nums tracking-wider font-semibold">
                           0{i + 1}
                         </span>
 
-                        <span className="text-base sm:text-base md:text-lg font-bold font-sans text-light">
+                        <span className="text-sm sm:text-[15px] md:text-base font-serif text-light/95 tracking-normal">
                           {item}
                         </span>
                       </div>

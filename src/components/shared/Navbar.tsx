@@ -135,13 +135,13 @@ const NavbarBrand: React.FC<NavbarBrandProps> = ({ logoRef, handleLinkClick }) =
         <div className="transition-transform duration-500 ease-in-expo group-hover:rotate-[360deg] flex items-center justify-center">
           <Copyright className="w-[18px] h-[18px]" />
         </div>
-        <div className="relative ms-2 flex items-center whitespace-nowrap text-warm text-lg font-sans tracking-wide font-medium leading-none">
+        <div className="relative ms-2.5 flex items-center whitespace-nowrap text-warm text-sm sm:text-base font-bold-serif tracking-tight font-bold leading-none">
           <span>Suraj </span>
           <span className="relative inline-flex items-center overflow-hidden transition-all duration-500 ease-in-expo w-[32px] group-hover:w-[86px]">
             <span className="transition-transform duration-500 ease-in-expo group-hover:-translate-x-full inline-block">
               dev
             </span>
-            <span className="absolute left-0 ps-1.5 transition-transform duration-500 ease-in-expo translate-x-full group-hover:translate-x-0 inline-block">
+            <span className="absolute left-0 ps-1.5 transition-transform duration-500 ease-in-expo translate-x-full group-hover:translate-x-0 inline-block font-bold-italic text-accent">
               Rawat
             </span>
           </span>
@@ -406,7 +406,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
           />
 
           <div className="flex justify-between items-center px-8 sm:px-10 md:px-14 h-20 border-b border-elevated-dark">
-            <span className="text-gray-mid font-mono text-xs tracking-widest uppercase">Navigation</span>
+            <span className="text-gray-mid font-bold-serif text-xs tracking-[0.16em] uppercase">Navigation</span>
           </div>
 
           <nav className="absolute top-[80px] bottom-[170px] md:bottom-[100px] left-0 right-0 flex flex-col justify-center px-8 sm:px-10 md:px-14 gap-2 md:gap-3">
@@ -426,13 +426,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
                     onClick={() => handleLinkClick(link.href)}
                     className="group flex items-center gap-4 md:gap-6 text-left animate-link-row"
                   >
-                    <span className="text-gray-mid font-mono text-xs md:text-sm transition-colors duration-300 group-hover:text-accent">
+                    <span className="text-gray-mid font-bold-serif text-xs md:text-sm font-semibold tracking-wider transition-colors duration-300 group-hover:text-accent tabular-nums">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="font-display text-[2.8rem] sm:text-[3.4rem] md:text-[3.8rem] lg:text-[4.4rem] xl:text-[4.8rem] font-black uppercase leading-none tracking-tight text-cream group-hover:text-accent transition-colors duration-300 flex overflow-hidden">
+                    <span className="font-bold-serif text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[2.8rem] font-bold uppercase leading-none tracking-[-0.025em] text-cream group-hover:text-accent transition-colors duration-300 flex overflow-hidden">
                       {link.name}
                     </span>
-                    <span className="text-accent text-2xl md:text-3xl lg:text-4xl opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
+                    <span className="text-accent text-xl md:text-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
                       →
                     </span>
                   </button>
@@ -446,7 +446,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
             className="absolute bottom-0 left-0 right-0 h-[170px] md:h-[100px] px-8 sm:px-10 md:px-14 pt-6 pb-6 md:pb-10 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-end"
           >
             <div className="space-y-1 text-left">
-              <p className="text-gray-mid font-mono text-xs uppercase tracking-widest mb-1.5">Get in Touch</p>
+              <p className="text-gray-mid font-bold-serif text-xs uppercase tracking-[0.16em] mb-1.5">Get in Touch</p>
               <Magnetic strength={0.3}>
                 <a
                   href={`mailto:${site.email}`}
@@ -683,7 +683,7 @@ const Navbar: React.FC<NavbarProps> = ({ hamburgerOnly = false }) => {
             <NavbarBrand logoRef={logoRef} handleLinkClick={handleLinkClick} />
             <ul
               ref={linksContainerRef}
-              className="flex gap-6 text-warm text-base font-sans font-medium uppercase tracking-wider"
+              className="flex gap-8 text-warm text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.14em] font-semibold"
             >
               {links.filter((l) => !l.menuOnly).map((link) => (
                 <AnimatedLink key={link.href}>
