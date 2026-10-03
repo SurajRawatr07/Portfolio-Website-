@@ -5,37 +5,79 @@ import { gsap, useGSAP } from '@/lib/gsap';
 import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import FlowField from '@/components/canvas/FlowField';
+import { FaGithub, FaLinkedinIn, FaExternalLinkAlt } from 'react-icons/fa';
 
-const CREDENTIALS = [
+interface ExperienceItem {
+  id: string;
+  number: string;
+  title: string;
+  institution?: {
+    name: string;
+    url: string;
+  };
+  organization?: {
+    name: string;
+    url?: string;
+    accent?: boolean;
+  };
+  socialLinks?: Array<{
+    name: string;
+    url: string;
+    icon: 'github' | 'linkedin';
+  }>;
+}
+
+const EXPERIENCES: ExperienceItem[] = [
   {
-    year: '2024 – 2027',
-    title: 'BCA Computer Science Student',
-    organization: 'Graphic Era Hill University',
-    type: 'Education',
+    id: '01-bca-final-year',
+    number: '01',
+    title: 'BCA Final Year',
+    institution: {
+      name: 'Graphic Era Hill University, Haldwani Campus',
+      url: 'https://gehu.ac.in/',
+    },
   },
   {
-    year: '2026 – Present',
+    id: '02-founder-community-lead',
+    number: '02',
     title: 'Founder & Community Lead',
-    organization: 'Tech Circle',
-    type: 'Community',
+    organization: {
+      name: 'Tech Circle',
+      url: 'https://techcircle.vercel.app/',
+      accent: true,
+    },
   },
   {
-    year: '2024 – Present',
+    id: '03-full-stack-developer',
+    number: '03',
     title: 'Full-Stack Developer',
-    organization: 'Independent / Professional Projects',
-    type: 'Engineering',
+    organization: {
+      name: 'Independent Projects & Development',
+    },
+    socialLinks: [
+      {
+        name: 'GitHub',
+        url: 'https://github.com/SurajRawatr07',
+        icon: 'github',
+      },
+    ],
   },
   {
-    year: '2024 – Present',
-    title: 'Freelance Full-Stack Developer',
-    organization: 'Freelance',
-    type: 'Freelance',
-  },
-  {
-    year: '2026 – Present',
+    id: '04-open-source-contributor',
+    number: '04',
     title: 'Open Source Contributor',
-    organization: 'Open Source Community',
-    type: 'Open Source',
+    socialLinks: [
+      {
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/in/suraj-rawat-30513b340/',
+        icon: 'linkedin',
+      },
+      {
+        name: 'GitHub',
+        url: 'https://github.com/SurajRawatr07',
+        icon: 'github',
+      },
+    ],
   },
 ];
 
@@ -64,13 +106,12 @@ Beyond development, I actively participate in hackathons, contribute to open-sou
     () => {
       gsap.fromTo(
         '.about-image-wrapper',
-        { x: -60, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
-          x: 0,
+          y: 0,
           opacity: 1,
-          duration: 1.2,
+          duration: 1,
           ease: 'power3.out',
-          force3D: true,
           scrollTrigger: {
             trigger: '.about-image-wrapper',
             start: 'top 85%',
@@ -271,48 +312,202 @@ Beyond development, I actively participate in hackathons, contribute to open-sou
               <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
                 (Experience)
               </span>
-              <h3 className="mt-4 font-bold-serif text-[clamp(1.8rem,3.8vw,3.8rem)] uppercase tracking-[-0.025em] leading-[0.98] text-light">
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">My </span></span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="font-bold-italic block normal-case tracking-[-0.015em] text-accent">Professional</span></span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top"><span className="block">Experience </span></span>
+              <h3 className="mt-3 font-bold-serif text-[clamp(1.65rem,3.2vw,2.75rem)] tracking-[-0.02em] leading-[1.08] text-light">
+                <span className="experience-word inline-block overflow-hidden align-top">
+                  <span className="block font-bold-serif">My</span>
+                </span>{' '}
+                <span className="experience-word inline-block overflow-hidden align-top">
+                  <span className="font-bold-italic block tracking-[-0.015em] text-accent px-1">Professional</span>
+                </span>{' '}
+                <span className="experience-word inline-block overflow-hidden align-top">
+                  <span className="block font-bold-serif">Experience</span>
+                </span>
               </h3>
             </div>
 
             <div className="relative mx-auto max-w-6xl">
               <div aria-hidden="true" className="absolute bottom-0 left-[7px] top-0 w-px bg-white/15 md:hidden" />
-              <svg aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 64 1000" preserveAspectRatio="none">
+              <svg aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 64 800" preserveAspectRatio="none">
                 <path
                   ref={pathRef}
-                  d="M32 0 C24 100 40 150 32 250 C24 350 40 400 32 500 C24 600 40 650 32 750 C24 850 40 900 32 1000"
+                  d="M32 0 C24 80 40 120 32 200 C24 280 40 320 32 400 C24 480 40 520 32 600 C24 680 40 720 32 800"
                   fill="none"
                   stroke="rgba(232, 228, 222, 0.28)"
                   strokeWidth="1.5"
                 />
               </svg>
               <div className="flex flex-col gap-10 md:gap-16">
-                {CREDENTIALS.map((item, idx) => {
+                {EXPERIENCES.map((item, idx) => {
                   const isLeft = idx % 2 === 0;
                   return (
-                    <article key={item.title} data-side={isLeft ? 'left' : 'right'} className="cred-row group relative grid grid-cols-[32px_1fr] gap-x-5 opacity-0 md:grid-cols-[1fr_96px_1fr] md:gap-x-0">
+                    <article
+                      key={item.id}
+                      data-side={isLeft ? 'left' : 'right'}
+                      className="cred-row group relative grid grid-cols-[32px_1fr] gap-x-5 opacity-0 md:grid-cols-[1fr_96px_1fr] md:gap-x-0"
+                    >
                       <div className="relative order-1 md:col-start-2 md:row-start-1 md:justify-self-center">
                         <span className="timeline-dot relative z-10 block h-[15px] w-[15px] rounded-full border-[3px] border-ink bg-cream group-hover:scale-110 group-hover:bg-accent transition-all duration-300" />
-                        <span aria-hidden="true" className={`timeline-connector absolute top-[7px] hidden h-px w-14 bg-white/25 md:block ${isLeft ? 'right-full origin-right' : 'left-full origin-left'}`} />
-                        <span className={`hidden md:block absolute top-7 whitespace-nowrap font-bold-serif text-[11px] sm:text-xs uppercase tracking-[0.14em] text-warm-light tabular-nums ${isLeft ? 'right-7 text-right' : 'left-7'}`}>
-                          {item.year}
+                        <span
+                          aria-hidden="true"
+                          className={`timeline-connector absolute top-[7px] hidden h-px w-14 bg-white/25 md:block ${
+                            isLeft ? 'right-full origin-right' : 'left-full origin-left'
+                          }`}
+                        />
+                        <span
+                          className={`hidden md:block absolute top-7 whitespace-nowrap font-bold-serif text-xs uppercase tracking-[0.16em] text-accent/90 tabular-nums font-bold ${
+                            isLeft ? 'right-7 text-right' : 'left-7'
+                          }`}
+                        >
+                          {item.number}
                         </span>
                       </div>
 
-                      <div className={`timeline-content order-2 pt-0 md:row-start-1 ${isLeft ? 'md:col-start-1 md:pr-14 md:text-right' : 'md:col-start-3 md:pl-14'}`}>
-                        <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                          <span className="font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-[0.18em] text-accent font-semibold">{item.type}</span>
-                          <span className="md:hidden font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-[0.14em] text-warm-light tabular-nums">{item.year}</span>
+                      <div
+                        className={`timeline-content order-2 pt-0 md:row-start-1 ${
+                          isLeft ? 'md:col-start-1 md:pr-14 md:text-right' : 'md:col-start-3 md:pl-14'
+                        }`}
+                      >
+                        <div
+                          className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-2 ${
+                            isLeft ? 'md:justify-end' : 'md:justify-start'
+                          }`}
+                        >
+                          <span className="md:hidden font-bold-serif text-[11px] uppercase tracking-[0.16em] text-accent tabular-nums font-bold">
+                            {item.number}
+                          </span>
                         </div>
-                        <h4 className="font-bold-serif text-[clamp(1.25rem,2.3vw,2.15rem)] uppercase tracking-[-0.02em] leading-[1.08] text-cream">
+
+                        <h4 className="font-bold-serif text-[clamp(1.2rem,2.2vw,1.85rem)] tracking-[-0.015em] leading-[1.15] text-cream">
                           {item.title}
                         </h4>
-                        <div className={`mt-3.5 sm:mt-4 border-t border-white/10 pt-3 sm:pt-3.5 ${isLeft ? 'md:ml-auto md:max-w-md' : 'md:max-w-md'}`}>
-                          <p className="font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft">{item.organization}</p>
-                        </div>
+
+                        {item.institution && (
+                          <div
+                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-wrap items-center ${
+                              isLeft ? 'md:justify-end' : 'md:justify-start'
+                            }`}
+                          >
+                            <a
+                              href={item.institution.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`${item.institution.name} official website (opens in a new tab)`}
+                              className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft hover:text-white transition-colors duration-200"
+                            >
+                              <span className="underline-offset-4 group-hover/link:underline">
+                                {item.institution.name}
+                              </span>
+                              <FaExternalLinkAlt
+                                className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0"
+                                aria-hidden="true"
+                              />
+                            </a>
+                          </div>
+                        )}
+
+                        {item.organization && (
+                          <div
+                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-col gap-2.5 ${
+                              isLeft ? 'md:items-end' : 'md:items-start'
+                            }`}
+                          >
+                            {item.organization.url ? (
+                              <a
+                                href={item.organization.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`${item.organization.name} website (opens in a new tab)`}
+                                className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed transition-colors duration-200 ${
+                                  item.organization.accent
+                                    ? 'text-accent hover:text-accent-light font-medium'
+                                    : 'text-gray-soft hover:text-white'
+                                }`}
+                              >
+                                <span className="underline-offset-4 group-hover/link:underline">
+                                  {item.organization.name}
+                                </span>
+                                <FaExternalLinkAlt
+                                  className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ${
+                                    item.organization.accent
+                                      ? 'text-accent/80 group-hover/link:text-accent-light'
+                                      : 'text-gray-mid group-hover/link:text-accent'
+                                  }`}
+                                  aria-hidden="true"
+                                />
+                              </a>
+                            ) : (
+                              <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft">
+                                {item.organization.name}
+                              </p>
+                            )}
+
+                            {item.socialLinks && (
+                              <div
+                                className={`flex flex-wrap items-center gap-2.5 ${
+                                  isLeft ? 'md:justify-end' : 'md:justify-start'
+                                }`}
+                              >
+                                {item.socialLinks.map((link) => (
+                                  <a
+                                    key={link.name}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`Suraj Rawat's ${link.name} profile (opens in a new tab)`}
+                                    className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-0.5 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
+                                  >
+                                    {link.icon === 'github' && (
+                                      <FaGithub
+                                        className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                        aria-hidden="true"
+                                      />
+                                    )}
+                                    {link.icon === 'linkedin' && (
+                                      <FaLinkedinIn
+                                        className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                        aria-hidden="true"
+                                      />
+                                    )}
+                                    <span>{link.name}</span>
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {!item.organization && item.socialLinks && (
+                          <div
+                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-wrap items-center gap-2.5 ${
+                              isLeft ? 'md:justify-end' : 'md:justify-start'
+                            }`}
+                          >
+                            {item.socialLinks.map((link) => (
+                              <a
+                                key={link.name}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Suraj Rawat's ${link.name} profile (opens in a new tab)`}
+                                className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-0.5 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
+                              >
+                                {link.icon === 'github' && (
+                                  <FaGithub
+                                    className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                                {link.icon === 'linkedin' && (
+                                  <FaLinkedinIn
+                                    className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                                <span>{link.name}</span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </article>
                   );
