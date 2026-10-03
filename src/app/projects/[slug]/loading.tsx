@@ -82,7 +82,7 @@ export default function ProjectLoading() {
       <div className="flex flex-col gap-12 mb-16">
         <div className="shimmer-box w-full aspect-[16/10] max-h-[750px] rounded-2xl flex flex-col items-center justify-center gap-3">
           <div className="w-3 h-3 rounded-full bg-[#34D399] pulse-subtle shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/40">
+          <span className="font-bold-serif text-[11px] uppercase tracking-[0.25em] text-white/40">
             Loading Project Media
           </span>
         </div>

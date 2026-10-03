@@ -340,9 +340,9 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
             <div className="px-5 pt-4 pb-5 text-left">
               <div className="flex items-center justify-between mb-3">
                 <span
-                  className="mc-num font-mono font-bold leading-none tabular-nums text-accent tracking-[-0.02em]"
+                  className="mc-num font-bold-serif font-bold leading-none tabular-nums text-accent tracking-[-0.02em]"
                   style={{
-                    fontSize: 'clamp(1.75rem, 8vw, 2.25rem)',
+                    fontSize: 'clamp(1.6rem, 7vw, 2.1rem)',
                   }}
                 >
                   {String(index + 1).padStart(2, '0')}

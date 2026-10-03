@@ -8,7 +8,7 @@ import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
 import AnimatedButton from '@/components/ui/AnimatedButton';
 import { gsap, SplitText, useGSAP } from '@/lib/gsap';
 import { EASE } from '@/lib/motion';
-import { FaArrowUp, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { ArrowUp, Github, ExternalLink } from 'lucide-react';
 import { Project } from '@/lib/projects';
 import { getAdjacentProjects } from '@/lib/projects';
 import { site } from '@/lib/site';
@@ -108,7 +108,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                   topText={
                     <span className="flex items-center gap-2">
                       <span>LIVE</span>
-                      <FaExternalLinkAlt className="text-[11px]" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </span>
                   }
                   bottomText={
@@ -127,13 +127,13 @@ export default function ProjectDetails({ project }: { project: Project }) {
                   rel="noopener noreferrer"
                   topText={
                     <span className="flex items-center gap-2">
-                      <FaGithub className="text-sm" />
+                      <Github className="w-3.5 h-3.5" />
                       <span>CODE</span>
                     </span>
                   }
                   bottomText={
                     <span className="flex items-center gap-2">
-                      <FaGithub className="text-sm" />
+                      <Github className="w-3.5 h-3.5" />
                       <span>GITHUB ↗</span>
                     </span>
                   }
@@ -258,7 +258,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                       </div>
                     </div>
                   </div>
-                  <figcaption className="mt-2.5 flex items-center justify-between font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-muted">
+                  <figcaption className="mt-2.5 flex items-center justify-between font-bold-serif text-[10px] sm:text-[11px] uppercase tracking-widest text-muted">
                     <span>{project.title}</span>
                     <span>
                       {String(actualIdx + 1).padStart(2, '0')} / {String(project.images.length).padStart(2, '0')}
@@ -304,7 +304,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                   topText={
                     <span className="flex items-center gap-2">
                       <span>LIVE DEMO</span>
-                      <FaExternalLinkAlt className="text-[11px]" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </span>
                   }
                   bottomText={
@@ -323,13 +323,13 @@ export default function ProjectDetails({ project }: { project: Project }) {
                   rel="noopener noreferrer"
                   topText={
                     <span className="flex items-center gap-2">
-                      <FaGithub className="text-sm" />
+                      <Github className="w-3.5 h-3.5" />
                       <span>SOURCE CODE</span>
                     </span>
                   }
                   bottomText={
                     <span className="flex items-center gap-2">
-                      <FaGithub className="text-sm" />
+                      <Github className="w-3.5 h-3.5" />
                       <span>GITHUB ↗</span>
                     </span>
                   }
@@ -379,13 +379,23 @@ export default function ProjectDetails({ project }: { project: Project }) {
             <ScrollWordReveal
               text="Have a project in mind?"
               offset={['start 0.98', 'end 0.88']}
-              className="text-muted text-sm sm:text-base font-italic-serif justify-center mb-1"
+              className="text-muted text-xs sm:text-sm font-italic-serif justify-center mb-1.5"
             />
+            <p className="text-muted text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-bold-serif mb-1 font-bold">
+              EMAIL
+            </p>
             <a
               href={`mailto:${site.email}`}
-              className="text-base sm:text-lg font-bold-serif font-bold text-[#bab6b3] hover:text-accent transition-colors duration-200"
+              className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-[#bab6b3] hover:text-cream transition-all duration-200 tracking-wide"
+              aria-label={`Send email to ${site.email}`}
             >
-              {site.email}
+              <span className="border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                {site.email}
+              </span>
+              <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-[0.72rem]">
+                <span className="group-hover:hidden">→</span>
+                <span className="hidden group-hover:inline">↗</span>
+              </span>
             </a>
           </div>
           <button
@@ -393,7 +403,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
             className="absolute right-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-muted hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none"
             aria-label="Scroll to top"
           >
-            <FaArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
+            <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
           </button>
         </div>
       </div>

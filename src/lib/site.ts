@@ -24,7 +24,7 @@ export const socials: Record<SocialKey, { label: string; href: string }> = {
   github: { label: 'GitHub', href: 'https://github.com/SurajRawatr07' },
   linkedin: { label: 'Linkedin', href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/' },
   instagram: { label: 'Instagram', href: 'https://www.instagram.com/surajrwt07_' },
-  source: { label: 'Source Code', href: 'https://github.com/SurajRawatr07' },
+  source: { label: 'Source Code', href: 'https://github.com/SurajRawatr07/SURAJ-RAWAT-PORTFOLIO' },
 };
 
 export const socialList: Array<{ label: string; href: string }> = [

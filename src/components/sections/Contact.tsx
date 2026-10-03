@@ -174,16 +174,35 @@ const Contact = () => {
           ref={cardRef}
           className="rounded-3xl bg-surface text-light p-8 sm:p-12 md:p-16 lg:p-20 border border-elevated-dark"
         >
+          <p className="font-bold-serif text-xs uppercase tracking-[0.2em] text-accent mb-2.5 font-bold">
+            (Contact)
+          </p>
           <AnimatedHeading
             words={headingWords}
             className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4 text-light"
           />
-          <div className="max-w-2xl mb-10">
+          <div className="max-w-2xl mb-8">
             <ScrollWordReveal
-              text="Have a project in mind or just want to say hello? Feel free to reach out."
+              text="Have an idea, project or collaboration in mind? Feel free to reach out."
               offset={['start 0.95', 'end 0.7']}
               className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] font-normal"
             />
+            <div className="mt-4 flex items-center">
+              <a
+                href={`mailto:${site.email}`}
+                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-cream/90 hover:text-cream tracking-wide transition-all duration-200"
+                style={{ textDecoration: 'none' }}
+                aria-label={`Send email to ${site.email}`}
+              >
+                <span className="relative border-b border-accent/40 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis max-w-[280px] sm:max-w-none">
+                  {site.email}
+                </span>
+                <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[0.72rem] text-accent">
+                  <span className="group-hover:hidden">→</span>
+                  <span className="hidden group-hover:inline">↗</span>
+                </span>
+              </a>
+            </div>
           </div>
 
           <form
@@ -294,34 +313,37 @@ const Contact = () => {
             </div>
           </form>
 
-          <div className="mt-14 pt-10 border-t border-elevated-dark flex flex-col items-center justify-center text-center w-full">
-            <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
-              <p className="text-xs uppercase tracking-[0.2em] text-accent mb-2.5 font-bold-serif font-semibold text-center">
-                Direct Contact
-              </p>
-
-              <div ref={ctaRef} className="inline-block max-w-full">
-                <button
-                  type="button"
-                  aria-label={`Copy ${site.email} to clipboard`}
-                  onClick={() => {
-                    navigator.clipboard.writeText(site.email);
-                    setCopiedToast(true);
-                  }}
-                  className="group relative inline-flex items-center justify-center cursor-pointer text-light font-bold-serif font-bold uppercase leading-tight hover:text-accent transition-colors duration-300 max-w-full text-center tracking-[-0.02em]"
-                  style={{
-                    fontSize: 'clamp(1.1rem, 3.5vw, 2.4rem)',
-                  }}
-                >
-                  <span className="break-all sm:break-normal">{site.email}</span>
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out block" />
-                </button>
-              </div>
-
-              <span className="font-italic-serif text-xs text-warm-light/80 tracking-wide mt-2.5 block text-center">
-                Click to copy email address
+          <div className="mt-12 pt-8 border-t border-elevated-dark flex flex-col sm:flex-row items-center justify-between gap-5 w-full">
+            <div ref={ctaRef} className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-muted mb-1 font-bold">
+                EMAIL
               </span>
+              <a
+                href={`mailto:${site.email}`}
+                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-cream hover:text-accent transition-all duration-200 tracking-wide"
+                aria-label={`Send email to ${site.email}`}
+              >
+                <span className="relative border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {site.email}
+                </span>
+                <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-[0.72rem]">
+                  <span className="group-hover:hidden">→</span>
+                  <span className="hidden group-hover:inline">↗</span>
+                </span>
+              </a>
             </div>
+
+            <button
+              type="button"
+              aria-label={`Copy ${site.email} to clipboard`}
+              onClick={() => {
+                navigator.clipboard.writeText(site.email);
+                setCopiedToast(true);
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200 cursor-pointer"
+            >
+              <span>Copy Email</span>
+            </button>
           </div>
         </div>
       </div>

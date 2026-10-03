@@ -130,7 +130,7 @@ const NavbarBrand: React.FC<NavbarBrandProps> = ({ logoRef, handleLinkClick }) =
           handleLinkClick('/#top');
         }}
         className="group flex items-center cursor-pointer select-none py-1 text-warm"
-        aria-label="Aitezaz Sikandar Home"
+        aria-label="Suraj Rawat Home"
       >
         <div className="transition-transform duration-500 ease-in-expo group-hover:rotate-[360deg] flex items-center justify-center">
           <Copyright className="w-[18px] h-[18px]" />
@@ -446,14 +446,20 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
             className="absolute bottom-0 left-0 right-0 h-[170px] md:h-[100px] px-8 sm:px-10 md:px-14 pt-6 pb-6 md:pb-10 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-end"
           >
             <div className="space-y-1 text-left">
-              <p className="text-gray-mid font-bold-serif text-xs uppercase tracking-[0.16em] mb-1.5">Get in Touch</p>
+              <p className="text-gray-mid font-bold-serif text-xs uppercase tracking-[0.16em] mb-1.5 font-bold">EMAIL</p>
               <Magnetic strength={0.3}>
                 <a
                   href={`mailto:${site.email}`}
-                  className="group relative inline-block text-muted hover:text-white text-xs sm:text-sm transition-colors duration-300 py-0.5"
+                  className="group relative inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.84rem] text-muted hover:text-cream transition-colors duration-200 py-0.5 tracking-wide"
+                  aria-label={`Send email to ${site.email}`}
                 >
-                  <span>{site.email}</span>
-                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-accent origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none block" />
+                  <span className="border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                    {site.email}
+                  </span>
+                  <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-[0.7rem]">
+                    <span className="group-hover:hidden">→</span>
+                    <span className="hidden group-hover:inline">↗</span>
+                  </span>
                 </a>
               </Magnetic>
             </div>
@@ -465,7 +471,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-block text-gray-mid hover:text-cream text-xs font-mono uppercase tracking-widest transition-colors duration-300 py-1"
+                    className="group relative inline-block text-gray-mid hover:text-cream text-xs font-bold-serif uppercase tracking-widest transition-colors duration-300 py-1"
                   >
                     <span>{s.label}</span>
                     <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-accent origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none block" />
