@@ -3,8 +3,8 @@
  * Copyright (c) 2026 Aitezaz Sikandar. All rights reserved.
  * Licensed under the MIT License. See LICENSE in the project root for license information.
  * Project: Portfolio
- * Author: Aitezaz Sikandar (aitezazdev)
- * Website: https://aitezazdev.vercel.app
+ * Author: Suraj Rawat (https://surajrawatportfoliowebsite.vercel.app/)
+ * Website: https://surajrawatportfoliowebsite.vercel.app/
  */
 
 import HomeBanner from '@/components/sections/HomeBanner';
