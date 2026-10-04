@@ -258,7 +258,7 @@ const HomeBanner = () => {
 
       const initFloating = () => {
         const isMobile = window.innerWidth < 768;
-        const amp = isMobile ? 0.35 : 1.0;
+        const amp = isMobile ? 0.28 : 0.85;
 
         floatTimelinesRef.current.forEach((t) => t.kill());
         floatTimelinesRef.current = [];
@@ -376,11 +376,11 @@ const HomeBanner = () => {
         />
       )}
 
-      <div ref={innerContentRef} className="max-w-7xl mx-auto w-full relative z-10">
+      <div ref={innerContentRef} className="max-w-5xl mx-auto w-full relative z-10 px-4 sm:px-6">
         {/* Floating Social Icons distributed around the Hero */}
         <div ref={socialsRef} className="pointer-events-none">
           {/* GitHub: Upper Left */}
-          <div className="absolute -top-4 sm:-top-6 md:-top-7 lg:-top-8 left-2 sm:left-4 md:left-8 lg:left-14 xl:left-20 z-20 pointer-events-auto select-none">
+          <div className="absolute top-1 sm:top-2 md:top-3 lg:top-4 left-2 sm:left-5 md:left-9 lg:left-14 xl:left-18 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-0 will-change-transform"
               onMouseEnter={() => handleFloatHover(0, true)}
@@ -394,10 +394,10 @@ const HomeBanner = () => {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 title="GitHub"
-                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 <FaGithub
-                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 />
               </a>
@@ -405,7 +405,7 @@ const HomeBanner = () => {
           </div>
 
           {/* LinkedIn: Middle Right */}
-          <div className="absolute top-[48%] sm:top-[44%] md:top-[42%] lg:top-[45%] right-2 sm:right-4 md:right-8 lg:right-14 xl:right-20 z-20 pointer-events-auto select-none">
+          <div className="absolute top-[34%] sm:top-[32%] md:top-[30%] lg:top-[28%] right-2 sm:right-5 md:right-9 lg:right-13 xl:right-16 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-1 will-change-transform"
               onMouseEnter={() => handleFloatHover(1, true)}
@@ -419,10 +419,10 @@ const HomeBanner = () => {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 title="LinkedIn"
-                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 <FaLinkedinIn
-                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 />
               </a>
@@ -430,7 +430,7 @@ const HomeBanner = () => {
           </div>
 
           {/* LeetCode: Lower Left */}
-          <div className="absolute -bottom-3 sm:bottom-0 md:bottom-2 lg:bottom-4 left-3 sm:left-6 md:left-10 lg:left-18 xl:left-28 z-20 pointer-events-auto select-none">
+          <div className="absolute top-[58%] sm:top-[56%] md:top-[54%] lg:top-[52%] left-2 sm:left-5 md:left-9 lg:left-13 xl:left-16 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-2 will-change-transform"
               onMouseEnter={() => handleFloatHover(2, true)}
@@ -444,10 +444,10 @@ const HomeBanner = () => {
                 rel="noopener noreferrer"
                 aria-label="LeetCode"
                 title="LeetCode"
-                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal hover:text-[#FFA116] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA116] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal hover:text-[#FFA116] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA116] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 <SiLeetcode
-                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-300 group-hover:scale-110"
+                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 />
               </a>

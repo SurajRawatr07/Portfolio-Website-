@@ -42,7 +42,7 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2027',
     description:
-      'Pursuing BCA with 8.0/10 CGPA. Core focus: data structures, algorithms, database management, and modern full-stack software engineering.',
+      'Pursuing BCA with 8.0/10 CGPA. Core focus: data structures, algorithms, database management and modern full-stack software engineering.',
     responsibilities: [
       'Data Structures & Algorithms',
       'DBMS, SQL & Schema Modeling',
@@ -323,20 +323,19 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         },
       );
 
-      const experienceWords = gsap.utils.toArray<HTMLElement>('.experience-word > span');
-      if (experienceWords.length) {
+      const expHeading = tableRef.current?.querySelector('.experience-heading');
+      if (expHeading) {
         gsap.fromTo(
-          experienceWords,
-          { yPercent: 120, rotate: 3 },
+          expHeading,
+          { y: 24, opacity: 0 },
           {
-            yPercent: 0,
-            rotate: 0,
-            duration: 1,
-            stagger: 0.12,
-            ease: 'power4.out',
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: tableRef.current,
-              start: 'top 82%',
+              start: 'top 85%',
               once: true,
             },
           },
@@ -410,16 +409,11 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
               <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
                 (Experience)
               </span>
-              <h3 className="mt-3 font-bold-serif text-[clamp(1.65rem,3.2vw,2.75rem)] tracking-[-0.02em] leading-[1.08] text-light">
-                <span className="experience-word inline-block overflow-hidden align-top">
-                  <span className="block font-bold-serif">My</span>
+              <h3 className="experience-heading mt-3 font-bold-serif text-[clamp(1.75rem,3.4vw,2.85rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
+                <span className="inline-block">
+                  My <span className="font-bold-italic text-accent">Professional</span>
                 </span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top">
-                  <span className="font-bold-italic block tracking-[-0.015em] text-accent px-1">Professional</span>
-                </span>{' '}
-                <span className="experience-word inline-block overflow-hidden align-top">
-                  <span className="block font-bold-serif">Experience</span>
-                </span>
+                <span className="inline-block">Experience</span>
               </h3>
             </div>
 
@@ -462,13 +456,13 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                       <div
                         className={`timeline-content order-2 pt-0 md:row-start-1 ${
-                          isLeft ? 'md:col-start-1 md:pr-14 md:text-right' : 'md:col-start-3 md:pl-14 md:text-left'
+                          isLeft ? 'md:col-start-1 md:pr-12 md:text-right' : 'md:col-start-3 md:pl-12 md:text-left'
                         }`}
                       >
                         <div className="rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/60 md:bg-transparent border border-white/[0.06] md:border-transparent transition-all duration-300">
                           {/* Number & Period */}
                           <div
-                            className={`flex flex-wrap items-center gap-2 mb-2 ${
+                            className={`flex flex-wrap items-center gap-2 mb-1.5 ${
                               isLeft ? 'md:justify-end' : 'md:justify-start'
                             }`}
                           >
@@ -486,14 +480,14 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           </div>
 
                           {/* Title */}
-                          <h4 className="font-bold-serif text-lg sm:text-xl md:text-[1.65rem] tracking-[-0.015em] leading-[1.2] text-cream">
+                          <h4 className="font-bold-serif text-lg sm:text-xl md:text-[1.35rem] lg:text-[1.45rem] tracking-[-0.015em] leading-snug text-cream">
                             {item.title}
                           </h4>
 
                           {/* Institution or Organization Link */}
                           {item.institution && (
                             <div
-                              className={`mt-2 flex flex-wrap items-center ${
+                              className={`mt-1.5 flex flex-wrap items-center ${
                                 isLeft ? 'md:justify-end' : 'md:justify-start'
                               }`}
                             >
@@ -502,13 +496,13 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={`${item.institution.name} website (opens in a new tab)`}
-                                className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft hover:text-white transition-colors duration-200"
+                                className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] leading-snug text-gray-soft hover:text-white transition-colors duration-200"
                               >
                                 <span className="underline-offset-4 group-hover/link:underline">
                                   {item.institution.name}
                                 </span>
                                 <FaExternalLinkAlt
-                                  className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0"
+                                  className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5"
                                   aria-hidden="true"
                                 />
                               </a>
@@ -517,7 +511,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                           {item.organization && (
                             <div
-                              className={`mt-2 flex flex-wrap items-center ${
+                              className={`mt-1.5 flex flex-wrap items-center ${
                                 isLeft ? 'md:justify-end' : 'md:justify-start'
                               }`}
                             >
@@ -527,7 +521,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   aria-label={`${item.organization.name} website (opens in a new tab)`}
-                                  className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed transition-colors duration-200 ${
+                                  className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] leading-snug transition-colors duration-200 ${
                                     item.organization.accent
                                       ? 'text-accent hover:text-accent-light font-medium'
                                       : 'text-gray-soft hover:text-white'
@@ -537,7 +531,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                                     {item.organization.name}
                                   </span>
                                   <FaExternalLinkAlt
-                                    className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ${
+                                    className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5 ${
                                       item.organization.accent
                                         ? 'text-accent/80 group-hover/link:text-accent-light'
                                         : 'text-gray-mid group-hover/link:text-accent'
@@ -546,7 +540,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                                   />
                                 </a>
                               ) : (
-                                <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft">
+                                <p className="font-italic-serif text-xs sm:text-[13px] leading-snug text-gray-soft">
                                   {item.organization.name}
                                 </p>
                               )}
@@ -554,30 +548,45 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           )}
 
                           {/* Concise Description */}
-                          <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft/90 mt-2.5">
+                          <p
+                            className={`font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft/90 mt-2 max-w-lg ${
+                              isLeft ? 'md:ml-auto' : ''
+                            }`}
+                          >
                             {item.description}
                           </p>
 
                           {/* Core Responsibilities Panel */}
                           {item.responsibilities && item.responsibilities.length > 0 && (
-                            <div className="mt-3.5 pt-3 border-t border-white/[0.08]">
-                              <span className="font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-[0.14em] text-accent/90 font-bold block mb-1.5">
-                                Core Responsibilities
-                              </span>
-                              <ul
-                                className={`space-y-1 text-xs text-light/85 font-serif ${
-                                  isLeft ? 'md:text-right' : 'md:text-left'
+                            <div
+                              className={`mt-3 pt-3 border-t border-white/[0.08] w-full max-w-lg ${
+                                isLeft ? 'md:ml-auto' : ''
+                              }`}
+                            >
+                              <span
+                                className={`font-bold-serif text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-2 ${
+                                  isLeft ? 'md:text-right' : 'text-left'
                                 }`}
                               >
+                                CORE RESPONSIBILITIES
+                              </span>
+                              <ul className="space-y-1.5 text-xs text-light/85 font-serif">
                                 {item.responsibilities.map((resp, i) => (
                                   <li
                                     key={i}
-                                    className={`flex items-start gap-2 ${
-                                      isLeft ? 'md:flex-row-reverse' : 'md:flex-row'
-                                    }`}
+                                    className="grid grid-cols-[1fr_auto] items-center gap-3 py-0.5 border-b border-white/[0.03] last:border-b-0"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-accent/70 mt-1 flex-shrink-0" />
-                                    <span className="text-gray-soft/95 leading-normal">{resp}</span>
+                                    <span
+                                      className={`text-gray-soft/95 leading-normal ${
+                                        isLeft ? 'md:text-right' : 'text-left'
+                                      }`}
+                                    >
+                                      {resp}
+                                    </span>
+                                    <span
+                                      className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
+                                      aria-hidden="true"
+                                    />
                                   </li>
                                 ))}
                               </ul>
@@ -587,14 +596,14 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           {/* Tech Stack Pills */}
                           {item.tech && item.tech.length > 0 && (
                             <div
-                              className={`mt-3.5 flex flex-wrap gap-1.5 ${
-                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              className={`mt-3 flex flex-wrap gap-1.5 max-w-lg ${
+                                isLeft ? 'md:justify-end md:ml-auto' : 'justify-start'
                               }`}
                             >
                               {item.tech.map((t) => (
                                 <span
                                   key={t}
-                                  className="font-bold-serif text-[10.5px] sm:text-[11px] px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:border-accent/40 hover:text-white transition-colors duration-200"
+                                  className="inline-flex items-center px-2.5 py-1 text-[11px] font-bold-serif rounded-full leading-none bg-white/[0.04] border border-white/10 text-warm-light/90 hover:border-accent/40 hover:text-white hover:bg-white/[0.08] transition-all duration-200 select-none"
                                 >
                                   {t}
                                 </span>
@@ -605,8 +614,8 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           {/* Social Links */}
                           {item.socialLinks && item.socialLinks.length > 0 && (
                             <div
-                              className={`mt-3.5 flex flex-wrap items-center gap-2.5 ${
-                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              className={`mt-3 flex flex-wrap items-center gap-2 max-w-lg ${
+                                isLeft ? 'md:justify-end md:ml-auto' : 'justify-start'
                               }`}
                             >
                               {item.socialLinks.map((link) => (
