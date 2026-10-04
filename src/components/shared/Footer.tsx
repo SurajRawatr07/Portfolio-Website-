@@ -3,7 +3,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AnimatedLink from '@/components/ui/AnimateLink';
 import Magnetic from '@/components/ui/Magnetic';
-import { ArrowUp, Linkedin, Github, Instagram, Code2 } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import { useHandleLinkClick } from '@/lib/navigation';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { site, socialList, navLinks } from '@/lib/site';
@@ -11,10 +13,10 @@ import Lenis from 'lenis';
 
 const getSocialIcon = (label: string) => {
   const l = label.toLowerCase();
-  if (l.includes('linkedin')) return <Linkedin className="w-3.5 h-3.5" />;
-  if (l.includes('github')) return <Github className="w-3.5 h-3.5" />;
-  if (l.includes('instagram')) return <Instagram className="w-3.5 h-3.5" />;
-  return <Code2 className="w-3.5 h-3.5" />;
+  if (l.includes('linkedin')) return <FaLinkedinIn className="w-3.5 h-3.5" />;
+  if (l.includes('github')) return <FaGithub className="w-3.5 h-3.5" />;
+  if (l.includes('leetcode')) return <SiLeetcode className="w-3.5 h-3.5" />;
+  return null;
 };
 
 const Footer = () => {
@@ -104,9 +106,12 @@ const Footer = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-cream transition-colors duration-200"
+                    aria-label={`${s.label} profile (opens in a new tab)`}
+                    className="group inline-flex items-center gap-2 hover:text-cream transition-colors duration-200"
                   >
-                    <span className="text-accent/90">{getSocialIcon(s.label)}</span>
+                    <span className="text-accent/90 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:scale-105">
+                      {getSocialIcon(s.label)}
+                    </span>
                     <span>{s.label}</span>
                   </a>
                 </AnimatedLink>
@@ -145,7 +150,55 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="pt-8 mt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-6">
+          <nav aria-label="Social profiles" className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-xs sm:text-[13px] font-bold-serif">
+            <a
+              href="https://github.com/SurajRawatr07"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile (opens in a new tab)"
+              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
+            >
+              <FaGithub className="w-3.5 h-3.5 text-warm group-hover:text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
+              <span className="relative">
+                GitHub
+                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+              </span>
+            </a>
+
+            <span className="text-white/20 hidden sm:inline" aria-hidden="true">•</span>
+
+            <a
+              href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile (opens in a new tab)"
+              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
+            >
+              <FaLinkedinIn className="w-3.5 h-3.5 text-warm group-hover:text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
+              <span className="relative">
+                LinkedIn
+                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+              </span>
+            </a>
+
+            <span className="text-white/20 hidden sm:inline" aria-hidden="true">•</span>
+
+            <a
+              href="https://leetcode.com/u/SurajRawat07/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LeetCode Profile (opens in a new tab)"
+              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
+            >
+              <SiLeetcode className="w-3.5 h-3.5 text-warm group-hover:text-[#FFA116] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
+              <span className="relative">
+                LeetCode
+                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+              </span>
+            </a>
+          </nav>
+
           <Magnetic strength={0.4}>
             <button
               onClick={scrollToTop}

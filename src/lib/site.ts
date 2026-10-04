@@ -18,20 +18,19 @@ export const site = {
   ],
 } as const;
 
-export type SocialKey = 'github' | 'linkedin' | 'instagram' | 'source';
+export type SocialKey = 'github' | 'linkedin' | 'leetcode' | 'instagram';
 
 export const socials: Record<SocialKey, { label: string; href: string }> = {
   github: { label: 'GitHub', href: 'https://github.com/SurajRawatr07' },
-  linkedin: { label: 'Linkedin', href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/' },
+  linkedin: { label: 'LinkedIn', href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/' },
+  leetcode: { label: 'LeetCode', href: 'https://leetcode.com/u/SurajRawat07/' },
   instagram: { label: 'Instagram', href: 'https://www.instagram.com/surajrwt07_' },
-  source: { label: 'Source Code', href: 'https://github.com/SurajRawatr07/SURAJ-RAWAT-PORTFOLIO' },
 };
 
 export const socialList: Array<{ label: string; href: string }> = [
-  socials.linkedin,
-  socials.instagram,
   socials.github,
-  socials.source,
+  socials.linkedin,
+  socials.leetcode,
 ];
 
 export const navLinks = [
