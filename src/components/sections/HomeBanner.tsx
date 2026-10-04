@@ -98,6 +98,8 @@ const HomeBanner = () => {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const tickerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
+  const floatTimelinesRef = useRef<gsap.core.Timeline[]>([]);
   const stampRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const innerContentRef = useRef<HTMLDivElement>(null);
@@ -129,6 +131,7 @@ const HomeBanner = () => {
     });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
+    gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
     gsap.set(stampRef.current, { scale: 0, rotate: -30, opacity: 0 });
 
     const tl = gsap.timeline({ defaults: { ease: EASE.outQuart }, delay: 0.05 });
@@ -145,6 +148,11 @@ const HomeBanner = () => {
         buttonsRef.current?.children ?? [],
         { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(1.6)' },
         '-=0.45'
+      )
+      .to(
+        socialsRef.current?.children ?? [],
+        { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(1.5)' },
+        '-=0.35'
       )
       .to(stampRef.current, { scale: 1, rotate: 0, opacity: 1, duration: 0.9, ease: 'elastic.out(1, 0.55)' }, '-=0.6');
 
@@ -164,6 +172,7 @@ const HomeBanner = () => {
     if (reduced || !nameRef.current) {
       if (reduced) {
         gsap.set([paragraphRef.current, tickerRef.current], { clearProps: 'all' });
+        gsap.set(socialsRef.current?.children ?? [], { clearProps: 'all' });
       }
       return;
     }
@@ -191,6 +200,7 @@ const HomeBanner = () => {
     });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
+    gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
     gsap.set(stampRef.current, { scale: 0, rotate: -30, opacity: 0 });
   }, [reduced, playIntro]);
 
@@ -241,6 +251,102 @@ const HomeBanner = () => {
     },
     { scope: sectionRef, dependencies: [reduced] },
   );
+
+  useGSAP(
+    () => {
+      if (reduced) return;
+
+      const initFloating = () => {
+        const isMobile = window.innerWidth < 768;
+        const amp = isMobile ? 0.35 : 1.0;
+
+        floatTimelinesRef.current.forEach((t) => t.kill());
+        floatTimelinesRef.current = [];
+
+        // 1. GitHub: 6–8s duration, slow diagonal / horizontal movement
+        const tlGitHub = gsap.timeline({ repeat: -1, yoyo: true });
+        tlGitHub
+          .to('.hero-social-float-0', {
+            x: 12 * amp,
+            y: -9 * amp,
+            rotation: 2.5 * amp,
+            duration: 3.6,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-0', {
+            x: -10 * amp,
+            y: 8 * amp,
+            rotation: -2 * amp,
+            duration: 3.6,
+            ease: 'sine.inOut',
+          });
+        floatTimelinesRef.current.push(tlGitHub);
+
+        // 2. LinkedIn: 7–9s duration, slight vertical + horizontal movement with offset phase
+        const tlLinkedIn = gsap.timeline({ repeat: -1, yoyo: true, delay: 0.7 });
+        tlLinkedIn
+          .to('.hero-social-float-1', {
+            x: -9 * amp,
+            y: 11 * amp,
+            rotation: -2.8 * amp,
+            duration: 4.1,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-1', {
+            x: 8 * amp,
+            y: -10 * amp,
+            rotation: 2.2 * amp,
+            duration: 4.1,
+            ease: 'sine.inOut',
+          });
+        floatTimelinesRef.current.push(tlLinkedIn);
+
+        // 3. LeetCode: 8–10s duration, different slow floating path with subtle rotation
+        const tlLeetCode = gsap.timeline({ repeat: -1, yoyo: true, delay: 1.3 });
+        tlLeetCode
+          .to('.hero-social-float-2', {
+            x: 11 * amp,
+            y: -13 * amp,
+            rotation: 3.2 * amp,
+            duration: 4.6,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-2', {
+            x: -12 * amp,
+            y: 7 * amp,
+            rotation: -2.4 * amp,
+            duration: 4.6,
+            ease: 'sine.inOut',
+          });
+        floatTimelinesRef.current.push(tlLeetCode);
+      };
+
+      initFloating();
+
+      const handleResize = () => {
+        initFloating();
+      };
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        floatTimelinesRef.current.forEach((t) => t.kill());
+        floatTimelinesRef.current = [];
+      };
+    },
+    { scope: sectionRef, dependencies: [reduced] },
+  );
+
+  const handleFloatHover = (idx: number, isHovering: boolean) => {
+    const tl = floatTimelinesRef.current[idx];
+    if (tl) {
+      if (isHovering) {
+        tl.pause();
+      } else {
+        tl.resume();
+      }
+    }
+  };
 
   const handleScroll = (id: string) => {
     const section = document.getElementById(id);
@@ -335,39 +441,78 @@ const HomeBanner = () => {
               />
             </div>
 
-            <div className="mt-7 flex items-center justify-center gap-3.5 sm:gap-5 flex-wrap">
-              <a
-                href="https://github.com/SurajRawatr07"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Suraj Rawat's GitHub Profile"
-                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+            <div
+              ref={socialsRef}
+              className="mt-8 sm:mt-10 md:mt-11 flex items-center justify-center gap-5 sm:gap-8 md:gap-11 select-none"
+            >
+              {/* GitHub */}
+              <div
+                className="hero-social-float-0 will-change-transform"
+                onMouseEnter={() => handleFloatHover(0, true)}
+                onMouseLeave={() => handleFloatHover(0, false)}
+                onFocus={() => handleFloatHover(0, true)}
+                onBlur={() => handleFloatHover(0, false)}
               >
-                <FaGithub className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-accent transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
-                <span>GitHub</span>
-              </a>
+                <a
+                  href="https://github.com/SurajRawatr07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  title="GitHub"
+                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                >
+                  <FaGithub
+                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
 
-              <a
-                href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Suraj Rawat's LinkedIn Profile"
-                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+              {/* LinkedIn */}
+              <div
+                className="hero-social-float-1 will-change-transform"
+                onMouseEnter={() => handleFloatHover(1, true)}
+                onMouseLeave={() => handleFloatHover(1, false)}
+                onFocus={() => handleFloatHover(1, true)}
+                onBlur={() => handleFloatHover(1, false)}
               >
-                <FaLinkedinIn className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-accent transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
-                <span>LinkedIn</span>
-              </a>
+                <a
+                  href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  title="LinkedIn"
+                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                >
+                  <FaLinkedinIn
+                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
 
-              <a
-                href="https://leetcode.com/u/SurajRawat07/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Suraj Rawat's LeetCode Profile"
-                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+              {/* LeetCode */}
+              <div
+                className="hero-social-float-2 will-change-transform"
+                onMouseEnter={() => handleFloatHover(2, true)}
+                onMouseLeave={() => handleFloatHover(2, false)}
+                onFocus={() => handleFloatHover(2, true)}
+                onBlur={() => handleFloatHover(2, false)}
               >
-                <SiLeetcode className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
-                <span>LeetCode</span>
-              </a>
+                <a
+                  href="https://leetcode.com/u/SurajRawat07/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LeetCode"
+                  title="LeetCode"
+                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal hover:text-[#FFA116] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA116] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                >
+                  <SiLeetcode
+                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
