@@ -377,6 +377,84 @@ const HomeBanner = () => {
       )}
 
       <div ref={innerContentRef} className="max-w-7xl mx-auto w-full relative z-10">
+        {/* Floating Social Icons distributed around the Hero */}
+        <div ref={socialsRef} className="pointer-events-none">
+          {/* GitHub: Upper Left */}
+          <div className="absolute -top-4 sm:-top-6 md:-top-7 lg:-top-8 left-2 sm:left-4 md:left-8 lg:left-14 xl:left-20 z-20 pointer-events-auto select-none">
+            <div
+              className="hero-social-float-0 will-change-transform"
+              onMouseEnter={() => handleFloatHover(0, true)}
+              onMouseLeave={() => handleFloatHover(0, false)}
+              onFocus={() => handleFloatHover(0, true)}
+              onBlur={() => handleFloatHover(0, false)}
+            >
+              <a
+                href="https://github.com/SurajRawatr07"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
+                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              >
+                <FaGithub
+                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* LinkedIn: Middle Right */}
+          <div className="absolute top-[48%] sm:top-[44%] md:top-[42%] lg:top-[45%] right-2 sm:right-4 md:right-8 lg:right-14 xl:right-20 z-20 pointer-events-auto select-none">
+            <div
+              className="hero-social-float-1 will-change-transform"
+              onMouseEnter={() => handleFloatHover(1, true)}
+              onMouseLeave={() => handleFloatHover(1, false)}
+              onFocus={() => handleFloatHover(1, true)}
+              onBlur={() => handleFloatHover(1, false)}
+            >
+              <a
+                href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              >
+                <FaLinkedinIn
+                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* LeetCode: Lower Left */}
+          <div className="absolute -bottom-3 sm:bottom-0 md:bottom-2 lg:bottom-4 left-3 sm:left-6 md:left-10 lg:left-18 xl:left-28 z-20 pointer-events-auto select-none">
+            <div
+              className="hero-social-float-2 will-change-transform"
+              onMouseEnter={() => handleFloatHover(2, true)}
+              onMouseLeave={() => handleFloatHover(2, false)}
+              onFocus={() => handleFloatHover(2, true)}
+              onBlur={() => handleFloatHover(2, false)}
+            >
+              <a
+                href="https://leetcode.com/u/SurajRawat07/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LeetCode"
+                title="LeetCode"
+                className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal hover:text-[#FFA116] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA116] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              >
+                <SiLeetcode
+                  className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="relative text-center">
           <h1
             ref={nameRef}
@@ -410,7 +488,7 @@ const HomeBanner = () => {
               ref={paragraphRef}
               className="text-warm/90 font-italic-serif text-base sm:text-lg md:text-[1.05rem] leading-[1.65] mb-6 md:mb-8 text-center mx-auto max-w-lg tracking-normal"
             >
-              Full-Stack Developer / MERN Stack Developer building fast, scalable, and production-ready web applications.
+              Full-Stack Developer building scalable web applications with MERN, Next.js, TypeScript & AI.
             </p>
 
             <div ref={tickerRef} className="w-full flex justify-center">
@@ -439,80 +517,6 @@ const HomeBanner = () => {
                 bottomText="DOWNLOAD →"
                 variant="outline"
               />
-            </div>
-
-            <div
-              ref={socialsRef}
-              className="mt-8 sm:mt-10 md:mt-11 flex items-center justify-center gap-5 sm:gap-8 md:gap-11 select-none"
-            >
-              {/* GitHub */}
-              <div
-                className="hero-social-float-0 will-change-transform"
-                onMouseEnter={() => handleFloatHover(0, true)}
-                onMouseLeave={() => handleFloatHover(0, false)}
-                onFocus={() => handleFloatHover(0, true)}
-                onBlur={() => handleFloatHover(0, false)}
-              >
-                <a
-                  href="https://github.com/SurajRawatr07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  title="GitHub"
-                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-                >
-                  <FaGithub
-                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
-              </div>
-
-              {/* LinkedIn */}
-              <div
-                className="hero-social-float-1 will-change-transform"
-                onMouseEnter={() => handleFloatHover(1, true)}
-                onMouseLeave={() => handleFloatHover(1, false)}
-                onFocus={() => handleFloatHover(1, true)}
-                onBlur={() => handleFloatHover(1, false)}
-              >
-                <a
-                  href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  title="LinkedIn"
-                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-                >
-                  <FaLinkedinIn
-                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
-              </div>
-
-              {/* LeetCode */}
-              <div
-                className="hero-social-float-2 will-change-transform"
-                onMouseEnter={() => handleFloatHover(2, true)}
-                onMouseLeave={() => handleFloatHover(2, false)}
-                onFocus={() => handleFloatHover(2, true)}
-                onBlur={() => handleFloatHover(2, false)}
-              >
-                <a
-                  href="https://leetcode.com/u/SurajRawat07/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LeetCode"
-                  title="LeetCode"
-                  className="group relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal hover:text-[#FFA116] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA116] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
-                >
-                  <SiLeetcode
-                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  />
-                </a>
-              </div>
             </div>
           </div>
         </div>

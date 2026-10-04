@@ -20,7 +20,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '01',
     number: '01',
     title: 'Full-Stack Development',
-    description: 'MERN, Next.js and scalable modern web applications.',
+    description: 'MERN, Next.js & scalable web apps.',
     technologies: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     icon: 'layers',
   },
@@ -28,7 +28,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '02',
     number: '02',
     title: 'AI-Powered Applications',
-    description: 'Intelligent applications, LLM integrations, RAG and AI-driven workflows.',
+    description: 'LLMs, RAG & intelligent workflows.',
     technologies: ['Generative AI', 'LLM Integration', 'RAG Workflows', 'Prompt Engineering', 'AI Automation'],
     icon: 'sparkles',
   },
@@ -36,7 +36,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '03',
     number: '03',
     title: 'Backend & API Engineering',
-    description: 'REST APIs, authentication, databases and reliable backend systems.',
+    description: 'REST APIs, auth & databases.',
     technologies: ['Node.js', 'Express.js', 'REST APIs', 'JWT', 'MongoDB', 'Firebase'],
     icon: 'server',
   },
@@ -44,7 +44,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '04',
     number: '04',
     title: 'Modern UI & Product Development',
-    description: 'Responsive interfaces, polished interactions and user-focused digital products.',
+    description: 'Responsive interfaces & polished UX.',
     technologies: ['React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Responsive Design'],
     icon: 'palette',
   },
@@ -52,7 +52,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '05',
     number: '05',
     title: 'Open Source & Developer Community',
-    description: 'Open-source contribution, developer collaboration and community building.',
+    description: 'Contributions, collaboration & community building.',
     technologies: ['Git', 'GitHub', 'Open Source', 'Code Reviews', 'Collaboration', 'Community'],
     icon: 'users',
   },
@@ -93,7 +93,7 @@ const Services = () => {
   ];
 
   const descriptionText =
-    'Building modern, scalable, and impactful digital experiences through clean engineering, intuitive UI, and intelligent systems.';
+    'Architecting scalable digital products with clean engineering, resilient APIs, and intuitive user experiences.';
 
   return (
     <section

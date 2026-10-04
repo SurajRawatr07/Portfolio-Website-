@@ -33,20 +33,20 @@ interface ExperienceItem {
 
 const EXPERIENCES: ExperienceItem[] = [
   {
-    id: '01-bca-final-year',
+    id: '01-bca-cs',
     number: '01',
-    title: 'BCA Final Year',
+    title: 'BCA — Computer Science',
     institution: {
       name: 'Graphic Era Hill University, Haldwani Campus',
       url: 'https://gehu.ac.in/',
     },
-    period: '2023–2026',
+    period: '2024–2027',
     description:
-      'Pursuing Bachelor of Computer Applications with focus on computer science fundamentals, data structures, algorithms, and full-stack software development.',
+      'Pursuing BCA with 8.0/10 CGPA. Core focus: data structures, algorithms, database management, and modern full-stack software engineering.',
     responsibilities: [
       'Data Structures & Algorithms',
-      'Database Management Systems & SQL',
-      'Full-Stack Web Development',
+      'DBMS, SQL & Schema Modeling',
+      'Full-Stack Software Engineering',
       'Academic Software Projects',
     ],
     tech: ['C++', 'Java', 'Python', 'SQL', 'DBMS', 'Web Development'],
@@ -62,12 +62,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Founded and leading a developer community focused on peer learning, hackathon collaborations, mentorship, and building real-world projects.',
+      'Founded and lead a developer community driving peer learning, hackathon mentorship, technical workshops, and collaborative open-source builds.',
     responsibilities: [
       'Community Leadership & Growth',
-      'Organizing Technical Workshops',
-      'Hackathon Mentorship & Strategy',
-      'Project Collaboration & Code Reviews',
+      'Technical Workshops & Hands-on Sessions',
+      'Hackathon Mentorship & Project Strategy',
+      'Collaborative Code Reviews & Git Workflows',
     ],
     tech: ['Community Building', 'Git', 'GitHub', 'Event Organization', 'Mentorship'],
   },
@@ -80,12 +80,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Architecting and engineering production-ready web applications, modern UI experiences, and scalable backend REST APIs using the MERN stack.',
+      'Architect production-ready full-stack applications with React, Next.js, Node.js, and MongoDB, integrating secure auth and REST APIs.',
     responsibilities: [
-      'End-to-End Application Architecture',
-      'RESTful API Development & JWT Auth',
-      'Responsive UI & State Management',
-      'Database Schema Modeling & Optimization',
+      'Full-Stack Architecture & State Management',
+      'RESTful API Engineering & JWT Authentication',
+      'Responsive UI & Performance Optimization',
+      'MongoDB Schema Design & Data Modeling',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     socialLinks: [
@@ -105,12 +105,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Developing responsive full-stack web applications for clients with modern UI/UX, scalable backend architecture, secure authentication, and production deployment.',
+      'Deliver custom web applications for clients, implementing responsive user interfaces, backend APIs, and reliable cloud deployments.',
     responsibilities: [
-      'Client Scoping & Project Delivery',
-      'Responsive UI & UX Implementation',
-      'Secure REST API & Auth Architecture',
-      'Deployment & Performance Optimization',
+      'Client Scoping & Technical Delivery',
+      'Responsive Frontend & UX Architecture',
+      'Secure Authentication & API Integration',
+      'Cloud Deployment & Production Handover',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
   },
@@ -123,12 +123,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Actively contributing to community-driven repositories by building features, fixing issues, reviewing code, improving documentation, and collaborating with global developers.',
+      'Contribute to open-source codebases by shipping features, fixing bugs, reviewing pull requests, and collaborating with global developers.',
     responsibilities: [
-      'Public Repository Contributions',
-      'Feature Development & Bug Fixes',
-      'Git & GitHub Pull Request Reviews',
-      'Global Developer Collaboration',
+      'Repository Contributions & Feature Development',
+      'Issue Resolution & Bug Fixes',
+      'Code Reviews & PR Collaboration',
+      'Documentation & Technical Writeups',
     ],
     tech: ['Git', 'GitHub', 'React.js', 'JavaScript', 'TypeScript', 'Node.js'],
     socialLinks: [
@@ -151,31 +151,31 @@ const EXPERIENCES: ExperienceItem[] = [
     organization: {
       name: 'CodeAlpha • Cognifyz Technologies • Oasis Infobyte • SyntecxHub',
     },
-    period: '2026',
+    period: '2024–2026',
     description:
-      'Completed virtual web development internship programs developing responsive web applications, integrating REST APIs, optimizing frontend performance, and building full-stack solutions.',
+      'Built responsive web applications, integrated third-party REST APIs, optimized frontend rendering, and applied team Git workflows.',
     responsibilities: [
-      'Responsive Web Application Engineering',
-      'REST API Integration & Frontend State',
-      'Real-World Tasks & Performance Tuning',
-      'Team Version Control Workflows',
+      'Frontend Component Engineering',
+      'REST API Integration & State Handling',
+      'UI Responsiveness & Performance Tuning',
+      'Version Control & Branch Collaboration',
     ],
     tech: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Node.js', 'Tailwind CSS'],
   },
   {
-    id: '07-hackathon-participant',
+    id: '07-hackathons-achievements',
     number: '07',
-    title: 'Hackathon Participant',
+    title: 'Hackathons & Technical Competitions',
     organization: {
       name: 'National & Community Hackathons',
     },
     period: '2024–Present',
     description:
-      'Participating in national and community hackathons, building innovative MVPs with fast iteration, solving real-world challenges, and collaborating in high-velocity teams.',
+      'Competed in national and community hackathons, rapidly prototyping MVPs, architecting full-stack solutions, and collaborating under tight deadlines.',
     responsibilities: [
-      'National & Community Hackathons',
       'Rapid MVP Prototyping & Architecture',
-      'Problem Solving Under Tight Deadlines',
+      'Full-Stack Feature Implementation',
+      'Problem Solving Under Time Constraints',
       'Cross-Functional Team Collaboration',
     ],
     tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Git'],
@@ -189,15 +189,12 @@ const About = () => {
     { t: 'i?' },
   ];
 
+  const descriptionText =
+    'Full-stack developer focused on modern web engineering, clean architecture, and product development.';
 
- const descriptionText =
-  'I am a BCA student and Full-Stack Developer passionate about building clean, scalable, and impactful digital experiences.';
+  const aboutMeText = `Full-stack engineer building fast, scalable web applications with React, Next.js, TypeScript, and Node.js. Focused on clean architecture, responsive interfaces, and reliable REST APIs.
 
-const aboutMeText = `I am a BCA student, Full-Stack Developer, and Freelancer specializing in the MERN Stack, React, Next.js, and TypeScript. I enjoy turning ideas into scalable, user-focused web applications.
-
-I am also an Open-Source Contributor, Hackathon Participant, Campus Ambassador, and the Founder of Tech Circle — a developer community focused on learning, collaboration, and growth.
-
-Beyond development, I actively participate in hackathons, contribute to open-source projects, and build communities while continuously exploring new technologies and real-world opportunities.`;
+Founder of Tech Circle and active open-source contributor. Dedicated to shipping user-focused products, exploring AI workflows, and collaborating on high-velocity projects.`;
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);

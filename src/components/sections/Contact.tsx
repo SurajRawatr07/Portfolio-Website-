@@ -18,7 +18,8 @@ const Contact = () => {
 
   const headingWords = [
     { t: "Let's" },
-    { t: 'Connect', serif: true },
+    { t: 'Build', serif: true },
+    { t: 'Something' },
   ];
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -183,7 +184,7 @@ const Contact = () => {
           />
           <div className="max-w-2xl mb-8">
             <ScrollWordReveal
-              text="Have a project idea? Let's Create It"
+              text="Open to internships, collaborations and development opportunities."
               offset={['start 0.95', 'end 0.7']}
               className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] font-normal"
             />
@@ -316,11 +317,11 @@ const Contact = () => {
           <div className="mt-12 pt-8 border-t border-elevated-dark flex flex-col sm:flex-row items-center justify-between gap-5 w-full">
             <div ref={ctaRef} className="flex flex-col items-center sm:items-start text-center sm:text-left">
               <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-muted mb-1 font-bold">
-                EMAIL
+                DIRECT INQUIRIES
               </span>
               <a
                 href={`mailto:${site.email}`}
-                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-cream hover:text-accent transition-all duration-200 tracking-wide"
+                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.88rem] text-cream hover:text-accent transition-all duration-200 tracking-wide"
                 aria-label={`Send email to ${site.email}`}
               >
                 <span className="relative border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
@@ -333,17 +334,36 @@ const Contact = () => {
               </a>
             </div>
 
-            <button
-              type="button"
-              aria-label={`Copy ${site.email} to clipboard`}
-              onClick={() => {
-                navigator.clipboard.writeText(site.email);
-                setCopiedToast(true);
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200 cursor-pointer"
-            >
-              <span>Copy Email</span>
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
+              >
+                <span>Email</span>
+                <span className="text-[11px] text-accent">↗</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Suraj Rawat on LinkedIn"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
+              >
+                <span>LinkedIn</span>
+                <span className="text-[11px] text-accent">↗</span>
+              </a>
+              <button
+                type="button"
+                aria-label={`Copy ${site.email} to clipboard`}
+                onClick={() => {
+                  navigator.clipboard.writeText(site.email);
+                  setCopiedToast(true);
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200 cursor-pointer"
+              >
+                <span>Copy Email</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
