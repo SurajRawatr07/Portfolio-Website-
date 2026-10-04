@@ -31,6 +31,7 @@ export const socialList: Array<{ label: string; href: string }> = [
   socials.github,
   socials.linkedin,
   socials.leetcode,
+  socials.instagram,
 ];
 
 export const navLinks = [

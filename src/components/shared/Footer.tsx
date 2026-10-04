@@ -4,18 +4,69 @@ import React, { useState, useEffect, useRef } from 'react';
 import AnimatedLink from '@/components/ui/AnimateLink';
 import Magnetic from '@/components/ui/Magnetic';
 import { ArrowUp } from 'lucide-react';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import { useHandleLinkClick } from '@/lib/navigation';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
 import { site, socialList, navLinks } from '@/lib/site';
+import { gsap, useGSAP } from '@/lib/gsap';
 import Lenis from 'lenis';
+
+interface SocialItem {
+  id: string;
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+  ariaLabel: string;
+  colorClass: string;
+  floatClass: string;
+}
+
+const SOCIAL_ITEMS: SocialItem[] = [
+  {
+    id: 'github',
+    label: 'GitHub',
+    href: 'https://github.com/SurajRawatr07',
+    icon: <FaGithub className="w-4 h-4" aria-hidden="true" />,
+    ariaLabel: 'GitHub profile',
+    colorClass: 'group-hover:text-accent',
+    floatClass: 'social-float-0',
+  },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/',
+    icon: <FaLinkedinIn className="w-4 h-4" aria-hidden="true" />,
+    ariaLabel: 'LinkedIn profile',
+    colorClass: 'group-hover:text-accent',
+    floatClass: 'social-float-1',
+  },
+  {
+    id: 'leetcode',
+    label: 'LeetCode',
+    href: 'https://leetcode.com/u/SurajRawat07/',
+    icon: <SiLeetcode className="w-4 h-4" aria-hidden="true" />,
+    ariaLabel: 'LeetCode profile',
+    colorClass: 'group-hover:text-[#FFA116]',
+    floatClass: 'social-float-2',
+  },
+  {
+    id: 'instagram',
+    label: 'Instagram',
+    href: 'https://www.instagram.com/surajrwt07_',
+    icon: <FaInstagram className="w-4 h-4" aria-hidden="true" />,
+    ariaLabel: 'Instagram profile',
+    colorClass: 'group-hover:text-[#E4405F]',
+    floatClass: 'social-float-3',
+  },
+];
 
 const getSocialIcon = (label: string) => {
   const l = label.toLowerCase();
   if (l.includes('linkedin')) return <FaLinkedinIn className="w-3.5 h-3.5" />;
   if (l.includes('github')) return <FaGithub className="w-3.5 h-3.5" />;
   if (l.includes('leetcode')) return <SiLeetcode className="w-3.5 h-3.5" />;
+  if (l.includes('instagram')) return <FaInstagram className="w-3.5 h-3.5" />;
   return null;
 };
 
@@ -26,6 +77,61 @@ const Footer = () => {
   const lenisRef = useLenis() as React.RefObject<Lenis | null> | null;
   const lenis = lenisRef?.current;
 
+  // Subtle floating icon animations (independent natural movements inspired by the homepage)
+  useGSAP(
+    () => {
+      const prefersReduced =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      // GitHub: slow floating movement with slight upward drift & tilt
+      gsap.to('.social-float-0', {
+        y: -4.5,
+        x: 2,
+        rotation: 1.8,
+        duration: 3.2,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+
+      // LinkedIn: gentle downward and leftward float with opposite tilt
+      gsap.to('.social-float-1', {
+        y: 4,
+        x: -2.5,
+        rotation: -2,
+        duration: 3.8,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+
+      // LeetCode: smooth diagonal gentle vertical/horizontal wave
+      gsap.to('.social-float-2', {
+        y: -5,
+        x: -2,
+        rotation: 2.2,
+        duration: 3.4,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+
+      // Instagram: subtle counter-balance float with fluid rhythm
+      gsap.to('.social-float-3', {
+        y: 3.5,
+        x: 2.5,
+        rotation: -1.6,
+        duration: 4.1,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+    },
+    { scope: footerRef },
+  );
+
   useEffect(() => {
     setIsMounted(true);
     let interval: NodeJS.Timeout | number | undefined;
@@ -33,7 +139,10 @@ const Footer = () => {
     const updateTime = () => {
       const now = new Date();
       const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit', minute: '2-digit', hour12: true, timeZone: site.timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: site.timeZone,
       });
       setCurrentTime(timeString);
     };
@@ -45,7 +154,10 @@ const Footer = () => {
           updateTime();
           interval = setInterval(updateTime, 30000);
         } else {
-          if (interval) { clearInterval(interval); interval = undefined; }
+          if (interval) {
+            clearInterval(interval);
+            interval = undefined;
+          }
         }
       },
       { threshold: 0 },
@@ -70,9 +182,14 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="relative z-30 bg-ink border-t border-border-subtle px-6 sm:px-8 md:px-12 py-12 md:py-16">
+    <footer
+      ref={footerRef}
+      className="relative z-30 bg-ink border-t border-border-subtle px-6 sm:px-8 md:px-12 py-12 md:py-16"
+    >
       <div className="max-w-7xl mx-auto">
+        {/* Top Info Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-10 md:mb-12">
+          {/* Navigation Menu */}
           <div>
             <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
               Menu
@@ -95,21 +212,24 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Socials Column */}
           <div>
             <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
               Socials
             </h3>
             <ul className="flex flex-col gap-2.5 sm:gap-3 text-gray-soft text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.08em] font-medium">
-              {socialList.map((s) => (
+              {socialList.map((s, idx) => (
                 <AnimatedLink key={s.label}>
                   <a
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label} profile (opens in a new tab)`}
-                    className="group inline-flex items-center gap-2 hover:text-cream transition-colors duration-200"
+                    className="group inline-flex items-center gap-2.5 hover:text-cream transition-colors duration-200"
                   >
-                    <span className="text-accent/90 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:scale-105">
+                    <span
+                      className={`text-accent/90 inline-flex items-center justify-center social-float-${idx} transition-transform duration-300 group-hover:scale-110`}
+                    >
                       {getSocialIcon(s.label)}
                     </span>
                     <span>{s.label}</span>
@@ -119,10 +239,11 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Email & Local Time */}
           <div className="col-span-2 md:col-span-1 mt-2 md:mt-0 flex flex-col justify-between">
             <div>
               <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-2 md:mb-3">
-                EMAIL
+                Email
               </h3>
               <a
                 href={`mailto:${site.email}`}
@@ -150,64 +271,55 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Bottom Horizontal Social Floating Area */}
         <div className="pt-8 mt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-6">
-          <nav aria-label="Social profiles" className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-xs sm:text-[13px] font-bold-serif">
-            <a
-              href="https://github.com/SurajRawatr07"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile (opens in a new tab)"
-              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
-            >
-              <FaGithub className="w-3.5 h-3.5 text-warm group-hover:text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
-              <span className="relative">
-                GitHub
-                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
-              </span>
-            </a>
-
-            <span className="text-white/20 hidden sm:inline" aria-hidden="true">•</span>
-
-            <a
-              href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Profile (opens in a new tab)"
-              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
-            >
-              <FaLinkedinIn className="w-3.5 h-3.5 text-warm group-hover:text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
-              <span className="relative">
-                LinkedIn
-                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
-              </span>
-            </a>
-
-            <span className="text-white/20 hidden sm:inline" aria-hidden="true">•</span>
-
-            <a
-              href="https://leetcode.com/u/SurajRawat07/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LeetCode Profile (opens in a new tab)"
-              className="group inline-flex items-center gap-2 text-warm-light hover:text-white transition-all duration-300 py-1"
-            >
-              <SiLeetcode className="w-3.5 h-3.5 text-warm group-hover:text-[#FFA116] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" aria-hidden="true" />
-              <span className="relative">
-                LeetCode
-                <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
-              </span>
-            </a>
+          <nav
+            aria-label="Social profiles with floating icons"
+            className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 md:gap-8 text-xs sm:text-[13px] font-bold-serif"
+          >
+            {SOCIAL_ITEMS.map((item, index) => (
+              <React.Fragment key={item.id}>
+                {index > 0 && (
+                  <span className="text-white/20 hidden sm:inline select-none" aria-hidden="true">
+                    •
+                  </span>
+                )}
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.ariaLabel}
+                  className="group inline-flex items-center gap-2.5 text-warm-light hover:text-white transition-all duration-300 py-1.5 px-2 -mx-2 rounded-lg hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+                >
+                  <span
+                    className={`inline-flex items-center justify-center text-warm ${item.colorClass} ${item.floatClass} transition-transform duration-300 group-hover:scale-110`}
+                  >
+                    {item.icon}
+                  </span>
+                  <span className="relative">
+                    {item.label}
+                    <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+                  </span>
+                </a>
+              </React.Fragment>
+            ))}
           </nav>
 
-          <Magnetic strength={0.4}>
-            <button
-              onClick={scrollToTop}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-gray-soft hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none"
-              aria-label="Scroll to top"
-            >
-              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
-            </button>
-          </Magnetic>
+          {/* Scroll to Top Button */}
+          <div className="flex items-center gap-4">
+            <span className="text-gray-soft/60 text-[11px] font-bold-serif tracking-wide hidden lg:inline">
+              © {new Date().getFullYear()} {site.name}
+            </span>
+            <Magnetic strength={0.4}>
+              <button
+                onClick={scrollToTop}
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-gray-soft hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none cursor-pointer"
+                aria-label="Scroll to top"
+              >
+                <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
+              </button>
+            </Magnetic>
+          </div>
         </div>
       </div>
     </footer>
