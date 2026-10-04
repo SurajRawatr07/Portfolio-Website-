@@ -11,9 +11,9 @@ export const site = {
   url: 'https://surajrawatportfoliowebsite.vercel.app/',
   tagline: 'Full Stack Developer crafting fast, expressive web experiences.',
   roles: [
-    'Full Stack Developer',
-    'React & Next.js Engineer',
+    'Full-Stack Developer',
     'MERN Stack Developer',
+    'React & Next.js Engineer',
     'Open to Work Worldwide',
   ],
 } as const;

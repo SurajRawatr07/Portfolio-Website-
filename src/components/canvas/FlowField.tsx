@@ -156,7 +156,14 @@ export default function FlowField() {
     };
 
     resize();
-    const resizeObserver = new ResizeObserver(() => resize());
+    let resizeRaf: number | null = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        resize();
+        resizeRaf = null;
+      });
+    });
     resizeObserver.observe(container);
 
     if (!reduced) {
@@ -188,6 +195,7 @@ export default function FlowField() {
         container.addEventListener('mousemove', onMove);
         container.addEventListener('mouseleave', onLeave);
         return () => {
+          if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
           observer.disconnect();
           resizeObserver.disconnect();
           container.removeEventListener('mousemove', onMove);
@@ -199,6 +207,7 @@ export default function FlowField() {
         };
       }
       return () => {
+        if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
         observer.disconnect();
         resizeObserver.disconnect();
         if (rafId !== null) {
@@ -208,7 +217,10 @@ export default function FlowField() {
       };
     }
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (

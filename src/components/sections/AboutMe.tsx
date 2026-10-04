@@ -11,6 +11,7 @@ interface ExperienceItem {
   id: string;
   number: string;
   title: string;
+  period?: string;
   institution?: {
     name: string;
     url: string;
@@ -20,6 +21,9 @@ interface ExperienceItem {
     url?: string;
     accent?: boolean;
   };
+  description: string;
+  responsibilities: string[];
+  tech: string[];
   socialLinks?: Array<{
     name: string;
     url: string;
@@ -36,6 +40,16 @@ const EXPERIENCES: ExperienceItem[] = [
       name: 'Graphic Era Hill University, Haldwani Campus',
       url: 'https://gehu.ac.in/',
     },
+    period: '2023–2026',
+    description:
+      'Pursuing Bachelor of Computer Applications with focus on computer science fundamentals, data structures, algorithms, and full-stack software development.',
+    responsibilities: [
+      'Data Structures & Algorithms',
+      'Database Management Systems & SQL',
+      'Full-Stack Web Development',
+      'Academic Software Projects',
+    ],
+    tech: ['C++', 'Java', 'Python', 'SQL', 'DBMS', 'Web Development'],
   },
   {
     id: '02-founder-community-lead',
@@ -46,6 +60,16 @@ const EXPERIENCES: ExperienceItem[] = [
       url: 'https://techcircle.vercel.app/',
       accent: true,
     },
+    period: '2024–Present',
+    description:
+      'Founded and leading a developer community focused on peer learning, hackathon collaborations, mentorship, and building real-world projects.',
+    responsibilities: [
+      'Community Leadership & Growth',
+      'Organizing Technical Workshops',
+      'Hackathon Mentorship & Strategy',
+      'Project Collaboration & Code Reviews',
+    ],
+    tech: ['Community Building', 'Git', 'GitHub', 'Event Organization', 'Mentorship'],
   },
   {
     id: '03-full-stack-developer',
@@ -54,6 +78,16 @@ const EXPERIENCES: ExperienceItem[] = [
     organization: {
       name: 'Independent Projects & Development',
     },
+    period: '2024–Present',
+    description:
+      'Architecting and engineering production-ready web applications, modern UI experiences, and scalable backend REST APIs using the MERN stack.',
+    responsibilities: [
+      'End-to-End Application Architecture',
+      'RESTful API Development & JWT Auth',
+      'Responsive UI & State Management',
+      'Database Schema Modeling & Optimization',
+    ],
+    tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     socialLinks: [
       {
         name: 'GitHub',
@@ -63,9 +97,40 @@ const EXPERIENCES: ExperienceItem[] = [
     ],
   },
   {
-    id: '04-open-source-contributor',
+    id: '04-freelance-developer',
     number: '04',
+    title: 'Freelance Full-Stack Developer',
+    organization: {
+      name: 'Freelance',
+    },
+    period: '2024–Present',
+    description:
+      'Developing responsive full-stack web applications for clients with modern UI/UX, scalable backend architecture, secure authentication, and production deployment.',
+    responsibilities: [
+      'Client Scoping & Project Delivery',
+      'Responsive UI & UX Implementation',
+      'Secure REST API & Auth Architecture',
+      'Deployment & Performance Optimization',
+    ],
+    tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
+  },
+  {
+    id: '05-open-source-contributor',
+    number: '05',
     title: 'Open Source Contributor',
+    organization: {
+      name: 'Open Source Community',
+    },
+    period: '2024–Present',
+    description:
+      'Actively contributing to community-driven repositories by building features, fixing issues, reviewing code, improving documentation, and collaborating with global developers.',
+    responsibilities: [
+      'Public Repository Contributions',
+      'Feature Development & Bug Fixes',
+      'Git & GitHub Pull Request Reviews',
+      'Global Developer Collaboration',
+    ],
+    tech: ['Git', 'GitHub', 'React.js', 'JavaScript', 'TypeScript', 'Node.js'],
     socialLinks: [
       {
         name: 'LinkedIn',
@@ -78,6 +143,42 @@ const EXPERIENCES: ExperienceItem[] = [
         icon: 'github',
       },
     ],
+  },
+  {
+    id: '06-web-dev-intern',
+    number: '06',
+    title: 'Web Development Intern',
+    organization: {
+      name: 'CodeAlpha • Cognifyz Technologies • Oasis Infobyte • SyntecxHub',
+    },
+    period: '2026',
+    description:
+      'Completed virtual web development internship programs developing responsive web applications, integrating REST APIs, optimizing frontend performance, and building full-stack solutions.',
+    responsibilities: [
+      'Responsive Web Application Engineering',
+      'REST API Integration & Frontend State',
+      'Real-World Tasks & Performance Tuning',
+      'Team Version Control Workflows',
+    ],
+    tech: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Node.js', 'Tailwind CSS'],
+  },
+  {
+    id: '07-hackathon-participant',
+    number: '07',
+    title: 'Hackathon Participant',
+    organization: {
+      name: 'National & Community Hackathons',
+    },
+    period: '2024–Present',
+    description:
+      'Participating in national and community hackathons, building innovative MVPs with fast iteration, solving real-world challenges, and collaborating in high-velocity teams.',
+    responsibilities: [
+      'National & Community Hackathons',
+      'Rapid MVP Prototyping & Architecture',
+      'Problem Solving Under Tight Deadlines',
+      'Cross-Functional Team Collaboration',
+    ],
+    tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Git'],
   },
 ];
 
@@ -364,150 +465,180 @@ Beyond development, I actively participate in hackathons, contribute to open-sou
 
                       <div
                         className={`timeline-content order-2 pt-0 md:row-start-1 ${
-                          isLeft ? 'md:col-start-1 md:pr-14 md:text-right' : 'md:col-start-3 md:pl-14'
+                          isLeft ? 'md:col-start-1 md:pr-14 md:text-right' : 'md:col-start-3 md:pl-14 md:text-left'
                         }`}
                       >
-                        <div
-                          className={`flex flex-wrap items-center gap-x-3 gap-y-1 mb-2 ${
-                            isLeft ? 'md:justify-end' : 'md:justify-start'
-                          }`}
-                        >
-                          <span className="md:hidden font-bold-serif text-[11px] uppercase tracking-[0.16em] text-accent tabular-nums font-bold">
-                            {item.number}
-                          </span>
-                        </div>
-
-                        <h4 className="font-bold-serif text-[clamp(1.2rem,2.2vw,1.85rem)] tracking-[-0.015em] leading-[1.15] text-cream">
-                          {item.title}
-                        </h4>
-
-                        {item.institution && (
+                        <div className="rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/60 md:bg-transparent border border-white/[0.06] md:border-transparent transition-all duration-300">
+                          {/* Number & Period */}
                           <div
-                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-wrap items-center ${
+                            className={`flex flex-wrap items-center gap-2 mb-2 ${
                               isLeft ? 'md:justify-end' : 'md:justify-start'
                             }`}
                           >
-                            <a
-                              href={item.institution.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`${item.institution.name} official website (opens in a new tab)`}
-                              className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft hover:text-white transition-colors duration-200"
-                            >
-                              <span className="underline-offset-4 group-hover/link:underline">
-                                {item.institution.name}
-                              </span>
-                              <FaExternalLinkAlt
-                                className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0"
-                                aria-hidden="true"
-                              />
-                            </a>
+                            <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-accent tabular-nums font-bold">
+                              {item.number}
+                            </span>
+                            {item.period && (
+                              <>
+                                <span className="text-white/20 select-none">•</span>
+                                <span className="font-bold-serif text-[11px] uppercase tracking-wider text-warm-light/80">
+                                  {item.period}
+                                </span>
+                              </>
+                            )}
                           </div>
-                        )}
 
-                        {item.organization && (
-                          <div
-                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-col gap-2.5 ${
-                              isLeft ? 'md:items-end' : 'md:items-start'
-                            }`}
-                          >
-                            {item.organization.url ? (
+                          {/* Title */}
+                          <h4 className="font-bold-serif text-lg sm:text-xl md:text-[1.65rem] tracking-[-0.015em] leading-[1.2] text-cream">
+                            {item.title}
+                          </h4>
+
+                          {/* Institution or Organization Link */}
+                          {item.institution && (
+                            <div
+                              className={`mt-2 flex flex-wrap items-center ${
+                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              }`}
+                            >
                               <a
-                                href={item.organization.url}
+                                href={item.institution.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`${item.organization.name} website (opens in a new tab)`}
-                                className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed transition-colors duration-200 ${
-                                  item.organization.accent
-                                    ? 'text-accent hover:text-accent-light font-medium'
-                                    : 'text-gray-soft hover:text-white'
-                                }`}
+                                aria-label={`${item.institution.name} website (opens in a new tab)`}
+                                className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft hover:text-white transition-colors duration-200"
                               >
                                 <span className="underline-offset-4 group-hover/link:underline">
-                                  {item.organization.name}
+                                  {item.institution.name}
                                 </span>
                                 <FaExternalLinkAlt
-                                  className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ${
-                                    item.organization.accent
-                                      ? 'text-accent/80 group-hover/link:text-accent-light'
-                                      : 'text-gray-mid group-hover/link:text-accent'
-                                  }`}
+                                  className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0"
                                   aria-hidden="true"
                                 />
                               </a>
-                            ) : (
-                              <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft">
-                                {item.organization.name}
-                              </p>
-                            )}
+                            </div>
+                          )}
 
-                            {item.socialLinks && (
-                              <div
-                                className={`flex flex-wrap items-center gap-2.5 ${
-                                  isLeft ? 'md:justify-end' : 'md:justify-start'
+                          {item.organization && (
+                            <div
+                              className={`mt-2 flex flex-wrap items-center ${
+                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              }`}
+                            >
+                              {item.organization.url ? (
+                                <a
+                                  href={item.organization.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label={`${item.organization.name} website (opens in a new tab)`}
+                                  className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13.5px] leading-relaxed transition-colors duration-200 ${
+                                    item.organization.accent
+                                      ? 'text-accent hover:text-accent-light font-medium'
+                                      : 'text-gray-soft hover:text-white'
+                                  }`}
+                                >
+                                  <span className="underline-offset-4 group-hover/link:underline">
+                                    {item.organization.name}
+                                  </span>
+                                  <FaExternalLinkAlt
+                                    className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ${
+                                      item.organization.accent
+                                        ? 'text-accent/80 group-hover/link:text-accent-light'
+                                        : 'text-gray-mid group-hover/link:text-accent'
+                                    }`}
+                                    aria-hidden="true"
+                                  />
+                                </a>
+                              ) : (
+                                <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft">
+                                  {item.organization.name}
+                                </p>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Concise Description */}
+                          <p className="font-italic-serif text-xs sm:text-[13.5px] leading-relaxed text-gray-soft/90 mt-2.5">
+                            {item.description}
+                          </p>
+
+                          {/* Core Responsibilities Panel */}
+                          {item.responsibilities && item.responsibilities.length > 0 && (
+                            <div className="mt-3.5 pt-3 border-t border-white/[0.08]">
+                              <span className="font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-[0.14em] text-accent/90 font-bold block mb-1.5">
+                                Core Responsibilities
+                              </span>
+                              <ul
+                                className={`space-y-1 text-xs text-light/85 font-serif ${
+                                  isLeft ? 'md:text-right' : 'md:text-left'
                                 }`}
                               >
-                                {item.socialLinks.map((link) => (
-                                  <a
-                                    key={link.name}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={`Suraj Rawat's ${link.name} profile (opens in a new tab)`}
-                                    className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-0.5 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
+                                {item.responsibilities.map((resp, i) => (
+                                  <li
+                                    key={i}
+                                    className={`flex items-start gap-2 ${
+                                      isLeft ? 'md:flex-row-reverse' : 'md:flex-row'
+                                    }`}
                                   >
-                                    {link.icon === 'github' && (
-                                      <FaGithub
-                                        className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                        aria-hidden="true"
-                                      />
-                                    )}
-                                    {link.icon === 'linkedin' && (
-                                      <FaLinkedinIn
-                                        className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                        aria-hidden="true"
-                                      />
-                                    )}
-                                    <span>{link.name}</span>
-                                  </a>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-accent/70 mt-1 flex-shrink-0" />
+                                    <span className="text-gray-soft/95 leading-normal">{resp}</span>
+                                  </li>
                                 ))}
-                              </div>
-                            )}
-                          </div>
-                        )}
+                              </ul>
+                            </div>
+                          )}
 
-                        {!item.organization && item.socialLinks && (
-                          <div
-                            className={`mt-3 sm:mt-3.5 border-t border-white/10 pt-3 sm:pt-3.5 flex flex-wrap items-center gap-2.5 ${
-                              isLeft ? 'md:justify-end' : 'md:justify-start'
-                            }`}
-                          >
-                            {item.socialLinks.map((link) => (
-                              <a
-                                key={link.name}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`Suraj Rawat's ${link.name} profile (opens in a new tab)`}
-                                className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 hover:-translate-y-0.5 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
-                              >
-                                {link.icon === 'github' && (
-                                  <FaGithub
-                                    className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                                {link.icon === 'linkedin' && (
-                                  <FaLinkedinIn
-                                    className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                                <span>{link.name}</span>
-                              </a>
-                            ))}
-                          </div>
-                        )}
+                          {/* Tech Stack Pills */}
+                          {item.tech && item.tech.length > 0 && (
+                            <div
+                              className={`mt-3.5 flex flex-wrap gap-1.5 ${
+                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              }`}
+                            >
+                              {item.tech.map((t) => (
+                                <span
+                                  key={t}
+                                  className="font-bold-serif text-[10.5px] sm:text-[11px] px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:border-accent/40 hover:text-white transition-colors duration-200"
+                                >
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Social Links */}
+                          {item.socialLinks && item.socialLinks.length > 0 && (
+                            <div
+                              className={`mt-3.5 flex flex-wrap items-center gap-2.5 ${
+                                isLeft ? 'md:justify-end' : 'md:justify-start'
+                              }`}
+                            >
+                              {item.socialLinks.map((link) => (
+                                <a
+                                  key={link.name}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label={`Suraj Rawat's ${link.name} (opens in a new tab)`}
+                                  className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
+                                >
+                                  {link.icon === 'github' && (
+                                    <FaGithub
+                                      className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  {link.icon === 'linkedin' && (
+                                    <FaLinkedinIn
+                                      className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                  <span>{link.name}</span>
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </article>
                   );

@@ -12,54 +12,6 @@ import { site, socialList, navLinks } from '@/lib/site';
 import { gsap, useGSAP } from '@/lib/gsap';
 import Lenis from 'lenis';
 
-interface SocialItem {
-  id: string;
-  label: string;
-  href: string;
-  icon: React.ReactNode;
-  ariaLabel: string;
-  colorClass: string;
-  floatClass: string;
-}
-
-const SOCIAL_ITEMS: SocialItem[] = [
-  {
-    id: 'github',
-    label: 'GitHub',
-    href: 'https://github.com/SurajRawatr07',
-    icon: <FaGithub className="w-4 h-4" aria-hidden="true" />,
-    ariaLabel: 'GitHub profile',
-    colorClass: 'group-hover:text-accent',
-    floatClass: 'social-float-0',
-  },
-  {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/suraj-rawat-30513b340/',
-    icon: <FaLinkedinIn className="w-4 h-4" aria-hidden="true" />,
-    ariaLabel: 'LinkedIn profile',
-    colorClass: 'group-hover:text-accent',
-    floatClass: 'social-float-1',
-  },
-  {
-    id: 'leetcode',
-    label: 'LeetCode',
-    href: 'https://leetcode.com/u/SurajRawat07/',
-    icon: <SiLeetcode className="w-4 h-4" aria-hidden="true" />,
-    ariaLabel: 'LeetCode profile',
-    colorClass: 'group-hover:text-[#FFA116]',
-    floatClass: 'social-float-2',
-  },
-  {
-    id: 'instagram',
-    label: 'Instagram',
-    href: 'https://www.instagram.com/surajrwt07_',
-    icon: <FaInstagram className="w-4 h-4" aria-hidden="true" />,
-    ariaLabel: 'Instagram profile',
-    colorClass: 'group-hover:text-[#E4405F]',
-    floatClass: 'social-float-3',
-  },
-];
 
 const getSocialIcon = (label: string) => {
   const l = label.toLowerCase();
@@ -271,55 +223,20 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Horizontal Social Floating Area */}
-        <div className="pt-8 mt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-6">
-          <nav
-            aria-label="Social profiles with floating icons"
-            className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 md:gap-8 text-xs sm:text-[13px] font-bold-serif"
-          >
-            {SOCIAL_ITEMS.map((item, index) => (
-              <React.Fragment key={item.id}>
-                {index > 0 && (
-                  <span className="text-white/20 hidden sm:inline select-none" aria-hidden="true">
-                    •
-                  </span>
-                )}
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.ariaLabel}
-                  className="group inline-flex items-center gap-2.5 text-warm-light hover:text-white transition-all duration-300 py-1.5 px-2 -mx-2 rounded-lg hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
-                >
-                  <span
-                    className={`inline-flex items-center justify-center text-warm ${item.colorClass} ${item.floatClass} transition-transform duration-300 group-hover:scale-110`}
-                  >
-                    {item.icon}
-                  </span>
-                  <span className="relative">
-                    {item.label}
-                    <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
-                  </span>
-                </a>
-              </React.Fragment>
-            ))}
-          </nav>
-
-          {/* Scroll to Top Button */}
-          <div className="flex items-center gap-4">
-            <span className="text-gray-soft/60 text-[11px] font-bold-serif tracking-wide hidden lg:inline">
-              © {new Date().getFullYear()} {site.name}
-            </span>
-            <Magnetic strength={0.4}>
-              <button
-                onClick={scrollToTop}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-gray-soft hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none cursor-pointer"
-                aria-label="Scroll to top"
-              >
-                <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
-              </button>
-            </Magnetic>
-          </div>
+        {/* Bottom Bar */}
+        <div className="pt-8 mt-6 border-t border-white/[0.06] flex items-center justify-between">
+          <span className="text-gray-soft/60 text-[11px] font-bold-serif tracking-wide">
+            © {new Date().getFullYear()} {site.name}. All rights reserved.
+          </span>
+          <Magnetic strength={0.4}>
+            <button
+              onClick={scrollToTop}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-gray-soft hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none cursor-pointer"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
+            </button>
+          </Magnetic>
         </div>
       </div>
     </footer>

@@ -8,6 +8,8 @@ import Magnetic from '@/components/ui/Magnetic';
 import { EASE } from '@/lib/motion';
 import { site } from '@/lib/site';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 const AmbientGeometry = dynamic(() => import('@/components/canvas/AmbientGeometry'), {
   ssr: false,
@@ -302,7 +304,7 @@ const HomeBanner = () => {
               ref={paragraphRef}
               className="text-warm/90 font-italic-serif text-base sm:text-lg md:text-[1.05rem] leading-[1.65] mb-6 md:mb-8 text-center mx-auto max-w-lg tracking-normal"
             >
-             Full-Stack Developer focused on building fast, scalable, and production-ready web applications.
+              Full-Stack Developer / MERN Stack Developer building fast, scalable, and production-ready web applications.
             </p>
 
             <div ref={tickerRef} className="w-full flex justify-center">
@@ -324,13 +326,48 @@ const HomeBanner = () => {
               />
               <AnimatedButton
                 as="a"
-                href="/01_aitezaz_resume.pdf"
+                href="/suraj_rawat_resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 topText="RESUME"
                 bottomText="DOWNLOAD →"
                 variant="outline"
               />
+            </div>
+
+            <div className="mt-7 flex items-center justify-center gap-3.5 sm:gap-5 flex-wrap">
+              <a
+                href="https://github.com/SurajRawatr07"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Suraj Rawat's GitHub Profile"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+              >
+                <FaGithub className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-accent transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+                <span>GitHub</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Suraj Rawat's LinkedIn Profile"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+              >
+                <FaLinkedinIn className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-accent transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+                <span>LinkedIn</span>
+              </a>
+
+              <a
+                href="https://leetcode.com/u/SurajRawat07/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Suraj Rawat's LeetCode Profile"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/[0.04] border border-black/10 hover:border-[#FFA116] hover:bg-black/[0.08] text-charcoal transition-all duration-300 font-bold-serif text-xs"
+              >
+                <SiLeetcode className="w-3.5 h-3.5 text-charcoal/80 group-hover:text-[#FFA116] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+                <span>LeetCode</span>
+              </a>
             </div>
           </div>
         </div>

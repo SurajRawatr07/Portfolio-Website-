@@ -465,7 +465,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
             </div>
 
             <div className="flex gap-4 md:gap-6 justify-start flex-wrap">
-              {[socials.github, socials.linkedin, socials.leetcode].map((s) => (
+              {[socials.github, socials.linkedin, socials.leetcode, socials.instagram].map((s) => (
                 <Magnetic key={s.label} strength={0.3}>
                   <a
                     href={s.href}

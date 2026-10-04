@@ -39,6 +39,39 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         window.dispatchEvent(new CustomEvent('preloaderComplete'));
       });
     }
+
+    const isResizeObserverError = (msg?: string | null) => {
+      if (!msg) return false;
+      return (
+        msg.includes('ResizeObserver loop completed with undelivered notifications') ||
+        msg.includes('ResizeObserver loop limit exceeded')
+      );
+    };
+
+    const handleError = (e: ErrorEvent) => {
+      if (isResizeObserverError(e.message)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return true;
+      }
+    };
+
+    const handleRejection = (e: PromiseRejectionEvent) => {
+      const reason = e.reason;
+      const msg = typeof reason === 'string' ? reason : reason?.message;
+      if (isResizeObserverError(msg)) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleRejection);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleRejection);
+    };
   }, []);
 
   const handleExitComplete = useCallback(() => {

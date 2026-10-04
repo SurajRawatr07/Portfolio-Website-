@@ -154,13 +154,19 @@ export default function AmbientGeometry() {
     };
 
     resizeCanvas();
+    let resizeRaf: number | null = null;
     const resizeObserver = new ResizeObserver(() => {
-      resizeCanvas();
+      if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        resizeCanvas();
+        resizeRaf = null;
+      });
     });
     resizeObserver.observe(container);
 
     if (reduced) {
       return () => {
+        if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
         resizeObserver.disconnect();
       };
     }
@@ -238,6 +244,9 @@ export default function AmbientGeometry() {
     return () => {
       window.removeEventListener('pause-ambient-geometry', handlePause);
       window.removeEventListener('resume-ambient-geometry', handleResume);
+      if (resizeRaf !== null) {
+        cancelAnimationFrame(resizeRaf);
+      }
       resizeObserver.disconnect();
       observer.disconnect();
       if (parentSection) {

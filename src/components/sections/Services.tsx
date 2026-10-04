@@ -20,8 +20,7 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '01',
     number: '01',
     title: 'Full-Stack Development',
-    description:
-      'Build responsive and scalable web applications using modern frontend and backend technologies, from interactive interfaces to production-ready APIs and databases.',
+    description: 'MERN, Next.js and scalable modern web applications.',
     technologies: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     icon: 'layers',
   },
@@ -29,26 +28,23 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '02',
     number: '02',
     title: 'AI-Powered Applications',
-    description:
-      'Build practical AI-powered applications by integrating modern AI capabilities, intelligent workflows, LLM-based features and automation into real-world products.',
-    technologies: ['Generative AI', 'LLM Applications', 'AI Integration', 'Prompt Engineering', 'AI Automation'],
+    description: 'Intelligent applications, LLM integrations, RAG and AI-driven workflows.',
+    technologies: ['Generative AI', 'LLM Integration', 'RAG Workflows', 'Prompt Engineering', 'AI Automation'],
     icon: 'sparkles',
   },
   {
     id: '03',
     number: '03',
     title: 'Backend & API Engineering',
-    description:
-      'Design reliable backend systems, REST APIs, authentication flows and database architectures focused on clean structure, security and scalability.',
-    technologies: ['Node.js', 'Express.js', 'REST APIs', 'JWT', 'MongoDB', 'Mongoose', 'Firebase'],
+    description: 'REST APIs, authentication, databases and reliable backend systems.',
+    technologies: ['Node.js', 'Express.js', 'REST APIs', 'JWT', 'MongoDB', 'Firebase'],
     icon: 'server',
   },
   {
     id: '04',
     number: '04',
     title: 'Modern UI & Product Development',
-    description:
-      'Turn ideas into polished digital products with responsive interfaces, smooth interactions, thoughtful UX and performance-focused frontend engineering.',
+    description: 'Responsive interfaces, polished interactions and user-focused digital products.',
     technologies: ['React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Responsive Design'],
     icon: 'palette',
   },
@@ -56,9 +52,8 @@ const SERVICES_DATA: ServiceItem[] = [
     id: '05',
     number: '05',
     title: 'Open Source & Developer Community',
-    description:
-      'Contribute to open-source projects and developer communities through collaboration, code contributions, issue solving, documentation and knowledge sharing.',
-    technologies: ['Git', 'GitHub', 'Open Source', 'Code Review', 'Collaboration', 'Community Building'],
+    description: 'Open-source contribution, developer collaboration and community building.',
+    technologies: ['Git', 'GitHub', 'Open Source', 'Code Reviews', 'Collaboration', 'Community'],
     icon: 'users',
   },
 ];
