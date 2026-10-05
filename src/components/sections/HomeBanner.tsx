@@ -15,8 +15,14 @@ const AmbientGeometry = dynamic(() => import('@/components/canvas/AmbientGeometr
   ssr: false,
 });
 
+const INTRO_MESSAGES = [
+  'Hello, I’m Suraj Rawat.',
+  'Welcome to my portfolio.',
+  'Building Digital Experiences.',
+  'Turning Ideas Into Products.',
+] as const;
+
 const RoleTicker = () => {
-  const roles = site.roles;
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -29,34 +35,41 @@ const RoleTicker = () => {
       const currentWord = wrapper.querySelector('.ticker-word-current');
       const nextWord = wrapper.querySelector('.ticker-word-next');
       if (currentWord && nextWord) {
-        gsap.set(nextWord, { yPercent: 100 });
-        gsap.to(currentWord, { yPercent: -100, duration: 0.4, ease: EASE.outCubic });
+        gsap.set(nextWord, { y: 14, opacity: 0 });
+        gsap.to(currentWord, {
+          y: -14,
+          opacity: 0,
+          duration: 0.42,
+          ease: EASE.outCubic,
+        });
         gsap.to(nextWord, {
-          yPercent: 0,
-          duration: 0.4,
+          y: 0,
+          opacity: 1,
+          duration: 0.42,
           ease: EASE.outCubic,
           onComplete: () => {
-            setCurrentIdx((prev) => (prev + 1) % roles.length);
-            gsap.set(currentWord, { yPercent: 0 });
+            setCurrentIdx((prev) => (prev + 1) % INTRO_MESSAGES.length);
+            gsap.set(currentWord, { y: 0, opacity: 1 });
           },
         });
       }
-    }, 2600);
+    }, 2800);
     return () => clearInterval(interval);
-  }, [roles.length, reduced]);
+  }, [reduced]);
 
-  const nextIdx = (currentIdx + 1) % roles.length;
+  const nextIdx = (currentIdx + 1) % INTRO_MESSAGES.length;
   return (
-    <div className="h-6 overflow-hidden mb-8 flex justify-center items-center select-none">
+    <div className="h-7 sm:h-8 overflow-hidden mb-6 sm:mb-8 flex justify-center items-center select-none w-full">
       <div
         ref={containerRef}
-        className="relative h-6 w-80 text-center font-bold-serif text-xs sm:text-[13px] uppercase tracking-[0.16em] text-accent"
+        className="relative h-7 sm:h-8 w-full max-w-[340px] sm:max-w-[420px] text-center font-bold-serif text-xs sm:text-[13.5px] md:text-sm tracking-[0.03em] text-accent"
+        aria-live="polite"
       >
-        <div className="ticker-word-current absolute inset-0 flex items-center justify-center">
-          {roles[currentIdx]}
+        <div className="ticker-word-current absolute inset-0 flex items-center justify-center px-2 whitespace-nowrap">
+          {INTRO_MESSAGES[currentIdx]}
         </div>
-        <div className="ticker-word-next absolute inset-0 flex items-center justify-center translate-y-full">
-          {roles[nextIdx]}
+        <div className="ticker-word-next absolute inset-0 flex items-center justify-center px-2 translate-y-3.5 opacity-0 whitespace-nowrap">
+          {INTRO_MESSAGES[nextIdx]}
         </div>
       </div>
     </div>

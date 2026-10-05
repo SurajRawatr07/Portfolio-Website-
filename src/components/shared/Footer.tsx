@@ -1,129 +1,51 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import AnimatedLink from '@/components/ui/AnimateLink';
+import React from 'react';
 import Magnetic from '@/components/ui/Magnetic';
 import { ArrowUp } from 'lucide-react';
 import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
-import { useHandleLinkClick } from '@/lib/navigation';
+import { site, socials } from '@/lib/site';
 import { useLenis } from '@/components/providers/SmoothScrollProvider';
-import { site, socialList, navLinks } from '@/lib/site';
-import { gsap, useGSAP } from '@/lib/gsap';
 import Lenis from 'lenis';
 
+interface SocialLinkItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }>;
+  hoverColor: string;
+}
 
-const getSocialIcon = (label: string) => {
-  const l = label.toLowerCase();
-  if (l.includes('linkedin')) return <FaLinkedinIn className="w-3.5 h-3.5" />;
-  if (l.includes('github')) return <FaGithub className="w-3.5 h-3.5" />;
-  if (l.includes('leetcode')) return <SiLeetcode className="w-3.5 h-3.5" />;
-  if (l.includes('instagram')) return <FaInstagram className="w-3.5 h-3.5" />;
-  return null;
-};
+const FOOTER_SOCIALS: SocialLinkItem[] = [
+  {
+    name: 'GitHub',
+    href: socials.github.href,
+    icon: FaGithub,
+    hoverColor: 'hover:text-cream hover:border-white/30',
+  },
+  {
+    name: 'LinkedIn',
+    href: socials.linkedin.href,
+    icon: FaLinkedinIn,
+    hoverColor: 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40',
+  },
+  {
+    name: 'LeetCode',
+    href: socials.leetcode.href,
+    icon: SiLeetcode,
+    hoverColor: 'hover:text-[#FFA116] hover:border-[#FFA116]/40',
+  },
+  {
+    name: 'Instagram',
+    href: socials.instagram.href,
+    icon: FaInstagram,
+    hoverColor: 'hover:text-[#E4405F] hover:border-[#E4405F]/40',
+  },
+];
 
-const Footer = () => {
-  const [currentTime, setCurrentTime] = useState('');
-  const [isMounted, setIsMounted] = useState(false);
-  const footerRef = useRef<HTMLElement>(null);
+const Footer: React.FC = () => {
   const lenisRef = useLenis() as React.RefObject<Lenis | null> | null;
   const lenis = lenisRef?.current;
-
-  // Subtle floating icon animations (independent natural movements inspired by the homepage)
-  useGSAP(
-    () => {
-      const prefersReduced =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) return;
-
-      // GitHub: slow floating movement with slight upward drift & tilt
-      gsap.to('.social-float-0', {
-        y: -4.5,
-        x: 2,
-        rotation: 1.8,
-        duration: 3.2,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // LinkedIn: gentle downward and leftward float with opposite tilt
-      gsap.to('.social-float-1', {
-        y: 4,
-        x: -2.5,
-        rotation: -2,
-        duration: 3.8,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // LeetCode: smooth diagonal gentle vertical/horizontal wave
-      gsap.to('.social-float-2', {
-        y: -5,
-        x: -2,
-        rotation: 2.2,
-        duration: 3.4,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // Instagram: subtle counter-balance float with fluid rhythm
-      gsap.to('.social-float-3', {
-        y: 3.5,
-        x: 2.5,
-        rotation: -1.6,
-        duration: 4.1,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-    },
-    { scope: footerRef },
-  );
-
-  useEffect(() => {
-    setIsMounted(true);
-    let interval: NodeJS.Timeout | number | undefined;
-
-    const updateTime = () => {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-        timeZone: site.timeZone,
-      });
-      setCurrentTime(timeString);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          updateTime();
-          interval = setInterval(updateTime, 30000);
-        } else {
-          if (interval) {
-            clearInterval(interval);
-            interval = undefined;
-          }
-        }
-      },
-      { threshold: 0 },
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => {
-      observer.disconnect();
-      if (interval) clearInterval(interval);
-    };
-  }, []);
-
-  const handleLinkClick = useHandleLinkClick();
-  const links = navLinks.filter((l) => !('menuOnly' in l && l.menuOnly));
 
   const scrollToTop = () => {
     if (lenis) {
@@ -134,107 +56,63 @@ const Footer = () => {
   };
 
   return (
-    <footer
-      ref={footerRef}
-      className="relative z-30 bg-ink border-t border-border-subtle px-6 sm:px-8 md:px-12 py-12 md:py-16"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Top Info Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-10 md:mb-12">
-          {/* Navigation Menu */}
-          <div>
-            <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
-              Menu
-            </h3>
-            <ul className="flex flex-col gap-2.5 sm:gap-3 text-gray-soft text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.08em] font-medium">
-              {links.map((link) => (
-                <AnimatedLink key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLinkClick(link.href);
-                    }}
-                    className="hover:text-cream transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
-                </AnimatedLink>
-              ))}
-            </ul>
-          </div>
-
-          {/* Socials Column */}
-          <div>
-            <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-4 md:mb-5">
-              Socials
-            </h3>
-            <ul className="flex flex-col gap-2.5 sm:gap-3 text-gray-soft text-xs sm:text-[13px] font-bold-serif uppercase tracking-[0.08em] font-medium">
-              {socialList.map((s, idx) => (
-                <AnimatedLink key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${s.label} profile (opens in a new tab)`}
-                    className="group inline-flex items-center gap-2.5 hover:text-cream transition-colors duration-200"
-                  >
-                    <span
-                      className={`text-accent/90 inline-flex items-center justify-center social-float-${idx} transition-transform duration-300 group-hover:scale-110`}
-                    >
-                      {getSocialIcon(s.label)}
-                    </span>
-                    <span>{s.label}</span>
-                  </a>
-                </AnimatedLink>
-              ))}
-            </ul>
-          </div>
-
-          {/* Email & Local Time */}
-          <div className="col-span-2 md:col-span-1 mt-2 md:mt-0 flex flex-col justify-between">
-            <div>
-              <h3 className="text-light/95 text-xs sm:text-[12.5px] font-bold-serif tracking-[0.16em] uppercase font-bold mb-2 md:mb-3">
-                Email
-              </h3>
-              <a
-                href={`mailto:${site.email}`}
-                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-gray-soft hover:text-cream transition-all duration-200 tracking-wide"
-                aria-label={`Send email to ${site.email}`}
-              >
-                <span className="relative border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
-                  {site.email}
-                </span>
-                <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-[0.72rem]">
-                  <span className="group-hover:hidden">→</span>
-                  <span className="hidden group-hover:inline">↗</span>
-                </span>
-              </a>
-            </div>
-
-            <div className="mt-6 md:mt-auto pt-4">
-              <h4 className="text-light/80 text-[11px] sm:text-xs font-bold-serif tracking-[0.16em] uppercase font-semibold mb-1.5">
-                Local Time
-              </h4>
-              <p className="text-cream text-xs sm:text-sm font-bold-serif font-medium tracking-wide tabular-nums">
-                {isMounted && currentTime ? `${currentTime} ${site.timeZoneLabel}` : 'Loading local time...'}
-              </p>
-            </div>
-          </div>
+    <footer className="relative z-30 bg-ink border-t border-white/[0.08] py-8 sm:py-10 md:py-12 px-4 sm:px-6 md:px-8">
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+        {/* ONLY ONE Social Icon Row */}
+        <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 mb-5 sm:mb-6 select-none">
+          {FOOTER_SOCIALS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Magnetic key={item.name} strength={0.25}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${item.name} profile (opens in a new tab)`}
+                  title={item.name}
+                  className={`group relative w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-white/[0.04] border border-white/10 text-gray-soft shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${item.hoverColor}`}
+                >
+                  <Icon
+                    className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </a>
+              </Magnetic>
+            );
+          })}
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 mt-6 border-t border-white/[0.06] flex items-center justify-between">
-          <span className="text-gray-soft/60 text-[11px] font-bold-serif tracking-wide">
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
-          </span>
-          <Magnetic strength={0.4}>
+        {/* Small Secondary Contact Element: Email */}
+        <div className="mb-4">
+          <a
+            href={`mailto:${site.email}`}
+            className="group inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] md:text-sm text-gray-soft/90 hover:text-cream transition-colors duration-200 tracking-wide"
+            aria-label={`Send email to ${site.email}`}
+          >
+            <span className="relative border-b border-white/20 group-hover:border-accent transition-colors duration-200">
+              {site.email}
+            </span>
+            <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-xs">
+              ↗
+            </span>
+          </a>
+        </div>
+
+        {/* Copyright below the social row */}
+        <p className="text-gray-soft/60 text-[11px] sm:text-xs font-bold-serif tracking-wider select-none">
+          © 2026 Suraj Rawat
+        </p>
+
+        {/* Subtle Back To Top Button */}
+        <div className="mt-5 sm:mt-6">
+          <Magnetic strength={0.3}>
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-elevated-dark border border-border-subtler flex items-center justify-center text-gray-soft hover:text-accent hover:border-accent hover:bg-accent/10 transition-all duration-300 group focus:outline-none cursor-pointer"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-accent/40 text-gray-soft/70 hover:text-cream text-[11px] font-bold-serif uppercase tracking-wider transition-all duration-300 focus:outline-none cursor-pointer"
               aria-label="Scroll to top"
             >
-              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-1 transition-transform duration-300" />
+              <span>Back to Top</span>
+              <ArrowUp className="w-3 h-3 text-accent group-hover:-translate-y-0.5 transition-transform duration-300" />
             </button>
           </Magnetic>
         </div>

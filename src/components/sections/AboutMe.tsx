@@ -198,7 +198,6 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
 
   useGSAP(
     () => {
@@ -234,44 +233,25 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         },
       );
 
-      const rows = gsap.utils.toArray<HTMLElement>('.cred-row');
-      rows.forEach((row, i) => {
-        const side = row.dataset.side === 'left' ? -1 : 1;
-        const dot = row.querySelector('.timeline-dot');
-        const connector = row.querySelector('.timeline-connector');
-        const content = row.querySelector('.timeline-content');
+      const items = gsap.utils.toArray<HTMLElement>('.experience-item');
+      items.forEach((item, i) => {
+        const dot = item.querySelector('.timeline-dot');
         gsap.fromTo(
-          row,
-          { opacity: 0 },
+          item,
+          { opacity: 0, y: 22 },
           {
             opacity: 1,
+            y: 0,
             duration: 0.65,
             ease: 'power3.out',
-            delay: i * 0.07,
+            delay: i * 0.08,
             scrollTrigger: {
-              trigger: row,
-              start: 'top 90%',
+              trigger: item,
+              start: 'top 88%',
               once: true,
             },
           },
         );
-        if (content) {
-          gsap.fromTo(
-            content,
-            { x: side * 42, y: 18 },
-            {
-              x: 0,
-              y: 0,
-              duration: 0.8,
-              ease: 'power4.out',
-              scrollTrigger: {
-                trigger: row,
-                start: 'top 87%',
-                once: true,
-              },
-            },
-          );
-        }
         if (dot) {
           gsap.fromTo(
             dot,
@@ -279,28 +259,11 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
             {
               scale: 1,
               duration: 0.45,
-              ease: 'back.out(2.5)',
-              delay: 0.18,
+              ease: 'back.out(2)',
+              delay: i * 0.08 + 0.1,
               scrollTrigger: {
-                trigger: row,
-                start: 'top 87%',
-                once: true,
-              },
-            },
-          );
-        }
-        if (connector) {
-          gsap.fromTo(
-            connector,
-            { scaleX: 0 },
-            {
-              scaleX: 1,
-              duration: 0.55,
-              delay: 0.1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: row,
-                start: 'top 87%',
+                trigger: item,
+                start: 'top 88%',
                 once: true,
               },
             },
@@ -340,21 +303,6 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
             },
           },
         );
-      }
-
-      if (pathRef.current) {
-        const length = pathRef.current.getTotalLength();
-        gsap.set(pathRef.current, { strokeDasharray: length, strokeDashoffset: length });
-        gsap.to(pathRef.current, {
-          strokeDashoffset: 0,
-          duration: 2.2,
-          ease: 'power2.inOut',
-          scrollTrigger: {
-            trigger: tableRef.current,
-            start: 'top 75%',
-            once: true,
-          },
-        });
       }
     },
     { scope: sectionRef },
@@ -417,92 +365,48 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
               </h3>
             </div>
 
-            <div className="relative mx-auto max-w-6xl">
-              <div aria-hidden="true" className="absolute bottom-0 left-[7px] top-0 w-px bg-white/15 md:hidden" />
-              <svg aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 hidden h-full w-16 -translate-x-1/2 md:block" viewBox="0 0 64 800" preserveAspectRatio="none">
-                <path
-                  ref={pathRef}
-                  d="M32 0 C24 80 40 120 32 200 C24 280 40 320 32 400 C24 480 40 520 32 600 C24 680 40 720 32 800"
-                  fill="none"
-                  stroke="rgba(232, 228, 222, 0.28)"
-                  strokeWidth="1.5"
+            <div className="relative mx-auto max-w-4xl px-2 sm:px-4">
+              <div className="relative pl-6 sm:pl-8 md:pl-10 space-y-6 sm:space-y-8 md:space-y-10">
+                {/* Subtle Left-Side Continuous Timeline Track */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[7px] sm:left-[9px] md:left-[11px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5"
                 />
-              </svg>
-              <div className="flex flex-col gap-10 md:gap-16">
-                {EXPERIENCES.map((item, idx) => {
-                  const isLeft = idx % 2 === 0;
-                  return (
-                    <article
-                      key={item.id}
-                      data-side={isLeft ? 'left' : 'right'}
-                      className="cred-row group relative grid grid-cols-[32px_1fr] gap-x-5 opacity-0 md:grid-cols-[1fr_96px_1fr] md:gap-x-0"
-                    >
-                      <div className="relative order-1 md:col-start-2 md:row-start-1 md:justify-self-center">
-                        <span className="timeline-dot relative z-10 block h-[15px] w-[15px] rounded-full border-[3px] border-ink bg-cream group-hover:scale-110 group-hover:bg-accent transition-all duration-300" />
-                        <span
-                          aria-hidden="true"
-                          className={`timeline-connector absolute top-[7px] hidden h-px w-14 bg-white/25 md:block ${
-                            isLeft ? 'right-full origin-right' : 'left-full origin-left'
-                          }`}
-                        />
-                        <span
-                          className={`hidden md:block absolute top-7 whitespace-nowrap font-bold-serif text-xs uppercase tracking-[0.16em] text-accent/90 tabular-nums font-bold ${
-                            isLeft ? 'right-7 text-right' : 'left-7'
-                          }`}
-                        >
-                          {item.number}
-                        </span>
-                      </div>
 
-                      <div
-                        className={`timeline-content order-2 pt-0 md:row-start-1 ${
-                          isLeft ? 'md:col-start-1 md:pr-12 md:text-right' : 'md:col-start-3 md:pl-12 md:text-left'
-                        }`}
-                      >
-                        <div className="rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/60 md:bg-transparent border border-white/[0.06] md:border-transparent transition-all duration-300">
-                          {/* Number & Period */}
-                          <div
-                            className={`flex flex-wrap items-center gap-2 mb-1.5 ${
-                              isLeft ? 'md:justify-end' : 'md:justify-start'
-                            }`}
-                          >
-                            <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-accent tabular-nums font-bold">
-                              {item.number}
-                            </span>
-                            {item.period && (
-                              <>
-                                <span className="text-white/20 select-none">•</span>
-                                <span className="font-bold-serif text-[11px] uppercase tracking-wider text-warm-light/80">
-                                  {item.period}
-                                </span>
-                              </>
-                            )}
-                          </div>
+                {EXPERIENCES.map((item) => (
+                  <article
+                    key={item.id}
+                    className="experience-item group relative opacity-0"
+                  >
+                    {/* Left Timeline Indicator Dot */}
+                    <div className="absolute -left-[24px] sm:-left-[32px] md:-left-[40px] top-5 flex items-center justify-center">
+                      <span className="timeline-dot relative z-10 block h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border-2 border-accent bg-ink transition-transform duration-300 group-hover:scale-125 group-hover:bg-accent shadow-[0_0_10px_rgba(196,93,62,0.35)]" />
+                    </div>
 
-                          {/* Title */}
-                          <h4 className="font-bold-serif text-lg sm:text-xl md:text-[1.35rem] lg:text-[1.45rem] tracking-[-0.015em] leading-snug text-cream">
+                    {/* Experience Card */}
+                    <div className="rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out">
+                      {/* 1. ROLE / TITLE & 3. DATE */}
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                        <div>
+                          <h4 className="font-bold-serif text-base sm:text-lg md:text-[1.25rem] tracking-[-0.015em] leading-snug text-cream">
                             {item.title}
                           </h4>
 
-                          {/* Institution or Organization Link */}
+                          {/* 2. COMPANY / CONTEXT */}
                           {item.institution && (
-                            <div
-                              className={`mt-1.5 flex flex-wrap items-center ${
-                                isLeft ? 'md:justify-end' : 'md:justify-start'
-                              }`}
-                            >
+                            <div className="mt-1 flex items-center">
                               <a
                                 href={item.institution.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={`${item.institution.name} website (opens in a new tab)`}
-                                className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] leading-snug text-gray-soft hover:text-white transition-colors duration-200"
+                                className="group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] text-gray-soft hover:text-white transition-colors duration-200"
                               >
                                 <span className="underline-offset-4 group-hover/link:underline">
                                   {item.institution.name}
                                 </span>
                                 <FaExternalLinkAlt
-                                  className="w-2.5 h-2.5 text-gray-mid group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5"
+                                  className="w-2.5 h-2.5 text-accent/80 group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5"
                                   aria-hidden="true"
                                 />
                               </a>
@@ -510,18 +414,14 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           )}
 
                           {item.organization && (
-                            <div
-                              className={`mt-1.5 flex flex-wrap items-center ${
-                                isLeft ? 'md:justify-end' : 'md:justify-start'
-                              }`}
-                            >
+                            <div className="mt-1 flex items-center">
                               {item.organization.url ? (
                                 <a
                                   href={item.organization.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   aria-label={`${item.organization.name} website (opens in a new tab)`}
-                                  className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] leading-snug transition-colors duration-200 ${
+                                  className={`group/link inline-flex items-center gap-1.5 font-italic-serif text-xs sm:text-[13px] transition-colors duration-200 ${
                                     item.organization.accent
                                       ? 'text-accent hover:text-accent-light font-medium'
                                       : 'text-gray-soft hover:text-white'
@@ -531,124 +431,103 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                                     {item.organization.name}
                                   </span>
                                   <FaExternalLinkAlt
-                                    className={`w-2.5 h-2.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5 ${
-                                      item.organization.accent
-                                        ? 'text-accent/80 group-hover/link:text-accent-light'
-                                        : 'text-gray-mid group-hover/link:text-accent'
-                                    }`}
+                                    className="w-2.5 h-2.5 text-accent/80 group-hover/link:text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 flex-shrink-0 ml-0.5"
                                     aria-hidden="true"
                                   />
                                 </a>
                               ) : (
-                                <p className="font-italic-serif text-xs sm:text-[13px] leading-snug text-gray-soft">
+                                <p className="font-italic-serif text-xs sm:text-[13px] text-gray-soft">
                                   {item.organization.name}
                                 </p>
                               )}
                             </div>
                           )}
-
-                          {/* Concise Description */}
-                          <p
-                            className={`font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft/90 mt-2 max-w-lg ${
-                              isLeft ? 'md:ml-auto' : ''
-                            }`}
-                          >
-                            {item.description}
-                          </p>
-
-                          {/* Core Responsibilities Panel */}
-                          {item.responsibilities && item.responsibilities.length > 0 && (
-                            <div
-                              className={`mt-3 pt-3 border-t border-white/[0.08] w-full max-w-lg ${
-                                isLeft ? 'md:ml-auto' : ''
-                              }`}
-                            >
-                              <span
-                                className={`font-bold-serif text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-2 ${
-                                  isLeft ? 'md:text-right' : 'text-left'
-                                }`}
-                              >
-                                CORE RESPONSIBILITIES
-                              </span>
-                              <ul className="space-y-1.5 text-xs text-light/85 font-serif">
-                                {item.responsibilities.map((resp, i) => (
-                                  <li
-                                    key={i}
-                                    className="grid grid-cols-[1fr_auto] items-center gap-3 py-0.5 border-b border-white/[0.03] last:border-b-0"
-                                  >
-                                    <span
-                                      className={`text-gray-soft/95 leading-normal ${
-                                        isLeft ? 'md:text-right' : 'text-left'
-                                      }`}
-                                    >
-                                      {resp}
-                                    </span>
-                                    <span
-                                      className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
-                                      aria-hidden="true"
-                                    />
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* Tech Stack Pills */}
-                          {item.tech && item.tech.length > 0 && (
-                            <div
-                              className={`mt-3 flex flex-wrap gap-1.5 max-w-lg ${
-                                isLeft ? 'md:justify-end md:ml-auto' : 'justify-start'
-                              }`}
-                            >
-                              {item.tech.map((t) => (
-                                <span
-                                  key={t}
-                                  className="inline-flex items-center px-2.5 py-1 text-[11px] font-bold-serif rounded-full leading-none bg-white/[0.04] border border-white/10 text-warm-light/90 hover:border-accent/40 hover:text-white hover:bg-white/[0.08] transition-all duration-200 select-none"
-                                >
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Social Links */}
-                          {item.socialLinks && item.socialLinks.length > 0 && (
-                            <div
-                              className={`mt-3 flex flex-wrap items-center gap-2 max-w-lg ${
-                                isLeft ? 'md:justify-end md:ml-auto' : 'justify-start'
-                              }`}
-                            >
-                              {item.socialLinks.map((link) => (
-                                <a
-                                  key={link.name}
-                                  href={link.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={`Suraj Rawat's ${link.name} (opens in a new tab)`}
-                                  className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-300 font-bold-serif text-xs tracking-wide focus-visible:outline-2 focus-visible:outline-accent"
-                                >
-                                  {link.icon === 'github' && (
-                                    <FaGithub
-                                      className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                      aria-hidden="true"
-                                    />
-                                  )}
-                                  {link.icon === 'linkedin' && (
-                                    <FaLinkedinIn
-                                      className="w-3.5 h-3.5 text-warm group-hover/link:text-accent transition-colors duration-200"
-                                      aria-hidden="true"
-                                    />
-                                  )}
-                                  <span>{link.name}</span>
-                                </a>
-                              ))}
-                            </div>
-                          )}
                         </div>
+
+                        {/* 3. DATE: compact badge/pill */}
+                        {item.period && (
+                          <span className="self-start sm:self-center font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-wider text-accent px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 whitespace-nowrap">
+                            {item.period}
+                          </span>
+                        )}
                       </div>
-                    </article>
-                  );
-                })}
+
+                      {/* 4. DESCRIPTION: Maximum 1–2 short lines */}
+                      <p className="font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft/90 mt-2.5">
+                        {item.description}
+                      </p>
+
+                      {/* 5. CORE RESPONSIBILITIES: 3–4 concise items */}
+                      {item.responsibilities && item.responsibilities.length > 0 && (
+                        <div className="mt-3.5 pt-3 border-t border-white/[0.08]">
+                          <span className="font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-2">
+                            CORE RESPONSIBILITIES
+                          </span>
+                          <ul className="space-y-1 text-xs text-light/85 font-serif">
+                            {item.responsibilities.slice(0, 4).map((resp, i) => (
+                              <li
+                                key={i}
+                                className="grid grid-cols-[1fr_auto] items-center gap-3 py-0.5 border-b border-white/[0.03] last:border-b-0"
+                              >
+                                <span className="text-gray-soft/95 leading-normal">
+                                  {resp}
+                                </span>
+                                <span
+                                  className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
+                                  aria-hidden="true"
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* 6. TECHNOLOGY STACK: compact pills */}
+                      {item.tech && item.tech.length > 0 && (
+                        <div className="mt-3.5 flex flex-wrap gap-1.5">
+                          {item.tech.map((t) => (
+                            <span
+                              key={t}
+                              className="inline-flex items-center px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-bold-serif rounded-full leading-normal bg-white/[0.04] border border-white/10 text-warm-light/90 hover:border-accent/40 hover:text-white transition-colors duration-200 select-none"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Social Links (if present) */}
+                      {item.socialLinks && item.socialLinks.length > 0 && (
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                          {item.socialLinks.map((link) => (
+                            <a
+                              key={link.name}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Suraj Rawat's ${link.name} (opens in a new tab)`}
+                              className="group/link inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-200 font-bold-serif text-xs tracking-wide"
+                            >
+                              {link.icon === 'github' && (
+                                <FaGithub
+                                  className="w-3 h-3 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                  aria-hidden="true"
+                                />
+                              )}
+                              {link.icon === 'linkedin' && (
+                                <FaLinkedinIn
+                                  className="w-3 h-3 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                  aria-hidden="true"
+                                />
+                              )}
+                              <span>{link.name}</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
