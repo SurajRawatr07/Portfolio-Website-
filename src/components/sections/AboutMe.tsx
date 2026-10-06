@@ -393,7 +393,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
           </div>
 
           <div ref={tableRef} className="pt-10 md:pt-14 border-t border-white/10">
-            <div className="mb-8 text-center md:mb-12">
+            <div className="mb-6 text-center md:mb-10">
               <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
                 (Experience)
               </span>
@@ -405,30 +405,34 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
               </h3>
             </div>
 
-            <div className="relative mx-auto max-w-4xl px-2 sm:px-4">
-              <div className="relative pl-7 sm:pl-8 md:pl-10 space-y-5 sm:space-y-6 md:space-y-8">
-                {/* Subtle Left-Side Continuous Timeline Track */}
-                <div
-                  aria-hidden="true"
-                  className="timeline-line absolute left-[11px] sm:left-[13px] md:left-[15px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5"
-                />
+            {/* Experience Timeline */}
+            <div className="relative max-w-3xl mx-auto pl-7 sm:pl-9 md:pl-11">
+              {/* Subtle Left-Side Continuous Timeline Track */}
+              <div
+                aria-hidden="true"
+                className="timeline-line absolute left-[11px] sm:left-[13px] md:left-[15px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5 pointer-events-none origin-top"
+              />
 
+              <div className="space-y-6 sm:space-y-8">
                 {EXPERIENCES.map((item) => (
-                  <article
+                  <div
                     key={item.id}
-                    className="experience-item group relative"
+                    className="experience-item relative group"
                   >
-                    {/* Left Timeline Indicator Dot */}
-                    <div className="absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 flex items-center justify-center pointer-events-none">
-                      <span className="timeline-dot relative z-10 block h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border-2 border-accent bg-ink transition-all duration-300 group-hover:scale-110 group-hover:bg-accent shadow-[0_0_8px_rgba(196,93,62,0.35)]" />
+                    {/* Timeline Node Dot */}
+                    <div
+                      aria-hidden="true"
+                      className="timeline-dot absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-ink border-2 border-accent/70 group-hover:border-accent group-hover:scale-110 transition-transform duration-300 shadow-[0_0_8px_rgba(196,93,62,0.4)] flex items-center justify-center z-10"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                     </div>
 
-                    {/* Experience Card Slide */}
-                    <div className="experience-card will-change-transform rounded-2xl p-3.5 sm:p-5 md:p-5.5 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out">
+                    {/* Experience Card */}
+                    <div className="experience-card rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/85 border border-white/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-sm hover:border-accent/40 -translate-y-0.5 hover:shadow-2xl transition-all duration-300 ease-out">
                       {/* 1. ROLE / TITLE & 3. DATE */}
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                        <div>
-                          <h4 className="font-bold-serif text-sm sm:text-base md:text-[1.125rem] tracking-[-0.015em] leading-snug text-cream">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2">
+                        <div className="min-w-0 pr-1">
+                          <h4 className="font-bold-serif text-base sm:text-lg md:text-[1.25rem] tracking-[-0.015em] leading-snug text-cream break-words">
                             {item.title}
                           </h4>
 
@@ -484,32 +488,32 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                           )}
                         </div>
 
-                        {/* 3. DATE: compact badge/pill */}
+                        {/* 3. DATE: compact badge */}
                         {item.period && (
-                          <span className="self-start sm:self-center font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-wider text-accent px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 whitespace-nowrap">
+                          <span className="self-start sm:self-center font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-wider text-accent px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 whitespace-nowrap mt-0.5 sm:mt-0 flex-shrink-0">
                             {item.period}
                           </span>
                         )}
                       </div>
 
                       {/* 4. DESCRIPTION: Maximum 1–2 short lines */}
-                      <p className="font-italic-serif text-xs sm:text-[12.5px] leading-relaxed text-gray-soft/90 mt-2">
+                      <p className="font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft/90 mt-2.5">
                         {item.description}
                       </p>
 
                       {/* 5. CORE RESPONSIBILITIES: 3–4 concise items */}
                       {item.responsibilities && item.responsibilities.length > 0 && (
-                        <div className="mt-3 pt-2.5 border-t border-white/[0.08]">
+                        <div className="mt-3.5 pt-2.5 border-t border-white/[0.08]">
                           <span className="font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-1.5">
                             CORE RESPONSIBILITIES
                           </span>
-                          <ul className="space-y-1 text-xs text-light/85 font-serif">
+                          <ul className="space-y-1.5 text-xs text-light/85 font-serif">
                             {item.responsibilities.slice(0, 4).map((resp, i) => (
                               <li
                                 key={i}
-                                className="grid grid-cols-[1fr_auto] items-center gap-3 py-0.5 border-b border-white/[0.03] last:border-b-0"
+                                className="grid grid-cols-[1fr_auto] items-center gap-2.5 py-0.5 border-b border-white/[0.03] last:border-b-0"
                               >
-                                <span className="text-gray-soft/95 leading-normal">
+                                <span className="text-gray-soft/95 leading-normal text-[11.5px] sm:text-xs">
                                   {resp}
                                 </span>
                                 <span
@@ -524,7 +528,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                       {/* 6. TECHNOLOGY STACK: compact pills */}
                       {item.tech && item.tech.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-1.5">
+                        <div className="mt-3.5 pt-2 flex flex-wrap gap-1.5">
                           {item.tech.map((t) => (
                             <span
                               key={t}
@@ -566,7 +570,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                         </div>
                       )}
                     </div>
-                  </article>
+                  </div>
                 ))}
               </div>
             </div>

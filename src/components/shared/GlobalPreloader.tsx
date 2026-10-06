@@ -3,16 +3,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 
-export const preloaderWords = [
-  'नमस्ते 👋',
-  'Welcome 🚀',
-  'Loading... थोड़ा इंतज़ार 😄',
-  'Almost there... 👀',
-  'Let’s build something! 🚀',
-];
+export const PRELOADER_MESSAGES = [
+  'Hello, I’m Suraj Rawat.',
+  'Welcome to my portfolio.',
+  'Building Digital Experiences.',
+  'Turning Ideas Into Products.',
+] as const;
 
-const MIN_DISPLAY_MS = 5600;
-const HARD_CAP_MS = 6500;
+export const preloaderWords = PRELOADER_MESSAGES;
+
+const MIN_DISPLAY_MS = 2900;
+const HARD_CAP_MS = 3800;
 
 export default function GlobalPreloader({
   onComplete,
@@ -21,6 +22,7 @@ export default function GlobalPreloader({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const curvePathRef = useRef<SVGPathElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
   const [index, setIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [dimension, setDimension] = useState<{
@@ -144,7 +146,7 @@ export default function GlobalPreloader({
           sessionStorage.setItem('preloader-seen', '1');
         } catch {}
 
-        setTimeout(() => playExitAnimation.current(), 180);
+        setTimeout(() => playExitAnimation.current(), 140);
         return;
       }
 
@@ -171,18 +173,41 @@ export default function GlobalPreloader({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Smooth sequence progression between the 4 messages
   useEffect(() => {
     if (finishedRef.current) return;
-    if (index === preloaderWords.length - 1) return;
+    if (index >= PRELOADER_MESSAGES.length - 1) return;
 
-    const timeout = setTimeout(
-      () => {
+    const stayDuration = 620;
+    const fadeOutDuration = 160;
+
+    const timeout = setTimeout(() => {
+      if (textRef.current) {
+        gsap.to(textRef.current, {
+          opacity: 0,
+          y: -8,
+          duration: fadeOutDuration / 1000,
+          ease: 'power2.in',
+          onComplete: () => {
+            setIndex((prev) => prev + 1);
+          },
+        });
+      } else {
         setIndex((prev) => prev + 1);
-      },
-      index === 0 ? 650 : 550,
-    );
+      }
+    }, stayDuration);
 
     return () => clearTimeout(timeout);
+  }, [index]);
+
+  // Entrance animation for current message
+  useEffect(() => {
+    if (!textRef.current) return;
+    gsap.fromTo(
+      textRef.current,
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.32, ease: 'power2.out' },
+    );
   }, [index]);
 
   const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${
@@ -192,11 +217,16 @@ export default function GlobalPreloader({
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0B110E] cursor-wait text-cream select-none pointer-events-auto"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0B110E] cursor-wait text-cream select-none pointer-events-auto px-4"
       style={{ willChange: 'transform' }}
     >
-      <div className="flex items-center text-2xl sm:text-3xl md:text-4xl font-bold-serif font-bold text-cream z-10 transition-opacity duration-700 opacity-95 tracking-tight">
-        <p>{preloaderWords[index]}</p>
+      <div className="relative flex items-center justify-center text-center max-w-xl mx-auto w-full z-10 px-4">
+        <p
+          ref={textRef}
+          className="font-bold-serif font-bold text-cream tracking-tight text-xl sm:text-2xl md:text-3xl lg:text-[2.1rem] leading-snug break-words max-w-lg mx-auto"
+        >
+          {PRELOADER_MESSAGES[index]}
+        </p>
       </div>
 
       <div
