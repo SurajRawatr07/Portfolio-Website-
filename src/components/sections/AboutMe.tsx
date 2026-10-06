@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import FlowField from '@/components/canvas/FlowField';
@@ -183,6 +184,8 @@ const EXPERIENCES: ExperienceItem[] = [
 ];
 
 const About = () => {
+  const reduced = useReducedMotion();
+
   const headingWords = [
     { t: 'WHO' },
     { t: 'am', serif: true },
@@ -233,59 +236,79 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         },
       );
 
-      ScrollTrigger.batch('.experience-item', {
-        start: 'top 88%',
-        once: true,
-        onEnter: (batch) => {
-          gsap.fromTo(
-            batch,
-            { opacity: 0, y: 24 },
-            {
+      // Slide-by-slide Experience Animation with Reduced Motion Check
+      if (reduced) {
+        gsap.set('.experience-card', { opacity: 1, y: 0, x: 0, scale: 1 });
+        gsap.set('.timeline-dot', { opacity: 1, scale: 1 });
+        const timelineLine = tableRef.current?.querySelector('.timeline-line');
+        if (timelineLine) gsap.set(timelineLine, { opacity: 1, scaleY: 1 });
+      } else {
+        // Initial state: subtle translateY(35px), scale(0.98), subtle translateX(4px), opacity 0
+        gsap.set('.experience-card', {
+          opacity: 0,
+          y: 35,
+          x: 4,
+          scale: 0.98,
+          transformOrigin: 'top left',
+        });
+        gsap.set('.timeline-dot', {
+          opacity: 0,
+          scale: 0.7,
+        });
+
+        // Individual slide reveal with sequential micro-stagger as cards enter the viewport
+        ScrollTrigger.batch('.experience-item', {
+          start: 'top 88%',
+          once: true,
+          onEnter: (batch) => {
+            const cards = batch
+              .map((item) => item.querySelector('.experience-card'))
+              .filter(Boolean);
+            const dots = batch
+              .map((item) => item.querySelector('.timeline-dot'))
+              .filter(Boolean);
+
+            gsap.to(cards, {
               opacity: 1,
               y: 0,
+              x: 0,
+              scale: 1,
               duration: 0.75,
               ease: 'power3.out',
-              stagger: 0.1,
+              stagger: 0.12,
               overwrite: 'auto',
+            });
+
+            gsap.to(dots, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.5,
+              ease: 'power3.out',
+              stagger: 0.12,
+              delay: 0.05,
+              overwrite: 'auto',
+            });
+          },
+        });
+
+        const timelineLine = tableRef.current?.querySelector('.timeline-line');
+        if (timelineLine) {
+          gsap.fromTo(
+            timelineLine,
+            { opacity: 0, scaleY: 0.6, transformOrigin: 'top center' },
+            {
+              opacity: 1,
+              scaleY: 1,
+              duration: 0.95,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: tableRef.current,
+                start: 'top 88%',
+                once: true,
+              },
             },
           );
-          batch.forEach((el) => {
-            const dot = el.querySelector('.timeline-dot');
-            if (dot) {
-              gsap.fromTo(
-                dot,
-                { opacity: 0, scale: 0.75 },
-                {
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.5,
-                  ease: 'power3.out',
-                  delay: 0.05,
-                  overwrite: 'auto',
-                },
-              );
-            }
-          });
-        },
-      });
-
-      const timelineLine = tableRef.current?.querySelector('.timeline-line');
-      if (timelineLine) {
-        gsap.fromTo(
-          timelineLine,
-          { opacity: 0, scaleY: 0.85, transformOrigin: 'top center' },
-          {
-            opacity: 1,
-            scaleY: 1,
-            duration: 0.85,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: tableRef.current,
-              start: 'top 88%',
-              once: true,
-            },
-          },
-        );
+        }
       }
 
       gsap.fromTo(
@@ -322,7 +345,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         );
       }
     },
-    { scope: sectionRef },
+    { scope: sectionRef, dependencies: [reduced] },
   );
 
   return (
@@ -393,15 +416,15 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                 {EXPERIENCES.map((item) => (
                   <article
                     key={item.id}
-                    className="experience-item group relative opacity-0"
+                    className="experience-item group relative"
                   >
                     {/* Left Timeline Indicator Dot */}
-                    <div className="absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 flex items-center justify-center">
+                    <div className="absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 flex items-center justify-center pointer-events-none">
                       <span className="timeline-dot relative z-10 block h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border-2 border-accent bg-ink transition-all duration-300 group-hover:scale-110 group-hover:bg-accent shadow-[0_0_8px_rgba(196,93,62,0.35)]" />
                     </div>
 
-                    {/* Experience Card */}
-                    <div className="rounded-2xl p-4 sm:p-5 md:p-5.5 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out">
+                    {/* Experience Card Slide */}
+                    <div className="experience-card will-change-transform rounded-2xl p-3.5 sm:p-5 md:p-5.5 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out">
                       {/* 1. ROLE / TITLE & 3. DATE */}
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                         <div>
