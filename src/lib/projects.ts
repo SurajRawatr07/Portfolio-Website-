@@ -61,8 +61,8 @@ const projects: Project[] = [
       '/Projects/c-study/06_CSP.webp',
     ],
     hoverImage: '/Projects/c-study/02_CSP.webp',
-    github: 'https://github.com/aitezazdev/collaborative-study-platform',
-    liveUrl: 'https://collaborative-study-platform-uni.vercel.app/',
+    github: 'https://github.com/SurajRawatr07',
+    liveUrl: 'https://github.com/SurajRawatr07',
   },
   {
     id: 2,
@@ -104,8 +104,8 @@ const projects: Project[] = [
       '/Projects/HMS/hospital-8.webp',
     ],
     hoverImage: '/Projects/HMS/hospital-1.webp',
-    github: 'https://github.com/aitezazdev/Hospital-Mangment-System',
-    liveUrl: 'https://aitezazdev-medicore.vercel.app/',
+    github: 'https://github.com/SurajRawatr07',
+    liveUrl: 'https://github.com/SurajRawatr07',
   },
   {
     id: 3,
@@ -145,8 +145,8 @@ const projects: Project[] = [
       '/Projects/ecommerce/6.webp',
     ],
     hoverImage: '/Projects/ecommerce/1.webp',
-    github: 'https://github.com/aitezazdev/Next.js-Ecommerce',
-    liveUrl: 'https://aitezazdev-ecommerce.vercel.app/',
+    github: 'https://github.com/SurajRawatr07',
+    liveUrl: 'https://github.com/SurajRawatr07',
   },
   {
     id: 4,
@@ -186,8 +186,8 @@ const projects: Project[] = [
       '/Projects/financeTracker/6.webp',
     ],
     hoverImage: '/Projects/financeTracker/1.webp',
-    github: 'https://github.com/aitezazdev/Expense-Tracker_Mern',
-    liveUrl: 'https://aitezazdev-finance-tracker.vercel.app/',
+    github: 'https://github.com/SurajRawatr07',
+    liveUrl: 'https://github.com/SurajRawatr07',
   },
   {
     id: 5,
@@ -227,8 +227,8 @@ const projects: Project[] = [
       '/Projects/blogsite/6.webp',
     ],
     hoverImage: '/Projects/blogsite/1.webp',
-    github: 'https://github.com/aitezazdev/Blog-App-MERN',
-    liveUrl: 'https://aitezazdev-blog-app.vercel.app/',
+    github: 'https://github.com/SurajRawatr07',
+    liveUrl: 'https://github.com/SurajRawatr07',
   },
 ];
 export function getAllProjects(): Project[] {
