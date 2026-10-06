@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { gsap, useGSAP } from '@/lib/gsap';
+import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap';
 import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import FlowField from '@/components/canvas/FlowField';
@@ -42,12 +42,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2027',
     description:
-      'Pursuing BCA with 8.0/10 CGPA. Core focus: data structures, algorithms, database management and modern full-stack software engineering.',
+      'Pursuing BCA (8.0/10 CGPA) with focus on data structures, algorithms, databases, and full-stack software development.',
     responsibilities: [
-      'Data Structures & Algorithms',
-      'DBMS, SQL & Schema Modeling',
-      'Full-Stack Software Engineering',
-      'Academic Software Projects',
+      'Data Structures & Algorithms in C++ & Java',
+      'Database Design, SQL & Schema Modeling',
+      'Full-Stack Web Development & APIs',
+      'Core Computer Science Fundamentals',
     ],
     tech: ['C++', 'Java', 'Python', 'SQL', 'DBMS', 'Web Development'],
   },
@@ -62,12 +62,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Founded and lead a developer community driving peer learning, hackathon mentorship, technical workshops, and collaborative open-source builds.',
+      'Founded and lead a developer community hosting technical workshops, hackathon mentorship, and collaborative coding sessions.',
     responsibilities: [
-      'Community Leadership & Growth',
-      'Technical Workshops & Hands-on Sessions',
+      'Community Leadership & Workshop Organization',
       'Hackathon Mentorship & Project Strategy',
-      'Collaborative Code Reviews & Git Workflows',
+      'Collaborative Git Workflows & Code Reviews',
+      'Developer Networking & Peer Learning',
     ],
     tech: ['Community Building', 'Git', 'GitHub', 'Event Organization', 'Mentorship'],
   },
@@ -80,12 +80,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Architect production-ready full-stack applications with React, Next.js, Node.js, and MongoDB, integrating secure auth and REST APIs.',
+      'Building production-ready web applications with Next.js, React, Node.js, and MongoDB featuring secure authentication and REST APIs.',
     responsibilities: [
-      'Full-Stack Architecture & State Management',
-      'RESTful API Engineering & JWT Authentication',
+      'Full-Stack Web Architecture & State Management',
+      'RESTful API Engineering & Authentication',
       'Responsive UI & Performance Optimization',
-      'MongoDB Schema Design & Data Modeling',
+      'Database Modeling with MongoDB & SQL',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     socialLinks: [
@@ -105,12 +105,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Deliver custom web applications for clients, implementing responsive user interfaces, backend APIs, and reliable cloud deployments.',
+      'Delivering tailored web solutions for clients, focusing on responsive interfaces, performant backends, and cloud deployment.',
     responsibilities: [
-      'Client Scoping & Technical Delivery',
-      'Responsive Frontend & UX Architecture',
-      'Secure Authentication & API Integration',
-      'Cloud Deployment & Production Handover',
+      'Client Requirements & Technical Scoping',
+      'Frontend & Backend Architecture',
+      'REST API Integration & Authentication',
+      'Deployment & Cloud Hosting Management',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
   },
@@ -123,12 +123,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Contribute to open-source codebases by shipping features, fixing bugs, reviewing pull requests, and collaborating with global developers.',
+      'Contributing to open-source software by shipping features, resolving issues, and collaborating through pull request reviews.',
     responsibilities: [
-      'Repository Contributions & Feature Development',
-      'Issue Resolution & Bug Fixes',
-      'Code Reviews & PR Collaboration',
-      'Documentation & Technical Writeups',
+      'Feature Implementation & Bug Fixes',
+      'Pull Request Reviews & Git Collaboration',
+      'Code Quality & Technical Documentation',
+      'Active Open-Source Community Engagement',
     ],
     tech: ['Git', 'GitHub', 'React.js', 'JavaScript', 'TypeScript', 'Node.js'],
     socialLinks: [
@@ -153,12 +153,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2026',
     description:
-      'Built responsive web applications, integrated third-party REST APIs, optimized frontend rendering, and applied team Git workflows.',
+      'Completed virtual web development internships building responsive web interfaces, API integrations, and team Git workflows.',
     responsibilities: [
-      'Frontend Component Engineering',
+      'Responsive Frontend Component Development',
       'REST API Integration & State Handling',
-      'UI Responsiveness & Performance Tuning',
-      'Version Control & Branch Collaboration',
+      'Cross-Browser Compatibility & Performance',
+      'Version Control via Git & GitHub',
     ],
     tech: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Node.js', 'Tailwind CSS'],
   },
@@ -171,12 +171,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Competed in national and community hackathons, rapidly prototyping MVPs, architecting full-stack solutions, and collaborating under tight deadlines.',
+      'Participating in hackathons to rapidly prototype full-stack MVPs, solve real-world problems, and deliver under tight deadlines.',
     responsibilities: [
-      'Rapid MVP Prototyping & Architecture',
-      'Full-Stack Feature Implementation',
-      'Problem Solving Under Time Constraints',
-      'Cross-Functional Team Collaboration',
+      'Rapid Full-Stack MVP Prototyping',
+      'API Integration & Real-Time Features',
+      'Time-Constrained Problem Solving',
+      'Team Collaboration & Technical Pitches',
     ],
     tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Git'],
   },
@@ -233,43 +233,60 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         },
       );
 
-      const items = gsap.utils.toArray<HTMLElement>('.experience-item');
-      items.forEach((item, i) => {
-        const dot = item.querySelector('.timeline-dot');
+      ScrollTrigger.batch('.experience-item', {
+        start: 'top 88%',
+        once: true,
+        onEnter: (batch) => {
+          gsap.fromTo(
+            batch,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              ease: 'power3.out',
+              stagger: 0.1,
+              overwrite: 'auto',
+            },
+          );
+          batch.forEach((el) => {
+            const dot = el.querySelector('.timeline-dot');
+            if (dot) {
+              gsap.fromTo(
+                dot,
+                { opacity: 0, scale: 0.75 },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.5,
+                  ease: 'power3.out',
+                  delay: 0.05,
+                  overwrite: 'auto',
+                },
+              );
+            }
+          });
+        },
+      });
+
+      const timelineLine = tableRef.current?.querySelector('.timeline-line');
+      if (timelineLine) {
         gsap.fromTo(
-          item,
-          { opacity: 0, y: 22 },
+          timelineLine,
+          { opacity: 0, scaleY: 0.85, transformOrigin: 'top center' },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.65,
+            scaleY: 1,
+            duration: 0.85,
             ease: 'power3.out',
-            delay: i * 0.08,
             scrollTrigger: {
-              trigger: item,
+              trigger: tableRef.current,
               start: 'top 88%',
               once: true,
             },
           },
         );
-        if (dot) {
-          gsap.fromTo(
-            dot,
-            { scale: 0 },
-            {
-              scale: 1,
-              duration: 0.45,
-              ease: 'back.out(2)',
-              delay: i * 0.08 + 0.1,
-              scrollTrigger: {
-                trigger: item,
-                start: 'top 88%',
-                once: true,
-              },
-            },
-          );
-        }
-      });
+      }
 
       gsap.fromTo(
         '.cred-section-label',
@@ -313,51 +330,51 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
       <section
         ref={sectionRef}
         id="about"
-        className="min-h-screen bg-ink text-light pt-24 pb-20 md:pt-32 md:pb-28 rounded-t-4xl overflow-hidden"
+        className="min-h-screen bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 rounded-t-4xl overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
-          <div className="mb-10 md:mb-20">
+          <div className="mb-8 md:mb-14">
             <AnimatedHeading
               words={headingWords}
-              className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
+              className="text-[clamp(1.65rem,3.2vw,2.75rem)] tracking-[-0.02em] mb-3.5"
             />
             <ScrollWordReveal
               text={descriptionText}
               offset={['start 0.95', 'end 0.7']}
-              className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] max-w-2xl font-normal"
+              className="text-sm sm:text-base md:text-[1rem] text-gray-soft/90 font-italic-serif leading-[1.65] max-w-2xl font-normal"
             />
           </div>
 
-          <div className="grid grid-cols-12 gap-6 md:gap-8 pb-16 md:pb-24 items-center">
+          <div className="grid grid-cols-12 gap-6 md:gap-8 pb-12 md:pb-16 items-center">
             <div className="col-span-12 md:col-span-5 lg:col-span-5 flex items-center justify-center">
-              <div className="about-image-wrapper relative group w-full max-w-[350px] md:max-w-[380px] h-[360px] md:h-[480px] bg-elevated-dark rounded-2xl overflow-hidden border border-border-subtler shadow-2xl">
+              <div className="about-image-wrapper relative group w-full max-w-[350px] md:max-w-[380px] h-[340px] md:h-[440px] bg-elevated-dark rounded-2xl overflow-hidden border border-border-subtler shadow-2xl">
                 <FlowField />
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-7 lg:col-span-6 md:col-start-6 lg:col-start-7 flex flex-col justify-center space-y-6">
+            <div className="col-span-12 md:col-span-7 lg:col-span-6 md:col-start-6 lg:col-start-7 flex flex-col justify-center space-y-5">
               <span className="about-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent text-center md:text-left inline-block">
                 (About Me)
               </span>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {aboutMeText.split('\n\n').map((p, i) => (
                   <ScrollWordReveal
                     key={i}
                     text={p}
                     offset={['start 0.92', 'end 0.65']}
-                    className="text-sm sm:text-base md:text-[1rem] leading-[1.7] font-serif text-light/85 font-normal"
+                    className="text-sm sm:text-base md:text-[0.98rem] leading-[1.65] font-serif text-light/85 font-normal"
                   />
                 ))}
               </div>
             </div>
           </div>
 
-          <div ref={tableRef} className="pt-12 md:pt-20 border-t border-white/10">
-            <div className="mb-10 text-center md:mb-16">
+          <div ref={tableRef} className="pt-10 md:pt-14 border-t border-white/10">
+            <div className="mb-8 text-center md:mb-12">
               <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
                 (Experience)
               </span>
-              <h3 className="experience-heading mt-3 font-bold-serif text-[clamp(1.75rem,3.4vw,2.85rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
+              <h3 className="experience-heading mt-2.5 font-bold-serif text-[clamp(1.5rem,2.8vw,2.25rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
                 <span className="inline-block">
                   My <span className="font-bold-italic text-accent">Professional</span>
                 </span>{' '}
@@ -366,11 +383,11 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
             </div>
 
             <div className="relative mx-auto max-w-4xl px-2 sm:px-4">
-              <div className="relative pl-6 sm:pl-8 md:pl-10 space-y-6 sm:space-y-8 md:space-y-10">
+              <div className="relative pl-7 sm:pl-8 md:pl-10 space-y-5 sm:space-y-6 md:space-y-8">
                 {/* Subtle Left-Side Continuous Timeline Track */}
                 <div
                   aria-hidden="true"
-                  className="absolute left-[7px] sm:left-[9px] md:left-[11px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5"
+                  className="timeline-line absolute left-[11px] sm:left-[13px] md:left-[15px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5"
                 />
 
                 {EXPERIENCES.map((item) => (
@@ -379,16 +396,16 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                     className="experience-item group relative opacity-0"
                   >
                     {/* Left Timeline Indicator Dot */}
-                    <div className="absolute -left-[24px] sm:-left-[32px] md:-left-[40px] top-5 flex items-center justify-center">
-                      <span className="timeline-dot relative z-10 block h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border-2 border-accent bg-ink transition-transform duration-300 group-hover:scale-125 group-hover:bg-accent shadow-[0_0_10px_rgba(196,93,62,0.35)]" />
+                    <div className="absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 flex items-center justify-center">
+                      <span className="timeline-dot relative z-10 block h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full border-2 border-accent bg-ink transition-all duration-300 group-hover:scale-110 group-hover:bg-accent shadow-[0_0_8px_rgba(196,93,62,0.35)]" />
                     </div>
 
                     {/* Experience Card */}
-                    <div className="rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out">
+                    <div className="rounded-2xl p-4 sm:p-5 md:p-5.5 bg-surface-mid/60 border border-white/[0.06] hover:border-accent/40 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out">
                       {/* 1. ROLE / TITLE & 3. DATE */}
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                         <div>
-                          <h4 className="font-bold-serif text-base sm:text-lg md:text-[1.25rem] tracking-[-0.015em] leading-snug text-cream">
+                          <h4 className="font-bold-serif text-sm sm:text-base md:text-[1.125rem] tracking-[-0.015em] leading-snug text-cream">
                             {item.title}
                           </h4>
 
@@ -446,21 +463,21 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                         {/* 3. DATE: compact badge/pill */}
                         {item.period && (
-                          <span className="self-start sm:self-center font-bold-serif text-[10.5px] sm:text-[11px] uppercase tracking-wider text-accent px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 whitespace-nowrap">
+                          <span className="self-start sm:self-center font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-wider text-accent px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/25 whitespace-nowrap">
                             {item.period}
                           </span>
                         )}
                       </div>
 
                       {/* 4. DESCRIPTION: Maximum 1–2 short lines */}
-                      <p className="font-italic-serif text-xs sm:text-[13px] leading-relaxed text-gray-soft/90 mt-2.5">
+                      <p className="font-italic-serif text-xs sm:text-[12.5px] leading-relaxed text-gray-soft/90 mt-2">
                         {item.description}
                       </p>
 
                       {/* 5. CORE RESPONSIBILITIES: 3–4 concise items */}
                       {item.responsibilities && item.responsibilities.length > 0 && (
-                        <div className="mt-3.5 pt-3 border-t border-white/[0.08]">
-                          <span className="font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-2">
+                        <div className="mt-3 pt-2.5 border-t border-white/[0.08]">
+                          <span className="font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-1.5">
                             CORE RESPONSIBILITIES
                           </span>
                           <ul className="space-y-1 text-xs text-light/85 font-serif">
@@ -484,11 +501,11 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                       {/* 6. TECHNOLOGY STACK: compact pills */}
                       {item.tech && item.tech.length > 0 && (
-                        <div className="mt-3.5 flex flex-wrap gap-1.5">
+                        <div className="mt-3 flex flex-wrap gap-1.5">
                           {item.tech.map((t) => (
                             <span
                               key={t}
-                              className="inline-flex items-center px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-bold-serif rounded-full leading-normal bg-white/[0.04] border border-white/10 text-warm-light/90 hover:border-accent/40 hover:text-white transition-colors duration-200 select-none"
+                              className="inline-flex items-center px-2 py-0.5 text-[10px] sm:text-[10.5px] font-bold-serif rounded-full leading-normal bg-white/[0.04] border border-white/10 text-warm-light/90 hover:border-accent/40 hover:text-white transition-colors duration-200 select-none"
                             >
                               {t}
                             </span>

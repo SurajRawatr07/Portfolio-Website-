@@ -35,18 +35,18 @@ const RoleTicker = () => {
       const currentWord = wrapper.querySelector('.ticker-word-current');
       const nextWord = wrapper.querySelector('.ticker-word-next');
       if (currentWord && nextWord) {
-        gsap.set(nextWord, { y: 14, opacity: 0 });
+        gsap.set(nextWord, { y: 12, opacity: 0 });
         gsap.to(currentWord, {
-          y: -14,
+          y: -12,
           opacity: 0,
-          duration: 0.42,
-          ease: EASE.outCubic,
+          duration: 0.38,
+          ease: 'power2.out',
         });
         gsap.to(nextWord, {
           y: 0,
           opacity: 1,
-          duration: 0.42,
-          ease: EASE.outCubic,
+          duration: 0.38,
+          ease: 'power2.out',
           onComplete: () => {
             setCurrentIdx((prev) => (prev + 1) % INTRO_MESSAGES.length);
             gsap.set(currentWord, { y: 0, opacity: 1 });
@@ -59,16 +59,16 @@ const RoleTicker = () => {
 
   const nextIdx = (currentIdx + 1) % INTRO_MESSAGES.length;
   return (
-    <div className="h-7 sm:h-8 overflow-hidden mb-6 sm:mb-8 flex justify-center items-center select-none w-full">
+    <div className="h-6 sm:h-7 overflow-hidden mb-5 sm:mb-6 flex justify-center items-center select-none w-full">
       <div
         ref={containerRef}
-        className="relative h-7 sm:h-8 w-full max-w-[340px] sm:max-w-[420px] text-center font-bold-serif text-xs sm:text-[13.5px] md:text-sm tracking-[0.03em] text-accent"
+        className="relative h-6 sm:h-7 w-full max-w-[320px] sm:max-w-[420px] text-center font-bold-serif text-[11.5px] min-[360px]:text-xs sm:text-[13px] md:text-[13.5px] tracking-[0.03em] text-accent"
         aria-live="polite"
       >
-        <div className="ticker-word-current absolute inset-0 flex items-center justify-center px-2 whitespace-nowrap">
+        <div className="ticker-word-current absolute inset-0 flex items-center justify-center px-1.5 sm:px-2 whitespace-nowrap text-center">
           {INTRO_MESSAGES[currentIdx]}
         </div>
-        <div className="ticker-word-next absolute inset-0 flex items-center justify-center px-2 translate-y-3.5 opacity-0 whitespace-nowrap">
+        <div className="ticker-word-next absolute inset-0 flex items-center justify-center px-1.5 sm:px-2 translate-y-3 opacity-0 whitespace-nowrap text-center">
           {INTRO_MESSAGES[nextIdx]}
         </div>
       </div>
@@ -499,7 +499,7 @@ const HomeBanner = () => {
           <div className="max-w-xl w-full text-center mx-auto">
             <p
               ref={paragraphRef}
-              className="text-warm/90 font-italic-serif text-base sm:text-lg md:text-[1.05rem] leading-[1.65] mb-6 md:mb-8 text-center mx-auto max-w-lg tracking-normal"
+              className="text-warm/90 font-italic-serif text-sm sm:text-base md:text-[0.98rem] leading-[1.6] mb-4 sm:mb-5 text-center mx-auto max-w-md tracking-normal"
             >
               Full-Stack Developer building scalable web applications with MERN, Next.js, TypeScript & AI.
             </p>

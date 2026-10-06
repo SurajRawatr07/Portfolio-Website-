@@ -6,17 +6,17 @@
   --font-sans: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
   --font-mono: var(--font-playfair), var(--font-instrument-serif), 'Playfair Display', Georgia, serif;
 
-  /* Strict compact editorial scales */
-  --text-hero: clamp(2.4rem, 6.2vw, 6.8rem);
-  --text-hero-sm: clamp(2.1rem, 5.4vw, 5.6rem);
-  --text-section-xl: clamp(1.8rem, 3.8vw, 4.25rem);
-  --text-section: clamp(1.75rem, 3.4vw, 3.5rem);
-  --text-project: clamp(1.6rem, 2.8vw, 3.25rem);
-  --text-stat: clamp(1.6rem, 3.2vw, 3rem);
-  --text-body: clamp(0.85rem, 1.05vw, 1.05rem);
-  --text-label: clamp(0.65rem, 0.85vw, 0.8rem);
+  /* Balanced compact editorial scales */
+  --text-hero: clamp(2.2rem, 5.2vw, 4.8rem);
+  --text-hero-sm: clamp(1.85rem, 4.4vw, 4.0rem);
+  --text-section-xl: clamp(1.65rem, 3.2vw, 2.75rem);
+  --text-section: clamp(1.5rem, 2.8vw, 2.35rem);
+  --text-project: clamp(1.35rem, 2.2vw, 2.1rem);
+  --text-stat: clamp(1.4rem, 2.6vw, 2.2rem);
+  --text-body: clamp(0.82rem, 0.95vw, 0.98rem);
+  --text-label: clamp(0.65rem, 0.8vw, 0.75rem);
 
-  --spacing-section: clamp(5rem, 10vw, 9rem);
+  --spacing-section: clamp(3.5rem, 7vw, 6.5rem);
 
   --color-cream: #E2E8E4;
   --color-ink: #0A0F0D;

@@ -293,10 +293,10 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
 
   return (
     <div ref={sectionRef} className="md:hidden bg-cream pb-12">
-      <div className="px-6 pt-16 pb-8">
+      <div className="px-6 pt-10 pb-6">
         <AnimatedHeading
           words={[{ t: 'SELECTED' }, { t: 'works', serif: true }]}
-          className="text-[clamp(2.5rem,10vw,4.5rem)] leading-none text-charcoal tracking-[-0.035em]"
+          className="text-[clamp(1.65rem,5.5vw,2.5rem)] leading-none text-charcoal tracking-[-0.025em]"
         />
       </div>
 
@@ -317,7 +317,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
             className="overflow-hidden rounded-3xl block no-underline text-inherit"
             style={{ background: '#111110', boxShadow: '0 8px 32px rgba(0,0,0,0.18)' }}
           >
-            <div className="p-3 pb-0">
+            <div className="p-2.5 sm:p-3 pb-0">
               <div
                 className="mc-img-wrap relative overflow-hidden rounded-2xl"
                 style={{ aspectRatio: '16 / 10', clipPath: 'inset(100% 0 0 0 round 14px)' }}
@@ -337,23 +337,23 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
               </div>
             </div>
 
-            <div className="px-5 pt-4 pb-5 text-left">
-              <div className="flex items-center justify-between mb-3">
+            <div className="px-4 sm:px-5 pt-3.5 pb-4 sm:pb-5 text-left">
+              <div className="flex items-center justify-between mb-2.5">
                 <span
                   className="mc-num font-bold-serif font-bold leading-none tabular-nums text-accent tracking-[-0.02em]"
                   style={{
-                    fontSize: 'clamp(1.6rem, 7vw, 2.1rem)',
+                    fontSize: 'clamp(1.4rem, 6vw, 1.85rem)',
                   }}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-1.5 mb-2.5">
                 {project.tech.slice(0, 3).map((t) => (
                   <span
                     key={t}
-                    className="mc-tag font-bold-serif uppercase tracking-[0.08em] px-2.5 py-1 rounded-full font-medium"
+                    className="mc-tag font-bold-serif uppercase tracking-[0.08em] px-2.5 py-0.5 rounded-full font-medium"
                     style={{
                       fontSize: '10px',
                       background: 'rgba(255,255,255,0.08)',
@@ -368,7 +368,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
 
               <h3
                 className="mc-title font-bold-serif uppercase leading-[1.08] text-white mb-3 text-balance"
-                style={{ fontSize: 'clamp(1.2rem, 4.5vw, 1.65rem)', letterSpacing: '-0.02em' }}
+                style={{ fontSize: 'clamp(1.15rem, 4vw, 1.45rem)', letterSpacing: '-0.02em' }}
               >
                 {project.title}
               </h3>
@@ -585,11 +585,11 @@ export default function ProjectsPage() {
       onMouseLeave={handleTableMouseLeave}
       className="relative w-full bg-cream text-charcoal overflow-hidden"
     >
-      <div className="hidden md:block pt-14 pb-18 md:pt-16 md:pb-20 px-6 sm:px-8 md:px-12 lg:px-16 max-w-7xl mx-auto">
-        <div className="mb-10">
+      <div className="hidden md:block pt-12 pb-14 md:pt-14 md:pb-16 px-6 sm:px-8 md:px-12 lg:px-16 max-w-7xl mx-auto">
+        <div className="mb-8">
           <AnimatedHeading
             words={[{ t: 'SELECTED' }, { t: 'works', serif: true }]}
-            className="text-[clamp(1.8rem,3.8vw,3.8rem)] leading-none text-charcoal tracking-[-0.025em]"
+            className="text-[clamp(1.65rem,3.2vw,2.75rem)] leading-none text-charcoal tracking-[-0.02em]"
           />
         </div>
         <hr className="border-t border-border w-full mb-4" />
@@ -599,7 +599,7 @@ export default function ProjectsPage() {
             <Link
               key={project.id}
               href={`/projects/${project.slug}`}
-              className="project-row-desktop relative flex items-stretch border-b border-border py-6 min-h-[105px] group cursor-pointer no-underline"
+              className="project-row-desktop relative flex items-stretch border-b border-border py-4.5 sm:py-5 min-h-[92px] group cursor-pointer no-underline"
               onMouseEnter={(e) => {
                 mouse.current.x = e.clientX;
                 mouse.current.y = e.clientY;
@@ -618,7 +618,7 @@ export default function ProjectsPage() {
               </div>
 
               <div className="flex-1 pr-8">
-                <h3 className="relative font-bold-serif text-[clamp(1.6rem,2.8vw,2.85rem)] font-bold uppercase leading-[1.02] tracking-[-0.025em] overflow-hidden">
+                <h3 className="relative font-bold-serif text-[clamp(1.35rem,2.2vw,2.1rem)] font-bold uppercase leading-[1.05] tracking-[-0.02em] overflow-hidden">
                   <span className="block text-charcoal select-none">{project.title}</span>
                   <span
                     className="title-reveal-overlay block text-accent absolute inset-0 select-none"

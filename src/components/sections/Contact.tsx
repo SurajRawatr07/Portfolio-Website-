@@ -169,26 +169,26 @@ const Contact = () => {
   const isDisabled = isSubmitting;
 
   return (
-    <section ref={sectionRef} id="contact" className="bg-ink text-light pt-12 pb-16 md:pt-14 md:pb-24 relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="bg-ink text-light pt-12 pb-14 md:pt-14 md:pb-20 relative overflow-hidden">
       <div ref={containerRef} className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 w-full">
         <div
           ref={cardRef}
-          className="rounded-3xl bg-surface text-light p-8 sm:p-12 md:p-16 lg:p-20 border border-elevated-dark"
+          className="rounded-3xl bg-surface text-light p-6 sm:p-9 md:p-12 lg:p-14 border border-elevated-dark"
         >
           <p className="font-bold-serif text-xs uppercase tracking-[0.2em] text-accent mb-2.5 font-bold">
             (Contact)
           </p>
           <AnimatedHeading
             words={headingWords}
-            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4 text-light"
+            className="text-[clamp(1.65rem,3.2vw,2.75rem)] tracking-[-0.02em] mb-3.5 text-light"
           />
-          <div className="max-w-2xl mb-8">
+          <div className="max-w-2xl mb-6 md:mb-8">
             <ScrollWordReveal
               text="Open to internships, collaborations and development opportunities."
               offset={['start 0.95', 'end 0.7']}
-              className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] font-normal"
+              className="text-sm sm:text-base md:text-[1rem] text-gray-soft/90 font-italic-serif leading-[1.65] font-normal"
             />
-            <div className="mt-4 flex items-center">
+            <div className="mt-3.5 flex items-center">
               <a
                 href={`mailto:${site.email}`}
                 className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.66rem] min-[375px]:text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.85rem] text-cream/90 hover:text-cream tracking-wide transition-all duration-200"
@@ -208,7 +208,7 @@ const Contact = () => {
 
           <form
             onSubmit={handleSubmit}
-            className="max-w-2xl space-y-6 p-6 sm:p-8 rounded-2xl mx-auto bg-surface-mid border border-white/[0.04]"
+            className="max-w-2xl space-y-4 sm:space-y-5 p-5 sm:p-7 rounded-2xl mx-auto bg-surface-mid border border-white/[0.04]"
           >
 
             <div className="flex flex-col gap-2">
@@ -314,7 +314,7 @@ const Contact = () => {
             </div>
           </form>
 
-          <div className="mt-12 pt-8 border-t border-elevated-dark flex flex-col sm:flex-row items-center justify-between gap-5 w-full">
+          <div className="mt-8 pt-6 border-t border-elevated-dark flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
             <div ref={ctaRef} className="flex flex-col items-center sm:items-start text-center sm:text-left">
               <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-muted mb-1 font-bold">
                 DIRECT INQUIRIES

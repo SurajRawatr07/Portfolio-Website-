@@ -429,7 +429,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
                     <span className="text-gray-mid font-bold-serif text-xs md:text-sm font-semibold tracking-wider transition-colors duration-300 group-hover:text-accent tabular-nums">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="font-bold-serif text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] lg:text-[2.8rem] font-bold uppercase leading-none tracking-[-0.025em] text-cream group-hover:text-accent transition-colors duration-300 flex overflow-hidden">
+                    <span className="font-bold-serif text-[clamp(1.4rem,4.2vw,2.4rem)] font-bold uppercase leading-none tracking-[-0.02em] text-cream group-hover:text-accent transition-colors duration-300 flex overflow-hidden">
                       {link.name}
                     </span>
                     <span className="text-accent text-xl md:text-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
@@ -715,7 +715,7 @@ const Navbar: React.FC<NavbarProps> = ({ hamburgerOnly = false }) => {
           className="mobile-navbar md:hidden fixed w-full z-50 bg-transparent"
           style={navStyle}
         >
-          <div className="flex justify-between items-center px-6 sm:px-8 h-20 w-full">
+          <div className="flex justify-between items-center px-4 sm:px-8 h-16 sm:h-20 w-full">
             <NavbarBrand handleLinkClick={handleLinkClick} />
             <div className="w-10 h-10" />
           </div>
@@ -724,7 +724,7 @@ const Navbar: React.FC<NavbarProps> = ({ hamburgerOnly = false }) => {
 
       <div
         ref={hamburgerRef}
-        className="fixed top-5 md:top-6 right-6 z-[9982] pointer-events-auto"
+        className="fixed top-3.5 sm:top-5 md:top-6 right-4 sm:right-6 z-[9982] pointer-events-auto"
         style={
           hamburgerOnly
             ? { opacity: 1, scale: 1 }

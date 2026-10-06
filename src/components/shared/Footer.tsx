@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative z-30 bg-ink border-t border-white/[0.08] py-8 sm:py-10 md:py-12 px-4 sm:px-6 md:px-8">
+    <footer className="relative z-30 bg-ink border-t border-white/[0.08] py-7 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8">
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         {/* ONLY ONE Social Icon Row */}
         <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 mb-5 sm:mb-6 select-none">

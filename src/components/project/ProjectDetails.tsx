@@ -90,7 +90,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
           <h1
             ref={titleRef}
             aria-label={project.title}
-            className="font-bold-serif uppercase tracking-[-0.025em] leading-[1] text-[clamp(1.8rem,4vw,3.6rem)] mb-5 text-balance"
+            className="font-bold-serif uppercase tracking-[-0.02em] leading-[1.05] text-[clamp(1.65rem,3.4vw,2.75rem)] mb-4 text-balance"
           >
             <span aria-hidden="true" className="pd-title-text block">
               {project.title}

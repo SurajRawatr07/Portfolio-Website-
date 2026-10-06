@@ -51,34 +51,30 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
       if (!chars.length) return;
 
       gsap.set(chars, {
-        yPercent: 120,
-        rotateX: -60,
+        yPercent: 36,
         opacity: 0,
-        transformPerspective: 700,
-        transformOrigin: '50% 100%',
       });
 
       const line = root.querySelector<HTMLElement>('.ah-line');
 
       const tl = gsap.timeline({
         scrollTrigger: { trigger: root, start: 'top 90%', once: true },
-        defaults: { ease: EASE.outQuart },
+        defaults: { ease: EASE.outCubic },
       });
 
       tl.to(
         chars,
         {
           yPercent: 0,
-          rotateX: 0,
           opacity: 1,
-          duration: 0.72,
-          stagger: { each: 0.02, from: 'start' },
+          duration: 0.52,
+          stagger: { each: 0.015, from: 'start' },
         },
         0
       );
 
       if (line) {
-        tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: EASE.inOutQuad }, 0.15);
+        tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: 0.65, ease: EASE.outCubic }, 0.12);
       }
 
       return () => {

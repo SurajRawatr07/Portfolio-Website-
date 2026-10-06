@@ -191,29 +191,22 @@ const TechStack = () => {
     <section
       ref={containerRef}
       id="tech-stack"
-      className="bg-ink text-light pt-24 pb-16 md:pt-32 md:pb-20 rounded-b-4xl overflow-hidden"
+      className="bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 rounded-b-4xl overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="mb-10 md:mb-14 hidden md:block">
+        <div className="mb-8 md:mb-12">
           <AnimatedHeading
             words={headingWords}
-            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
+            className="text-[clamp(1.65rem,3.2vw,2.75rem)] tracking-[-0.02em] mb-3.5"
           />
           <ScrollWordReveal
             text={descriptionText}
             offset={['start 0.95', 'end 0.7']}
-            className="text-sm sm:text-base md:text-[1.05rem] text-gray-soft/90 font-italic-serif leading-[1.7] max-w-2xl font-normal"
+            className="text-sm sm:text-base md:text-[1rem] text-gray-soft/90 font-italic-serif leading-[1.65] max-w-2xl font-normal"
           />
         </div>
 
-        <div className="mb-8 md:hidden">
-          <AnimatedHeading
-            words={[{ t: 'MY' }, { t: 'stack', serif: true }]}
-            className="text-[clamp(1.8rem,3.8vw,3.8rem)] tracking-[-0.025em] mb-4"
-          />
-        </div>
-
-        <div className="mb-10 flex flex-wrap gap-2 sm:gap-2.5 items-center">
+        <div className="mb-8 flex flex-wrap gap-1.5 sm:gap-2 items-center">
           {filterOptions.map((option) => {
             const isActive = activeFilter === option.id;
             return (
@@ -221,7 +214,7 @@ const TechStack = () => {
                 key={option.id}
                 type="button"
                 onClick={() => setActiveFilter(option.id)}
-                className={`text-xs sm:text-[12.5px] font-bold-serif uppercase tracking-[0.08em] px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border transition-all duration-300 cursor-pointer select-none ${
+                className={`text-[11px] sm:text-xs font-bold-serif uppercase tracking-[0.08em] px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full border transition-all duration-300 cursor-pointer select-none ${
                   isActive
                     ? 'bg-cream text-ink border-cream font-bold shadow-md'
                     : 'bg-elevated-dark/60 text-gray-soft border-white/10 hover:border-accent/40 hover:text-cream font-medium'
@@ -233,47 +226,47 @@ const TechStack = () => {
           })}
         </div>
 
-        <div className="space-y-12 md:space-y-18">
+        <div className="space-y-8 sm:space-y-10 md:space-y-12">
           {visibleSections.map((stack, index) => (
             <div
               key={stack.id}
               ref={(el) => {
                 sectionRefs.current[index] = el;
               }}
-              className="flex flex-col md:flex-row md:items-start md:justify-between gap-6"
+              className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-6"
             >
               <div className="md:w-1/3">
                 <h3
                   ref={(el) => {
                     titleRefs.current[index] = el;
                   }}
-                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold-serif text-accent uppercase tracking-[-0.02em] leading-tight"
+                  className="text-base sm:text-lg md:text-xl font-bold-serif text-accent uppercase tracking-[-0.015em] leading-tight"
                 >
                   {stack.title}
                 </h3>
-                <span className="font-bold-serif text-[11px] sm:text-xs text-warm tracking-[0.16em] uppercase block mt-1.5 font-medium tabular-nums">
+                <span className="font-bold-serif text-[10.5px] sm:text-[11px] text-warm tracking-[0.16em] uppercase block mt-1 font-medium tabular-nums">
                   {stack.technologies.length} Technologies
                 </span>
               </div>
 
-              <div className="md:w-2/3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              <div className="md:w-2/3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-2.5 md:gap-3">
                 {stack.technologies.map((tech, i) => (
                   <div
                     key={i}
-                    className="tech-item flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-300 hover:bg-elevated-dark/60 border border-white/[0.04] hover:border-accent/30 bg-surface/50"
+                    className="tech-item flex items-center gap-2.5 p-2 sm:p-2.5 rounded-lg cursor-pointer transition-all duration-200 hover:bg-elevated-dark/60 border border-white/[0.04] hover:border-accent/30 bg-surface/50"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <div className="w-9 h-9 flex items-center justify-center relative flex-shrink-0">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center relative flex-shrink-0">
                       <Image
                         src={tech.icon}
                         alt={tech.name}
-                        width={36}
-                        height={36}
+                        width={32}
+                        height={32}
                         className="w-full h-full object-contain"
                       />
                     </div>
-                    <p className="text-xs sm:text-[13px] font-bold-serif text-cream/95 break-words tracking-tight">
+                    <p className="text-[11px] sm:text-xs font-bold-serif text-cream/95 break-words tracking-tight">
                       {tech.name}
                     </p>
                   </div>
