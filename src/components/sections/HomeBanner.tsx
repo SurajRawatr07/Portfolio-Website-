@@ -15,90 +15,90 @@ const AmbientGeometry = dynamic(() => import('@/components/canvas/AmbientGeometr
   ssr: false,
 });
 
-const INTRO_MESSAGES = [
-  'Hello, I’m Suraj Rawat.',
-  'Welcome to my portfolio.',
+const ROTATING_PHRASES = [
   'Building Digital Experiences.',
   'Turning Ideas Into Products.',
+  'Hello, I’m Suraj Rawat.',
+  'Welcome to my portfolio.',
 ] as const;
 
 const RoleTicker = () => {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const isAnimatingRef = useRef(false);
   const reduced = useReducedMotion();
 
   useEffect(() => {
     if (reduced) return;
     const interval = setInterval(() => {
-      const wrapper = containerRef.current;
-      if (!wrapper) return;
-      const currentWord = wrapper.querySelector('.ticker-word-current');
-      const nextWord = wrapper.querySelector('.ticker-word-next');
-      if (currentWord && nextWord) {
-        gsap.set(nextWord, { y: 12, opacity: 0 });
-        gsap.to(currentWord, {
-          y: -12,
-          opacity: 0,
-          duration: 0.38,
-          ease: 'power2.out',
-        });
-        gsap.to(nextWord, {
-          y: 0,
-          opacity: 1,
-          duration: 0.38,
-          ease: 'power2.out',
-          onComplete: () => {
-            setCurrentIdx((prev) => (prev + 1) % INTRO_MESSAGES.length);
-            gsap.set(currentWord, { y: 0, opacity: 1 });
-          },
-        });
-      }
-    }, 2800);
+      const el = textRef.current;
+      if (!el || isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
+
+      // Subtle, clean fade out with small upward glide
+      gsap.to(el, {
+        opacity: 0,
+        y: -7,
+        duration: 0.38,
+        ease: 'power2.in',
+        onComplete: () => {
+          setCurrentIdx((prev) => (prev + 1) % ROTATING_PHRASES.length);
+          // Subtle, clean fade in from below
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 7 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.42,
+              ease: 'power2.out',
+              onComplete: () => {
+                isAnimatingRef.current = false;
+              },
+            },
+          );
+        },
+      });
+    }, 3200);
+
     return () => clearInterval(interval);
   }, [reduced]);
 
-  const nextIdx = (currentIdx + 1) % INTRO_MESSAGES.length;
   return (
-    <div className="h-6 sm:h-7 overflow-hidden mb-5 sm:mb-6 flex justify-center items-center select-none w-full">
-      <div
-        ref={containerRef}
-        className="relative h-6 sm:h-7 w-full max-w-[320px] sm:max-w-[420px] text-center font-bold-serif text-[11.5px] min-[360px]:text-xs sm:text-[13px] md:text-[13.5px] tracking-[0.03em] text-accent"
-        aria-live="polite"
+    <div className="h-6 sm:h-7 flex items-center justify-center select-none w-full mb-7 sm:mb-8">
+      <p
+        ref={textRef}
+        className="font-italic-serif text-[13.5px] sm:text-[14.5px] md:text-[15px] tracking-[0.02em] text-[#1B895C] font-medium text-center whitespace-nowrap"
       >
-        <div className="ticker-word-current absolute inset-0 flex items-center justify-center px-1.5 sm:px-2 whitespace-nowrap text-center">
-          {INTRO_MESSAGES[currentIdx]}
-        </div>
-        <div className="ticker-word-next absolute inset-0 flex items-center justify-center px-1.5 sm:px-2 translate-y-3 opacity-0 whitespace-nowrap text-center">
-          {INTRO_MESSAGES[nextIdx]}
-        </div>
-      </div>
+        {ROTATING_PHRASES[currentIdx]}
+      </p>
     </div>
   );
 };
 
 const StampBadge = ({ onClick }: { onClick: () => void }) => (
-  <Magnetic strength={0.35}>
+  <Magnetic strength={0.3}>
     <button
       type="button"
       onClick={onClick}
       aria-label="Scroll to contact section"
-      className="group relative w-28 h-28 lg:w-36 lg:h-36 rounded-full grid place-items-center select-none"
+      className="group relative w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full grid place-items-center select-none cursor-pointer"
     >
       <svg viewBox="0 0 200 200" className="stamp-disc absolute inset-0 w-full h-full" aria-hidden="true">
         <defs>
-          <path id="stamp-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+          <path id="stamp-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" />
         </defs>
         <text
-          className="fill-charcoal font-bold-serif uppercase"
-          style={{ fontSize: '13px', letterSpacing: '0.22em' }}
+          className="fill-charcoal/70 group-hover:fill-charcoal font-bold-serif uppercase transition-colors duration-200"
+          style={{ fontSize: '13.5px', letterSpacing: '0.22em' }}
         >
           <textPath href="#stamp-circle">
             AVAILABLE FOR WORK • LET&apos;S BUILD • 
           </textPath>
         </text>
       </svg>
-      <span className="grid place-items-center w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-accent text-white transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-45">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <span className="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[#1B895C] text-white transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-45 shadow-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M7 7l10 10M17 7v10H7" />
         </svg>
       </span>
@@ -390,10 +390,18 @@ const HomeBanner = () => {
       )}
 
       <div ref={innerContentRef} className="max-w-5xl mx-auto w-full relative z-10 px-4 sm:px-6">
-        {/* Floating Social Icons distributed around the Hero */}
+        {/* "LET'S BUILD" Rotating Circle Badge — positioned high just below the CONTACT navbar area */}
+        <div
+          ref={stampRef}
+          className="absolute -top-3 sm:top-0 md:top-1 right-2 sm:right-4 md:right-8 lg:right-10 z-30 opacity-0 pointer-events-auto select-none"
+        >
+          <StampBadge onClick={() => handleScroll('contact')} />
+        </div>
+
+        {/* Floating Social Icons distributed safely around the Hero perimeter */}
         <div ref={socialsRef} className="pointer-events-none">
           {/* GitHub: Upper Left */}
-          <div className="absolute top-1 sm:top-2 md:top-3 lg:top-4 left-2 sm:left-5 md:left-9 lg:left-14 xl:left-18 z-20 pointer-events-auto select-none">
+          <div className="absolute top-2 sm:top-4 md:top-6 left-2 sm:left-5 md:left-8 lg:left-12 xl:left-14 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-0 will-change-transform"
               onMouseEnter={() => handleFloatHover(0, true)}
@@ -407,10 +415,10 @@ const HomeBanner = () => {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 title="GitHub"
-                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#1B895C] hover:bg-black/[0.08] text-charcoal hover:text-[#1B895C] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B895C] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 <FaGithub
-                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#1B895C] transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 />
               </a>
@@ -418,7 +426,7 @@ const HomeBanner = () => {
           </div>
 
           {/* LinkedIn: Middle Right */}
-          <div className="absolute top-[34%] sm:top-[32%] md:top-[30%] lg:top-[28%] right-2 sm:right-5 md:right-9 lg:right-13 xl:right-16 z-20 pointer-events-auto select-none">
+          <div className="absolute top-[44%] sm:top-[42%] md:top-[40%] right-2 sm:right-5 md:right-8 lg:right-12 xl:right-14 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-1 will-change-transform"
               onMouseEnter={() => handleFloatHover(1, true)}
@@ -432,10 +440,10 @@ const HomeBanner = () => {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 title="LinkedIn"
-                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-accent hover:bg-black/[0.08] text-charcoal hover:text-accent shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="group relative w-8 h-8 min-[375px]:w-9 min-[375px]:h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-black/[0.04] backdrop-blur-sm border border-black/10 hover:border-[#1B895C] hover:bg-black/[0.08] text-charcoal hover:text-[#1B895C] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B895C] focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 <FaLinkedinIn
-                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-accent transition-transform duration-300 group-hover:scale-110"
+                  className="w-3.5 h-3.5 min-[375px]:w-4 min-[375px]:h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 text-charcoal/80 group-hover:text-[#1B895C] transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 />
               </a>
@@ -443,7 +451,7 @@ const HomeBanner = () => {
           </div>
 
           {/* LeetCode: Lower Left */}
-          <div className="absolute top-[58%] sm:top-[56%] md:top-[54%] lg:top-[52%] left-2 sm:left-5 md:left-9 lg:left-13 xl:left-16 z-20 pointer-events-auto select-none">
+          <div className="absolute top-[68%] sm:top-[66%] md:top-[64%] left-2 sm:left-5 md:left-8 lg:left-12 xl:left-14 z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-2 will-change-transform"
               onMouseEnter={() => handleFloatHover(2, true)}
@@ -468,38 +476,36 @@ const HomeBanner = () => {
           </div>
         </div>
 
+        {/* Hero Title: SURAJ Rawat */}
         <div className="relative text-center">
           <h1
             ref={nameRef}
             aria-label={site.name}
-            className="select-none leading-none cursor-default mb-6 md:mb-4"
+            className="select-none leading-none cursor-default mb-4 sm:mb-5"
           >
             <span aria-hidden="true" className="block">
               <span
                 data-hero-line
-                className="block font-bold-serif uppercase text-hero tracking-[-0.03em] leading-[0.9] text-charcoal"
+                className="block font-bold-serif uppercase text-[clamp(2.5rem,6.8vw,5.5rem)] tracking-[-0.03em] leading-[0.92] text-charcoal"
               >
-                Suraj 
+                SURAJ 
               </span>
               <span
                 data-hero-line
-                className="block font-bold-italic text-hero-sm leading-[0.86] md:ml-[10vw] tracking-[-0.015em] text-accent"
+                className="block font-italic-serif text-[clamp(2.3rem,6.2vw,5.0rem)] leading-[0.92] md:ml-[6vw] tracking-[-0.015em] text-[#1B895C] font-normal"
               >
                 Rawat 
               </span>
             </span>
           </h1>
-
-          <div ref={stampRef} className="absolute -top-6 right-0 lg:right-4 xl:right-10 hidden sm:block opacity-0">
-            <StampBadge onClick={() => handleScroll('contact')} />
-          </div>
         </div>
 
-        <div className="flex justify-center items-center py-1 md:py-3 px-4 sm:px-6 w-full">
+        {/* Hero Subtitle, Rotating Phrase & Call-to-Action Buttons */}
+        <div className="flex justify-center items-center py-1 sm:py-2 px-4 sm:px-6 w-full">
           <div className="max-w-xl w-full text-center mx-auto">
             <p
               ref={paragraphRef}
-              className="text-warm/90 font-italic-serif text-sm sm:text-base md:text-[0.98rem] leading-[1.6] mb-4 sm:mb-5 text-center mx-auto max-w-md tracking-normal"
+              className="text-[#26332C] font-italic-serif text-[15px] sm:text-[16.5px] md:text-[18px] leading-[1.65] mb-4 sm:mb-5 text-center mx-auto max-w-lg tracking-normal font-normal"
             >
               Full-Stack Developer building scalable web applications with MERN, Next.js, TypeScript & AI.
             </p>
@@ -508,7 +514,7 @@ const HomeBanner = () => {
               <RoleTicker />
             </div>
 
-            <div ref={buttonsRef} className="flex flex-row justify-center items-center gap-2.5 sm:gap-4 flex-wrap w-full max-w-full mx-auto px-2">
+            <div ref={buttonsRef} className="flex flex-row justify-center items-center gap-3 sm:gap-4 flex-wrap w-full max-w-full mx-auto px-2">
               <AnimatedButton
                 onClick={() => handleScroll('projects')}
                 topText="PROJECTS"

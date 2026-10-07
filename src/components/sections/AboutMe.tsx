@@ -43,11 +43,11 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2027',
     description:
-      'Pursuing BCA (8.0/10 CGPA) with focus on data structures, algorithms, databases, and full-stack software development.',
+      'Pursuing BCA with an 8.0/10 CGPA, focused on software engineering, DSA and databases.',
     responsibilities: [
-      'Data Structures & Algorithms in C++ & Java',
-      'Database Design, SQL & Schema Modeling',
-      'Full-Stack Web Development & APIs',
+      'Data Structures & Algorithms',
+      'Database Design & SQL',
+      'Full-Stack Web Development',
       'Core Computer Science Fundamentals',
     ],
     tech: ['C++', 'Java', 'Python', 'SQL', 'DBMS', 'Web Development'],
@@ -63,14 +63,14 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Founded and lead a developer community hosting technical workshops, hackathon mentorship, and collaborative coding sessions.',
+      'Founded and lead a developer community hosting technical workshops, hackathons, and collaborative coding.',
     responsibilities: [
-      'Community Leadership & Workshop Organization',
-      'Hackathon Mentorship & Project Strategy',
+      'Technical Workshops & Event Organizing',
+      'Hackathon Mentorship & Project Guidance',
       'Collaborative Git Workflows & Code Reviews',
       'Developer Networking & Peer Learning',
     ],
-    tech: ['Community Building', 'Git', 'GitHub', 'Event Organization', 'Mentorship'],
+    tech: ['Community Leadership', 'Git', 'GitHub', 'Event Organizing', 'Mentorship'],
   },
   {
     id: '03-full-stack-developer',
@@ -81,12 +81,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Building production-ready web applications with Next.js, React, Node.js, and MongoDB featuring secure authentication and REST APIs.',
+      'Building production-ready web applications with modern frontend and backend architectures.',
     responsibilities: [
-      'Full-Stack Web Architecture & State Management',
-      'RESTful API Engineering & Authentication',
+      'Frontend Architecture & State Management',
+      'RESTful API Development & Authentication',
+      'Database Modeling & Query Optimization',
       'Responsive UI & Performance Optimization',
-      'Database Modeling with MongoDB & SQL',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     socialLinks: [
@@ -106,12 +106,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Delivering tailored web solutions for clients, focusing on responsive interfaces, performant backends, and cloud deployment.',
+      'Delivering custom web applications for clients with responsive interfaces and cloud deployment.',
     responsibilities: [
-      'Client Requirements & Technical Scoping',
-      'Frontend & Backend Architecture',
-      'REST API Integration & Authentication',
-      'Deployment & Cloud Hosting Management',
+      'Client Scoping & Architecture Planning',
+      'Full-Stack Feature Development',
+      'API Integration & Secure Authentication',
+      'Deployment & Hosting Configuration',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
   },
@@ -124,12 +124,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Contributing to open-source software by shipping features, resolving issues, and collaborating through pull request reviews.',
+      'Contributing to open-source software through feature implementation, bug fixes, and pull requests.',
     responsibilities: [
-      'Feature Implementation & Bug Fixes',
+      'Feature Implementation & Issue Resolution',
       'Pull Request Reviews & Git Collaboration',
-      'Code Quality & Technical Documentation',
-      'Active Open-Source Community Engagement',
+      'Technical Documentation & Code Quality',
+      'Open-Source Community Collaboration',
     ],
     tech: ['Git', 'GitHub', 'React.js', 'JavaScript', 'TypeScript', 'Node.js'],
     socialLinks: [
@@ -154,12 +154,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2026',
     description:
-      'Completed virtual web development internships building responsive web interfaces, API integrations, and team Git workflows.',
+      'Completed virtual web development internships building responsive web interfaces and APIs.',
     responsibilities: [
-      'Responsive Frontend Component Development',
+      'Responsive Frontend Component Engineering',
       'REST API Integration & State Handling',
-      'Cross-Browser Compatibility & Performance',
-      'Version Control via Git & GitHub',
+      'Cross-Browser Compatibility & UI Polish',
+      'Version Control & Collaborative Git',
     ],
     tech: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Node.js', 'Tailwind CSS'],
   },
@@ -172,12 +172,12 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–Present',
     description:
-      'Participating in hackathons to rapidly prototype full-stack MVPs, solve real-world problems, and deliver under tight deadlines.',
+      'Rapidly prototyping full-stack MVPs and solving real-world challenges under competitive deadlines.',
     responsibilities: [
-      'Rapid Full-Stack MVP Prototyping',
-      'API Integration & Real-Time Features',
+      'Rapid MVP Prototyping & Architecture',
+      'REST API & Real-Time Feature Integration',
       'Time-Constrained Problem Solving',
-      'Team Collaboration & Technical Pitches',
+      'Technical Presentation & Team Coordination',
     ],
     tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Git'],
   },
