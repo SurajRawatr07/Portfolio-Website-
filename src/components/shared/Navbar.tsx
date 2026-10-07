@@ -10,6 +10,8 @@ import { site, socials } from '@/lib/site';
 import Link from 'next/link';
 import Lenis from 'lenis';
 import { Copyright } from 'lucide-react';
+import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import Magnetic from '@/components/ui/Magnetic';
 
 interface MagneticHamburgerButtonProps {
@@ -464,20 +466,29 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
               </Magnetic>
             </div>
 
-            <div className="flex gap-4 md:gap-6 justify-start flex-wrap">
-              {[socials.github, socials.linkedin, socials.leetcode, socials.instagram].map((s) => (
-                <Magnetic key={s.label} strength={0.3}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative inline-block text-gray-mid hover:text-cream text-xs font-bold-serif uppercase tracking-widest transition-colors duration-300 py-1"
-                  >
-                    <span>{s.label}</span>
-                    <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-accent origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none block" />
-                  </a>
-                </Magnetic>
-              ))}
+            <div className="flex gap-3 sm:gap-4 md:gap-5 justify-start flex-wrap">
+              {[
+                { ...socials.github, icon: FaGithub },
+                { ...socials.linkedin, icon: FaLinkedinIn },
+                { ...socials.leetcode, icon: SiLeetcode },
+                { ...socials.instagram, icon: FaInstagram },
+              ].map((s) => {
+                const Icon = s.icon;
+                return (
+                  <Magnetic key={s.label} strength={0.3}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative inline-flex items-center gap-1.5 text-gray-mid hover:text-cream text-xs font-bold-serif uppercase tracking-widest transition-colors duration-300 py-1"
+                    >
+                      <Icon className="w-3.5 h-3.5 text-accent/80 group-hover:text-accent transition-colors duration-200" aria-hidden="true" />
+                      <span>{s.label}</span>
+                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-accent origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none block" />
+                    </a>
+                  </Magnetic>
+                );
+              })}
             </div>
           </div>
         </div>

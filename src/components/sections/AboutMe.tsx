@@ -397,11 +397,8 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
               <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
                 (Experience)
               </span>
-              <h3 className="experience-heading mt-2.5 font-bold-serif text-[clamp(1.5rem,2.8vw,2.25rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
-                <span className="inline-block">
-                  My <span className="font-bold-italic text-accent">Professional</span>
-                </span>{' '}
-                <span className="inline-block">Experience</span>
+              <h3 className="experience-heading mt-2 font-bold-serif text-[clamp(1.5rem,2.8vw,2.25rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
+                Experience
               </h3>
             </div>
 
@@ -542,29 +539,33 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
                       {/* Social Links (if present) */}
                       {item.socialLinks && item.socialLinks.length > 0 && (
-                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <div className="mt-3.5 flex flex-wrap items-center gap-2">
                           {item.socialLinks.map((link) => (
                             <a
                               key={link.name}
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              aria-label={`Suraj Rawat's ${link.name} (opens in a new tab)`}
-                              className="group/link inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-warm-light hover:text-white hover:border-accent/40 hover:bg-white/[0.08] transition-all duration-200 font-bold-serif text-xs tracking-wide"
+                              aria-label={`Suraj Rawat on ${link.name} (opens in a new tab)`}
+                              title={`${link.name} Profile`}
+                              className="group/link inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-warm-light hover:text-white hover:border-accent/50 hover:bg-white/[0.09] transition-all duration-200 font-bold-serif text-xs tracking-wide shadow-sm"
                             >
                               {link.icon === 'github' && (
                                 <FaGithub
-                                  className="w-3 h-3 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                  className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110"
                                   aria-hidden="true"
                                 />
                               )}
                               {link.icon === 'linkedin' && (
                                 <FaLinkedinIn
-                                  className="w-3 h-3 text-warm group-hover/link:text-accent transition-colors duration-200"
+                                  className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110"
                                   aria-hidden="true"
                                 />
                               )}
                               <span>{link.name}</span>
+                              <span className="text-[11px] text-accent/80 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
+                                ↗
+                              </span>
                             </a>
                           ))}
                         </div>

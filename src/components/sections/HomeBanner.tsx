@@ -2,18 +2,13 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { gsap, ScrollTrigger, SplitText, useGSAP } from '@/lib/gsap';
-import dynamic from 'next/dynamic';
 import AnimatedButton from '@/components/ui/AnimatedButton';
-import Magnetic from '@/components/ui/Magnetic';
 import { EASE } from '@/lib/motion';
 import { site } from '@/lib/site';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
-
-const AmbientGeometry = dynamic(() => import('@/components/canvas/AmbientGeometry'), {
-  ssr: false,
-});
+import AmbientGeometry from '@/components/canvas/AmbientGeometry';
 
 const ROTATING_PHRASES = [
   'Building Digital Experiences.',
@@ -76,36 +71,6 @@ const RoleTicker = () => {
   );
 };
 
-const StampBadge = ({ onClick }: { onClick: () => void }) => (
-  <Magnetic strength={0.3}>
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label="Scroll to contact section"
-      className="group relative w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full grid place-items-center select-none cursor-pointer"
-    >
-      <svg viewBox="0 0 200 200" className="stamp-disc absolute inset-0 w-full h-full" aria-hidden="true">
-        <defs>
-          <path id="stamp-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" />
-        </defs>
-        <text
-          className="fill-charcoal/70 group-hover:fill-charcoal font-bold-serif uppercase transition-colors duration-200"
-          style={{ fontSize: '13.5px', letterSpacing: '0.22em' }}
-        >
-          <textPath href="#stamp-circle">
-            AVAILABLE FOR WORK • LET&apos;S BUILD • 
-          </textPath>
-        </text>
-      </svg>
-      <span className="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[#1B895C] text-white transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-45 shadow-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M7 7l10 10M17 7v10H7" />
-        </svg>
-      </span>
-    </button>
-  </Magnetic>
-);
-
 const HomeBanner = () => {
   const nameRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -113,7 +78,6 @@ const HomeBanner = () => {
   const buttonsRef = useRef<HTMLDivElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
   const floatTimelinesRef = useRef<gsap.core.Timeline[]>([]);
-  const stampRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const innerContentRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
@@ -145,7 +109,6 @@ const HomeBanner = () => {
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
-    gsap.set(stampRef.current, { scale: 0, rotate: -30, opacity: 0 });
 
     const tl = gsap.timeline({ defaults: { ease: EASE.outQuart }, delay: 0.05 });
     tl.to(chars, {
@@ -166,8 +129,7 @@ const HomeBanner = () => {
         socialsRef.current?.children ?? [],
         { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(1.5)' },
         '-=0.35'
-      )
-      .to(stampRef.current, { scale: 1, rotate: 0, opacity: 1, duration: 0.9, ease: 'elastic.out(1, 0.55)' }, '-=0.6');
+      );
 
     const enterHandler = () => {
       gsap.to(chars, {
@@ -214,7 +176,6 @@ const HomeBanner = () => {
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
-    gsap.set(stampRef.current, { scale: 0, rotate: -30, opacity: 0 });
   }, [reduced, playIntro]);
 
   useEffect(() => {
@@ -370,7 +331,7 @@ const HomeBanner = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-[100dvh] md:min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 pt-28 pb-8 md:pt-20 md:pb-0 bg-cream flex items-center relative overflow-hidden"
+      className="min-h-[100dvh] md:min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 pt-24 pb-8 md:pt-20 md:pb-0 bg-cream flex items-center relative overflow-hidden"
     >
       <AmbientGeometry />
 
@@ -386,14 +347,6 @@ const HomeBanner = () => {
       )}
 
       <div ref={innerContentRef} className="max-w-5xl mx-auto w-full relative z-10 px-4 sm:px-6">
-        {/* "LET'S BUILD" Rotating Circle Badge — positioned high just below the CONTACT navbar area */}
-        <div
-          ref={stampRef}
-          className="absolute -top-3 sm:top-0 md:top-1 right-2 sm:right-4 md:right-8 lg:right-10 z-30 opacity-0 pointer-events-auto select-none"
-        >
-          <StampBadge onClick={() => handleScroll('contact')} />
-        </div>
-
         {/* Floating Social Icons framing the central Hero content */}
         <div ref={socialsRef} className="pointer-events-none">
           {/* GitHub: Left side, close to the Hero text */}

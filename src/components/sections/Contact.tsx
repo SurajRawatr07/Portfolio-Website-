@@ -8,6 +8,7 @@ import { gsap, useGSAP } from '@/lib/gsap';
 import { EASE } from '@/lib/motion';
 import { site } from '@/lib/site';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -336,20 +337,34 @@ const Contact = () => {
 
             <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
               <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
+                href="https://github.com/SurajRawatr07"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Suraj Rawat on GitHub"
+                title="GitHub"
+                className="group/link inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-white hover:border-accent/50 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
               >
-                <span>Email</span>
-                <span className="text-[11px] text-accent">↗</span>
+                <FaGithub className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110" aria-hidden="true" />
+                <span>GitHub</span>
+                <span className="text-[11px] text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Suraj Rawat on LinkedIn"
+                title="LinkedIn"
+                className="group/link inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-white hover:border-accent/50 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
+              >
+                <FaLinkedinIn className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110" aria-hidden="true" />
+                <span>LinkedIn</span>
+                <span className="text-[11px] text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
+              </a>
+              <a
+                href={`mailto:${site.email}`}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
               >
-                <span>LinkedIn</span>
+                <span>Email</span>
                 <span className="text-[11px] text-accent">↗</span>
               </a>
               <button
