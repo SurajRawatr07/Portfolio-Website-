@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { gsap, ScrollTrigger, SplitText, useGSAP } from '@/lib/gsap';
+import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap';
 import AnimatedButton from '@/components/ui/AnimatedButton';
 import { EASE } from '@/lib/motion';
-import { site } from '@/lib/site';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
@@ -81,7 +80,6 @@ const HomeBanner = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const innerContentRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
-  const splitsRef = useRef<SplitText[]>([]);
   const hasPlayedRef = useRef(false);
   const reduced = useReducedMotion();
 
@@ -89,34 +87,17 @@ const HomeBanner = () => {
     if (reduced || !nameRef.current || hasPlayedRef.current) return;
     hasPlayedRef.current = true;
 
-    const lines = nameRef.current.querySelectorAll<HTMLElement>('[data-hero-line]');
-    const chars: HTMLElement[] = [];
-    splitsRef.current.forEach((s) => s.revert());
-    splitsRef.current = [];
-    lines.forEach((line) => {
-      const split = SplitText.create(line, { type: 'chars', charsClass: 'hero-char' });
-      splitsRef.current.push(split);
-      chars.push(...(split.chars as HTMLElement[]));
-    });
-
-    gsap.set(chars, {
-      yPercent: 125,
-      rotateX: -70,
-      opacity: 0,
-      transformPerspective: 900,
-      transformOrigin: '50% 100%',
-    });
+    gsap.set(nameRef.current, { y: 16, opacity: 0 });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
 
-    const tl = gsap.timeline({ defaults: { ease: EASE.outQuart }, delay: 0.05 });
-    tl.to(chars, {
-      yPercent: 0,
-      rotateX: 0,
+    const tl = gsap.timeline({ defaults: { ease: EASE.outCubic }, delay: 0.05 });
+    tl.to(nameRef.current, {
+      y: 0,
       opacity: 1,
-      duration: 1,
-      stagger: { each: 0.026, from: 'start' },
+      duration: 0.85,
+      ease: 'power3.out',
     })
       .to(paragraphRef.current, { y: 0, opacity: 1, duration: 0.75, ease: EASE.outCubic }, '-=0.55')
       .to(tickerRef.current, { y: 0, opacity: 1, duration: 0.6, ease: EASE.outCubic }, '-=0.5')
@@ -130,23 +111,12 @@ const HomeBanner = () => {
         { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(1.5)' },
         '-=0.35'
       );
-
-    const enterHandler = () => {
-      gsap.to(chars, {
-        keyframes: [{ yPercent: -9, duration: 0.22 }, { yPercent: 0, duration: 0.5 }],
-        ease: EASE.outQuad,
-        stagger: { each: 0.016, from: 'center' },
-        overwrite: 'auto',
-      });
-    };
-    nameRef.current.addEventListener('mouseenter', enterHandler);
-    return () => nameRef.current?.removeEventListener('mouseenter', enterHandler);
   }, [reduced]);
 
   useEffect(() => {
     if (reduced || !nameRef.current) {
       if (reduced) {
-        gsap.set([paragraphRef.current, tickerRef.current], { clearProps: 'all' });
+        gsap.set([nameRef.current, paragraphRef.current, tickerRef.current], { clearProps: 'all' });
         gsap.set(socialsRef.current?.children ?? [], { clearProps: 'all' });
       }
       return;
@@ -156,23 +126,7 @@ const HomeBanner = () => {
       return cleanup;
     }
 
-    const lines = nameRef.current.querySelectorAll<HTMLElement>('[data-hero-line]');
-    const chars: HTMLElement[] = [];
-    splitsRef.current.forEach((s) => s.revert());
-    splitsRef.current = [];
-    lines.forEach((line) => {
-      const split = SplitText.create(line, { type: 'chars', charsClass: 'hero-char' });
-      splitsRef.current.push(split);
-      chars.push(...(split.chars as HTMLElement[]));
-    });
-
-    gsap.set(chars, {
-      yPercent: 125,
-      rotateX: -70,
-      opacity: 0,
-      transformPerspective: 900,
-      transformOrigin: '50% 100%',
-    });
+    gsap.set(nameRef.current, { y: 16, opacity: 0 });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
@@ -511,25 +465,36 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        {/* Hero Title: SURAJ Rawat */}
-        <div className="relative text-center">
+        {/* Hero Title: SURAJ RAWAT Premium Personal-Brand Wordmark */}
+        <div className="relative text-center flex justify-center items-center overflow-visible">
           <h1
             ref={nameRef}
-            aria-label={site.name}
-            className="select-none leading-none cursor-default mb-4 sm:mb-5"
+            aria-label="SURAJ RAWAT"
+            className="group select-none cursor-default mb-4 sm:mb-5 max-w-full inline-block overflow-visible"
           >
-            <span aria-hidden="true" className="block">
+            <span
+              className="inline-flex flex-nowrap whitespace-nowrap items-baseline justify-center gap-x-2 min-[380px]:gap-x-3 sm:gap-x-4 md:gap-x-5 leading-[1.05] py-1.5 text-[clamp(1.75rem,4.4vw,3.35rem)] overflow-visible"
+            >
+              {/* SURAJ: Strong uppercase bold serif */}
               <span
-                data-hero-line
-                className="block font-bold-serif uppercase text-[clamp(2.5rem,6.8vw,5.5rem)] tracking-[-0.03em] leading-[0.92] text-charcoal"
+                className="font-bold-serif uppercase font-bold text-charcoal tracking-[-0.01em] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[0.02em] inline-block"
+                style={{
+                  fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, "Times New Roman", serif',
+                  fontWeight: 700,
+                }}
               >
-                SURAJ 
+                SURAJ
               </span>
+
+              {/* RAWAT: Expressive italic serif with subtle contrast */}
               <span
-                data-hero-line
-                className="block font-italic-serif text-[clamp(2.3rem,6.2vw,5.0rem)] leading-[0.92] md:ml-[6vw] tracking-[-0.015em] text-[#1B895C] font-normal"
+                className="font-italic-serif italic font-normal text-charcoal tracking-normal transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[0.03em] group-hover:translate-x-1 inline-block"
+                style={{
+                  fontFamily: 'var(--font-instrument-serif), var(--font-playfair), "Instrument Serif", Georgia, "Times New Roman", serif',
+                  fontWeight: 400,
+                }}
               >
-                Rawat 
+                RAWAT
               </span>
             </span>
           </h1>
