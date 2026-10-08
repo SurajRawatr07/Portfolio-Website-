@@ -232,60 +232,146 @@ const HomeBanner = () => {
 
       const initFloating = () => {
         const isMobile = window.innerWidth < 768;
-        // On mobile, keep movement range minimal (~1.5px) to stay safe and close
-        // On desktop, subtle gentle drift (~4px max) without swinging far across the screen
-        const amp = isMobile ? 0.35 : 1;
+        const isSmallMobile = window.innerWidth < 420;
+        // Desktop has large natural movement space (~40-60px travel)
+        // Tablet has moderate travel (~25-35px travel)
+        // Mobile automatically scales travel down (~8-12px) to stay safe inside viewport and away from text
+        const amp = isSmallMobile ? 0.16 : isMobile ? 0.22 : window.innerWidth < 1024 ? 0.65 : 1.0;
 
         floatTimelinesRef.current.forEach((t) => t.kill());
         floatTimelinesRef.current = [];
 
-        // 1. GitHub: left side, gentle slow diagonal float
-        const tlGitHub = gsap.timeline({ repeat: -1, yoyo: true });
+        // 1. GitHub: Left / Upper-Left natural floating wander (multi-step wandering path)
+        const tlGitHub = gsap.timeline({ repeat: -1 });
         tlGitHub
           .to('.hero-social-float-0', {
-            x: -4.5 * amp,
-            y: -3.5 * amp,
+            x: -42 * amp,
+            y: -32 * amp,
+            scale: 1.03,
+            opacity: 1,
+            duration: 4.6,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-0', {
+            x: -56 * amp,
+            y: 38 * amp,
+            scale: 0.98,
+            opacity: 0.88,
+            duration: 5.2,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-0', {
+            x: 28 * amp,
+            y: 60 * amp,
+            scale: 1.04,
+            opacity: 0.98,
             duration: 4.8,
             ease: 'sine.inOut',
           })
           .to('.hero-social-float-0', {
-            x: 3.5 * amp,
-            y: 3.0 * amp,
-            duration: 5.2,
+            x: -16 * amp,
+            y: 14 * amp,
+            scale: 1.0,
+            opacity: 0.92,
+            duration: 4.4,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-0', {
+            x: 0,
+            y: 0,
+            scale: 1.0,
+            opacity: 0.92,
+            duration: 4.2,
             ease: 'sine.inOut',
           });
         floatTimelinesRef.current.push(tlGitHub);
 
-        // 2. LinkedIn: right side, gentle slow counter-phase float
-        const tlLinkedIn = gsap.timeline({ repeat: -1, yoyo: true, delay: 1.2 });
+        // 2. LinkedIn: Right / Upper-Right natural floating wander (independent counter-path)
+        const tlLinkedIn = gsap.timeline({ repeat: -1, delay: 1.6 });
         tlLinkedIn
           .to('.hero-social-float-1', {
-            x: 3.8 * amp,
-            y: -4.2 * amp,
+            x: 44 * amp,
+            y: -46 * amp,
+            scale: 1.04,
+            opacity: 1,
             duration: 5.4,
             ease: 'sine.inOut',
           })
           .to('.hero-social-float-1', {
-            x: -3.2 * amp,
-            y: 3.6 * amp,
+            x: 58 * amp,
+            y: 30 * amp,
+            scale: 0.97,
+            opacity: 0.88,
+            duration: 5.2,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-1', {
+            x: -30 * amp,
+            y: 68 * amp,
+            scale: 1.03,
+            opacity: 0.98,
+            duration: 5.6,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-1', {
+            x: 20 * amp,
+            y: 12 * amp,
+            scale: 0.99,
+            opacity: 0.92,
+            duration: 4.8,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-1', {
+            x: 0,
+            y: 0,
+            scale: 1.0,
+            opacity: 0.92,
             duration: 4.6,
             ease: 'sine.inOut',
           });
         floatTimelinesRef.current.push(tlLinkedIn);
 
-        // 3. LeetCode: lower-left side, gentle slow float with different timing & axis
-        const tlLeetCode = gsap.timeline({ repeat: -1, yoyo: true, delay: 2.2 });
+        // 3. LeetCode: Lower-Left natural floating wander (different rhythm & distinct loop)
+        const tlLeetCode = gsap.timeline({ repeat: -1, delay: 3.2 });
         tlLeetCode
           .to('.hero-social-float-2', {
-            x: 3.5 * amp,
-            y: 4.0 * amp,
+            x: -50 * amp,
+            y: 20 * amp,
+            scale: 1.03,
+            opacity: 0.98,
+            duration: 5.8,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-2', {
+            x: -18 * amp,
+            y: -54 * amp,
+            scale: 0.98,
+            opacity: 0.88,
+            duration: 6.0,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-2', {
+            x: 34 * amp,
+            y: 36 * amp,
+            scale: 1.04,
+            opacity: 1,
             duration: 5.6,
             ease: 'sine.inOut',
           })
           .to('.hero-social-float-2', {
-            x: -4.0 * amp,
-            y: -3.0 * amp,
-            duration: 4.9,
+            x: -14 * amp,
+            y: -10 * amp,
+            scale: 0.99,
+            opacity: 0.92,
+            duration: 5.0,
+            ease: 'sine.inOut',
+          })
+          .to('.hero-social-float-2', {
+            x: 0,
+            y: 0,
+            scale: 1.0,
+            opacity: 0.92,
+            duration: 4.8,
             ease: 'sine.inOut',
           });
         floatTimelinesRef.current.push(tlLeetCode);
@@ -349,8 +435,8 @@ const HomeBanner = () => {
       <div ref={innerContentRef} className="max-w-5xl mx-auto w-full relative z-10 px-4 sm:px-6">
         {/* Floating Social Icons framing the central Hero content */}
         <div ref={socialsRef} className="pointer-events-none">
-          {/* GitHub: Left side, close to the Hero text */}
-          <div className="absolute top-2 min-[400px]:top-3 sm:top-5 md:top-6 lg:top-8 left-3 min-[400px]:left-5 sm:left-8 md:left-[calc(50%-220px)] lg:left-[calc(50%-260px)] xl:left-[calc(50%-290px)] z-20 pointer-events-auto select-none">
+          {/* GitHub: Left & Upper-Left area */}
+          <div className="absolute top-2 min-[400px]:top-3 sm:top-5 md:top-6 lg:top-8 left-3 min-[400px]:left-5 sm:left-8 md:left-[calc(50%-280px)] lg:left-[calc(50%-340px)] xl:left-[calc(50%-380px)] z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-0 will-change-transform"
               onMouseEnter={() => handleFloatHover(0, true)}
@@ -374,8 +460,8 @@ const HomeBanner = () => {
             </div>
           </div>
 
-          {/* LinkedIn: Right side, close to the Hero text */}
-          <div className="absolute top-[28%] min-[400px]:top-[26%] sm:top-[25%] md:top-[23%] lg:top-[22%] right-3 min-[400px]:right-5 sm:right-8 md:right-[calc(50%-230px)] lg:right-[calc(50%-270px)] xl:right-[calc(50%-300px)] z-20 pointer-events-auto select-none">
+          {/* LinkedIn: Right & Upper-Right area */}
+          <div className="absolute top-[28%] min-[400px]:top-[26%] sm:top-[25%] md:top-[24%] lg:top-[25%] right-3 min-[400px]:right-5 sm:right-8 md:right-[calc(50%-280px)] lg:right-[calc(50%-340px)] xl:right-[calc(50%-380px)] z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-1 will-change-transform"
               onMouseEnter={() => handleFloatHover(1, true)}
@@ -399,8 +485,8 @@ const HomeBanner = () => {
             </div>
           </div>
 
-          {/* LeetCode: Lower-left side, close to the Hero text */}
-          <div className="absolute top-[58%] min-[400px]:top-[56%] sm:top-[52%] md:top-[48%] lg:top-[46%] left-3 min-[400px]:left-5 sm:left-8 md:left-[calc(50%-240px)] lg:left-[calc(50%-280px)] xl:left-[calc(50%-310px)] z-20 pointer-events-auto select-none">
+          {/* LeetCode: Lower-Left area */}
+          <div className="absolute top-[58%] min-[400px]:top-[56%] sm:top-[52%] md:top-[52%] lg:top-[50%] left-3 min-[400px]:left-5 sm:left-8 md:left-[calc(50%-300px)] lg:left-[calc(50%-360px)] xl:left-[calc(50%-400px)] z-20 pointer-events-auto select-none">
             <div
               className="hero-social-float-2 will-change-transform"
               onMouseEnter={() => handleFloatHover(2, true)}

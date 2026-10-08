@@ -43,12 +43,11 @@ const EXPERIENCES: ExperienceItem[] = [
     },
     period: '2024–2027',
     description:
-      'Pursuing BCA with an 8.0/10 CGPA, focused on software engineering, DSA and databases.',
+      'Pursuing BCA with an 8.0/10 CGPA, focused on software engineering, DSA, and databases.',
     responsibilities: [
-      'Data Structures & Algorithms',
-      'Database Design & SQL',
-      'Full-Stack Web Development',
-      'Core Computer Science Fundamentals',
+      'Data Structures & Algorithms in C++ and Java',
+      'Relational database design and SQL querying',
+      'Full-stack web application development',
     ],
     tech: ['C++', 'Java', 'Python', 'SQL', 'DBMS', 'Web Development'],
   },
@@ -65,12 +64,11 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Founded and lead a developer community hosting technical workshops, hackathons, and collaborative coding.',
     responsibilities: [
-      'Technical Workshops & Event Organizing',
-      'Hackathon Mentorship & Project Guidance',
-      'Collaborative Git Workflows & Code Reviews',
-      'Developer Networking & Peer Learning',
+      'Organizing technical workshops and hackathons',
+      'Mentoring student developers on web development',
+      'Leading collaborative Git workflows and code reviews',
     ],
-    tech: ['Community Leadership', 'Git', 'GitHub', 'Event Organizing', 'Mentorship'],
+    tech: ['Community Leadership', 'Git & GitHub', 'Mentorship', 'Event Organizing'],
   },
   {
     id: '03-full-stack-developer',
@@ -83,10 +81,9 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Building production-ready web applications with modern frontend and backend architectures.',
     responsibilities: [
-      'Frontend Architecture & State Management',
-      'RESTful API Development & Authentication',
-      'Database Modeling & Query Optimization',
-      'Responsive UI & Performance Optimization',
+      'Designing responsive interfaces in React and Next.js',
+      'Developing secure REST APIs using Node.js and Express',
+      'Modeling MongoDB schemas and optimizing database queries',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'],
     socialLinks: [
@@ -108,10 +105,9 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Delivering custom web applications for clients with responsive interfaces and cloud deployment.',
     responsibilities: [
-      'Client Scoping & Architecture Planning',
-      'Full-Stack Feature Development',
-      'API Integration & Secure Authentication',
-      'Deployment & Hosting Configuration',
+      'Engineering full-stack client solutions from concept to launch',
+      'Integrating third-party APIs, authentication, and payments',
+      'Deploying and maintaining production web applications',
     ],
     tech: ['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Firebase'],
   },
@@ -126,10 +122,9 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Contributing to open-source software through feature implementation, bug fixes, and pull requests.',
     responsibilities: [
-      'Feature Implementation & Issue Resolution',
-      'Pull Request Reviews & Git Collaboration',
-      'Technical Documentation & Code Quality',
-      'Open-Source Community Collaboration',
+      'Resolving repository issues and submitting clean pull requests',
+      'Collaborating with maintainers on reviews and Git workflows',
+      'Improving developer documentation and technical guides',
     ],
     tech: ['Git', 'GitHub', 'React.js', 'JavaScript', 'TypeScript', 'Node.js'],
     socialLinks: [
@@ -156,10 +151,9 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Completed virtual web development internships building responsive web interfaces and APIs.',
     responsibilities: [
-      'Responsive Frontend Component Engineering',
-      'REST API Integration & State Handling',
-      'Cross-Browser Compatibility & UI Polish',
-      'Version Control & Collaborative Git',
+      'Building reusable, responsive UI components with React',
+      'Integrating backend REST APIs and asynchronous data flows',
+      'Testing cross-browser compatibility and UI consistency',
     ],
     tech: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'Node.js', 'Tailwind CSS'],
   },
@@ -174,10 +168,9 @@ const EXPERIENCES: ExperienceItem[] = [
     description:
       'Rapidly prototyping full-stack MVPs and solving real-world challenges under competitive deadlines.',
     responsibilities: [
-      'Rapid MVP Prototyping & Architecture',
-      'REST API & Real-Time Feature Integration',
-      'Time-Constrained Problem Solving',
-      'Technical Presentation & Team Coordination',
+      'Engineering end-to-end full-stack MVPs within 24–48 hours',
+      'Architecting real-time features and responsive interfaces',
+      'Presenting technical demos and pitching to review panels',
     ],
     tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Git'],
   },
@@ -236,59 +229,118 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         },
       );
 
-      // Slide-by-slide Experience Animation with Reduced Motion Check
+      // One-by-One Experience Card Scroll Animation
       if (reduced) {
         gsap.set('.experience-card', { opacity: 1, y: 0, x: 0, scale: 1 });
         gsap.set('.timeline-dot', { opacity: 1, scale: 1 });
         const timelineLine = tableRef.current?.querySelector('.timeline-line');
         if (timelineLine) gsap.set(timelineLine, { opacity: 1, scaleY: 1 });
       } else {
-        // Initial state: subtle translateY(35px), scale(0.98), subtle translateX(4px), opacity 0
-        gsap.set('.experience-card', {
-          opacity: 0,
-          y: 35,
-          x: 4,
-          scale: 0.98,
-          transformOrigin: 'top left',
-        });
-        gsap.set('.timeline-dot', {
-          opacity: 0,
-          scale: 0.7,
-        });
+        const isMobile = window.innerWidth < 768;
+        const yOffset = isMobile ? 24 : 38;
+        const xOffset = isMobile ? 3 : 8;
 
-        // Individual slide reveal with sequential micro-stagger as cards enter the viewport
-        ScrollTrigger.batch('.experience-item', {
-          start: 'top 88%',
-          once: true,
-          onEnter: (batch) => {
-            const cards = batch
-              .map((item) => item.querySelector('.experience-card'))
-              .filter(Boolean);
-            const dots = batch
-              .map((item) => item.querySelector('.timeline-dot'))
-              .filter(Boolean);
+        const items = gsap.utils.toArray<HTMLElement>('.experience-item');
 
-            gsap.to(cards, {
-              opacity: 1,
-              y: 0,
-              x: 0,
-              scale: 1,
-              duration: 0.75,
-              ease: 'power3.out',
-              stagger: 0.12,
-              overwrite: 'auto',
-            });
+        items.forEach((item) => {
+          const card = item.querySelector<HTMLElement>('.experience-card');
+          const dot = item.querySelector<HTMLElement>('.timeline-dot');
+          if (!card || !dot) return;
 
-            gsap.to(dots, {
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              ease: 'power3.out',
-              stagger: 0.12,
-              delay: 0.05,
-              overwrite: 'auto',
-            });
-          },
+          // Initial pre-scroll state
+          gsap.set(card, {
+            opacity: 0,
+            y: yOffset,
+            x: xOffset,
+            scale: 0.96,
+            transformOrigin: 'top left',
+          });
+          gsap.set(dot, {
+            opacity: 0.25,
+            scale: 0.7,
+          });
+
+          // Individual scroll trigger for each experience item
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 86%',
+            end: 'top 20%',
+            onEnter: () => {
+              // Enters into focal spotlight
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                duration: 0.75,
+                ease: 'power3.out',
+                overwrite: 'auto',
+              });
+              gsap.to(dot, {
+                opacity: 1,
+                scale: 1.15,
+                duration: 0.5,
+                ease: 'power3.out',
+                overwrite: 'auto',
+              });
+            },
+            onLeave: () => {
+              // As user scrolls past toward next card, recedes gracefully
+              gsap.to(card, {
+                opacity: 0.45,
+                scale: 0.985,
+                y: -10,
+                duration: 0.6,
+                ease: 'power2.out',
+                overwrite: 'auto',
+              });
+              gsap.to(dot, {
+                opacity: 0.45,
+                scale: 0.9,
+                duration: 0.5,
+                ease: 'power2.out',
+                overwrite: 'auto',
+              });
+            },
+            onEnterBack: () => {
+              // Scrolling back up: restore full focal brilliance
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                duration: 0.65,
+                ease: 'power3.out',
+                overwrite: 'auto',
+              });
+              gsap.to(dot, {
+                opacity: 1,
+                scale: 1.15,
+                duration: 0.5,
+                ease: 'power3.out',
+                overwrite: 'auto',
+              });
+            },
+            onLeaveBack: () => {
+              // Scrolling back above: naturally reverse to pre-entrance state
+              gsap.to(card, {
+                opacity: 0,
+                y: yOffset,
+                x: xOffset,
+                scale: 0.96,
+                duration: 0.6,
+                ease: 'power2.in',
+                overwrite: 'auto',
+              });
+              gsap.to(dot, {
+                opacity: 0.25,
+                scale: 0.7,
+                duration: 0.4,
+                ease: 'power2.in',
+                overwrite: 'auto',
+              });
+            },
+          });
         });
 
         const timelineLine = tableRef.current?.querySelector('.timeline-line');
@@ -425,7 +477,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                     </div>
 
                     {/* Experience Card */}
-                    <div className="experience-card rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/85 border border-white/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-sm hover:border-accent/40 -translate-y-0.5 hover:shadow-2xl transition-all duration-300 ease-out">
+                    <div className="experience-card rounded-2xl p-4 sm:p-5 md:p-6 bg-surface-mid/85 border border-white/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-sm hover:border-accent/40 hover:opacity-100 -translate-y-0.5 hover:shadow-2xl transition-all duration-300 ease-out">
                       {/* 1. ROLE / TITLE & 3. DATE */}
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2">
                         <div className="min-w-0 pr-1">
@@ -498,14 +550,14 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                         {item.description}
                       </p>
 
-                      {/* 5. CORE RESPONSIBILITIES: 3–4 concise items */}
+                      {/* 5. CORE RESPONSIBILITIES: 3 concise points */}
                       {item.responsibilities && item.responsibilities.length > 0 && (
                         <div className="mt-3.5 pt-2.5 border-t border-white/[0.08]">
                           <span className="font-bold-serif text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-accent font-bold block mb-1.5">
                             CORE RESPONSIBILITIES
                           </span>
                           <ul className="space-y-1.5 text-xs text-light/85 font-serif">
-                            {item.responsibilities.slice(0, 4).map((resp, i) => (
+                            {item.responsibilities.slice(0, 3).map((resp, i) => (
                               <li
                                 key={i}
                                 className="grid grid-cols-[1fr_auto] items-center gap-2.5 py-0.5 border-b border-white/[0.03] last:border-b-0"
