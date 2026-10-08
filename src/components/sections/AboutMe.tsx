@@ -407,7 +407,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         id="about"
         className="min-h-screen bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 rounded-t-4xl overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="max-w-7xl mx-auto px-4 min-[380px]:px-6 sm:px-8 md:px-12 lg:px-16">
           <div className="mb-8 md:mb-14">
             <AnimatedHeading
               words={headingWords}
@@ -422,7 +422,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
           <div className="grid grid-cols-12 gap-6 md:gap-8 pb-12 md:pb-16 items-center">
             <div className="col-span-12 md:col-span-5 lg:col-span-5 flex items-center justify-center">
-              <div className="about-image-wrapper relative group w-full max-w-[350px] md:max-w-[380px] h-[340px] md:h-[440px] bg-elevated-dark rounded-2xl overflow-hidden border border-border-subtler shadow-2xl">
+              <div className="about-image-wrapper relative group w-full max-w-[350px] md:max-w-[380px] h-[300px] min-[380px]:h-[340px] md:h-[440px] bg-elevated-dark rounded-2xl overflow-hidden border border-border-subtler shadow-2xl">
                 <FlowField />
               </div>
             </div>
@@ -455,7 +455,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
             </div>
 
             {/* Experience Timeline */}
-            <div className="relative max-w-3xl mx-auto pl-7 sm:pl-9 md:pl-11">
+            <div className="relative max-w-3xl mx-auto pl-6 min-[380px]:pl-7 sm:pl-9 md:pl-11">
               {/* Subtle Left-Side Continuous Timeline Track */}
               <div
                 aria-hidden="true"
@@ -471,7 +471,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                     {/* Timeline Node Dot */}
                     <div
                       aria-hidden="true"
-                      className="timeline-dot absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-ink border-2 border-accent/70 group-hover:border-accent group-hover:scale-110 transition-transform duration-300 shadow-[0_0_8px_rgba(196,93,62,0.4)] flex items-center justify-center z-10"
+                      className="timeline-dot absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-ink border-2 border-accent/70 group-hover:border-accent group-hover:scale-110 transition-transform duration-300 shadow-[0_0_8px_rgba(52,211,153,0.4)] flex items-center justify-center z-10"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                     </div>

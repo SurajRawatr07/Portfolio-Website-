@@ -328,6 +328,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
                   fill
                   sizes="(max-width: 767px) calc(100vw - 32px)"
                   priority={index < 2}
+                  referrerPolicy="no-referrer"
                   className="mc-img object-cover object-top"
                 />
                 <div
@@ -696,6 +697,7 @@ export default function ProjectsPage() {
                         fill
                         sizes="480px"
                         priority={idx < 2}
+                        referrerPolicy="no-referrer"
                         className="object-cover object-top"
                       />
                     </div>

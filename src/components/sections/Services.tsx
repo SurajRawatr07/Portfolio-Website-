@@ -99,7 +99,7 @@ const Services = () => {
     <section
       id="services"
       ref={sectionRef}
-      className="min-h-screen bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 px-6 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
+      className="min-h-screen bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 px-4 min-[380px]:px-6 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 md:mb-14">
@@ -163,7 +163,7 @@ const Services = () => {
                     {item.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="font-bold-serif text-[10.5px] sm:text-[11px] text-warm-light px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 hover:border-accent/40 hover:text-white transition-all duration-200 tracking-wide"
+                        className="font-bold-serif text-[10.5px] sm:text-[11px] text-warm-light px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 hover:border-accent/40 hover:text-white hover:scale-[1.03] transition-all duration-200 tracking-wide select-none"
                       >
                         {tech}
                       </span>

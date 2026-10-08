@@ -87,7 +87,7 @@ const HomeBanner = () => {
     if (reduced || !nameRef.current || hasPlayedRef.current) return;
     hasPlayedRef.current = true;
 
-    gsap.set(nameRef.current, { y: 16, opacity: 0 });
+    gsap.set(nameRef.current, { y: 18, opacity: 0, scale: 0.98 });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
@@ -96,6 +96,7 @@ const HomeBanner = () => {
     tl.to(nameRef.current, {
       y: 0,
       opacity: 1,
+      scale: 1,
       duration: 0.85,
       ease: 'power3.out',
     })
@@ -126,7 +127,7 @@ const HomeBanner = () => {
       return cleanup;
     }
 
-    gsap.set(nameRef.current, { y: 16, opacity: 0 });
+    gsap.set(nameRef.current, { y: 18, opacity: 0, scale: 0.98 });
     gsap.set([paragraphRef.current, tickerRef.current], { y: 34, opacity: 0 });
     gsap.set(buttonsRef.current?.children ?? [], { y: 26, opacity: 0, scale: 0.96 });
     gsap.set(socialsRef.current?.children ?? [], { y: 20, opacity: 0, scale: 0.92 });
@@ -380,7 +381,7 @@ const HomeBanner = () => {
           ref={spotlightRef}
           className="absolute inset-0 pointer-events-none z-[1] opacity-0"
           style={{
-            background: 'radial-gradient(400px circle at var(--x, 0px) var(--y, 0px), rgba(196, 93, 62, 0.07), transparent 85%)',
+            background: 'radial-gradient(400px circle at var(--x, 0px) var(--y, 0px), rgba(52, 211, 153, 0.08), transparent 85%)',
             willChange: 'opacity',
           }}
         />
@@ -465,36 +466,37 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        {/* Hero Title: SURAJ RAWAT Premium Personal-Brand Wordmark */}
+        {/* Hero Title: Suraj Rawat Editorial Brand Wordmark (“𝑺𝒖𝒓𝒂𝒋 𝑹𝒂𝒘𝒂𝒕”) */}
         <div className="relative text-center flex justify-center items-center overflow-visible">
           <h1
             ref={nameRef}
-            aria-label="SURAJ RAWAT"
+            aria-label="Suraj Rawat"
             className="group select-none cursor-default mb-4 sm:mb-5 max-w-full inline-block overflow-visible"
           >
             <span
-              className="inline-flex flex-nowrap whitespace-nowrap items-baseline justify-center gap-x-2 min-[380px]:gap-x-3 sm:gap-x-4 md:gap-x-5 leading-[1.05] py-1.5 text-[clamp(1.75rem,4.4vw,3.35rem)] overflow-visible"
+              className="inline-flex flex-nowrap whitespace-nowrap items-baseline justify-center gap-x-2.5 min-[380px]:gap-x-3 sm:gap-x-4 md:gap-x-5 leading-[1.05] py-1.5 text-[clamp(2.1rem,5vw,3.75rem)] overflow-visible"
             >
-              {/* SURAJ: Strong uppercase bold serif */}
+              {/* Suraj: Bold elegant serif */}
               <span
-                className="font-bold-serif uppercase font-bold text-charcoal tracking-[-0.01em] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[0.02em] inline-block"
+                className="font-bold-serif font-bold text-charcoal tracking-[-0.015em] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[-0.005em] inline-block"
                 style={{
                   fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, "Times New Roman", serif',
                   fontWeight: 700,
                 }}
               >
-                SURAJ
+                Suraj
               </span>
 
-              {/* RAWAT: Expressive italic serif with subtle contrast */}
+              {/* Rawat: Bold italic / elegant italic serif with subtle accent color */}
               <span
-                className="font-italic-serif italic font-normal text-charcoal tracking-normal transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[0.03em] group-hover:translate-x-1 inline-block"
+                className="font-bold-serif italic font-bold text-[#1B895C] tracking-[-0.01em] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:tracking-[0.015em] group-hover:translate-x-1 inline-block"
                 style={{
-                  fontFamily: 'var(--font-instrument-serif), var(--font-playfair), "Instrument Serif", Georgia, "Times New Roman", serif',
-                  fontWeight: 400,
+                  fontFamily: 'var(--font-playfair), var(--font-instrument-serif), "Playfair Display", Georgia, "Times New Roman", serif',
+                  fontWeight: 700,
+                  fontStyle: 'italic',
                 }}
               >
-                RAWAT
+                Rawat
               </span>
             </span>
           </h1>

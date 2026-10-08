@@ -193,7 +193,7 @@ const TechStack = () => {
       id="tech-stack"
       className="bg-ink text-light pt-16 pb-14 md:pt-24 md:pb-20 rounded-b-4xl overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+      <div className="max-w-7xl mx-auto px-4 min-[380px]:px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="mb-8 md:mb-12">
           <AnimatedHeading
             words={headingWords}
@@ -253,7 +253,7 @@ const TechStack = () => {
                 {stack.technologies.map((tech, i) => (
                   <div
                     key={i}
-                    className="tech-item flex items-center gap-2.5 p-2 sm:p-2.5 rounded-lg cursor-pointer transition-all duration-200 hover:bg-elevated-dark/60 border border-white/[0.04] hover:border-accent/30 bg-surface/50"
+                    className="tech-item flex items-center gap-2.5 p-2 sm:p-2.5 rounded-lg cursor-pointer transition-all duration-200 hover:bg-elevated-dark/60 border border-white/[0.04] hover:border-accent/30 bg-surface/50 hover:scale-[1.02] active:scale-[0.98]"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -263,6 +263,7 @@ const TechStack = () => {
                         alt={tech.name}
                         width={32}
                         height={32}
+                        referrerPolicy="no-referrer"
                         className="w-full h-full object-contain"
                       />
                     </div>

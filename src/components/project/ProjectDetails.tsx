@@ -156,6 +156,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                     fill
                     sizes="(max-width: 768px) 100vw, 1200px"
                     priority
+                    referrerPolicy="no-referrer"
                     className="object-cover object-top"
                   />
                 </div>
@@ -253,6 +254,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                           alt={`${project.title} screenshot ${actualIdx + 1}`}
                           fill
                           sizes="(max-width: 768px) 100vw, 1100px"
+                          referrerPolicy="no-referrer"
                           className="object-cover object-top"
                         />
                       </div>

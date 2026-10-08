@@ -407,11 +407,11 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
             className="absolute bottom-[170px] md:bottom-[100px] left-0 right-0 h-px bg-border-subtler"
           />
 
-          <div className="flex justify-between items-center px-8 sm:px-10 md:px-14 h-20 border-b border-elevated-dark">
+          <div className="flex justify-between items-center px-6 sm:px-10 md:px-14 h-20 border-b border-elevated-dark">
             <span className="text-gray-mid font-bold-serif text-xs tracking-[0.16em] uppercase">Navigation</span>
           </div>
 
-          <nav className="absolute top-[80px] bottom-[170px] md:bottom-[100px] left-0 right-0 flex flex-col justify-center px-8 sm:px-10 md:px-14 gap-2 md:gap-3">
+          <nav className="absolute top-[80px] bottom-[170px] md:bottom-[100px] left-0 right-0 flex flex-col justify-center px-6 sm:px-10 md:px-14 gap-2 md:gap-3">
             {links.map((link, i) => (
               <div
                 key={link.href}
@@ -445,7 +445,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose, handle
 
           <div
             ref={metaRef}
-            className="absolute bottom-0 left-0 right-0 h-[170px] md:h-[100px] px-8 sm:px-10 md:px-14 pt-6 pb-6 md:pb-10 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-end"
+            className="absolute bottom-0 left-0 right-0 h-[170px] md:h-[100px] px-6 sm:px-10 md:px-14 pt-6 pb-6 md:pb-10 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-end"
           >
             <div className="space-y-1 text-left">
               <p className="text-gray-mid font-bold-serif text-xs uppercase tracking-[0.16em] mb-1.5 font-bold">EMAIL</p>

@@ -8,13 +8,11 @@ import { gsap, useGSAP } from '@/lib/gsap';
 import { EASE } from '@/lib/motion';
 import { site } from '@/lib/site';
 import { useReducedMotion } from '@/lib/useReducedMotion';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
   const headingWords = [
@@ -28,7 +26,6 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
   const [successMessage, setSuccessMessage] = useState<string>('');
-  const [copiedToast, setCopiedToast] = useState<boolean>(false);
 
   useEffect(() => {
     if (submitStatus) {
@@ -36,13 +33,6 @@ const Contact = () => {
       return () => clearTimeout(timer);
     }
   }, [submitStatus]);
-
-  useEffect(() => {
-    if (copiedToast) {
-      const timer = setTimeout(() => setCopiedToast(false), 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [copiedToast]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -66,7 +56,6 @@ const Contact = () => {
     () => {
       if (reduced) return;
       const card = cardRef.current;
-      const cta = ctaRef.current;
 
       if (card) {
         gsap.fromTo(
@@ -78,19 +67,6 @@ const Contact = () => {
             duration: 0.9,
             ease: EASE.outCubic,
             scrollTrigger: { trigger: card, start: 'top 90%', once: true },
-          }
-        );
-      }
-      if (cta) {
-        gsap.fromTo(
-          cta,
-          { x: 48, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: EASE.outCubic,
-            scrollTrigger: { trigger: cta, start: 'top 94%', once: true },
           }
         );
       }
@@ -314,94 +290,7 @@ const Contact = () => {
               </button>
             </div>
           </form>
-
-          <div className="mt-8 pt-6 border-t border-elevated-dark flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
-            <div ref={ctaRef} className="flex flex-col items-center sm:items-start text-center sm:text-left">
-              <span className="font-bold-serif text-xs uppercase tracking-[0.16em] text-muted mb-1 font-bold">
-                DIRECT INQUIRIES
-              </span>
-              <a
-                href={`mailto:${site.email}`}
-                className="group inline-flex items-center gap-1.5 font-italic-serif text-[0.72rem] min-[430px]:text-[0.78rem] md:text-[0.88rem] text-cream hover:text-accent transition-all duration-200 tracking-wide"
-                aria-label={`Send email to ${site.email}`}
-              >
-                <span className="relative border-b border-white/20 group-hover:border-accent transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis">
-                  {site.email}
-                </span>
-                <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-accent text-[0.72rem]">
-                  <span className="group-hover:hidden">→</span>
-                  <span className="hidden group-hover:inline">↗</span>
-                </span>
-              </a>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-              <a
-                href="https://github.com/SurajRawatr07"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Suraj Rawat on GitHub"
-                title="GitHub"
-                className="group/link inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-white hover:border-accent/50 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
-              >
-                <FaGithub className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110" aria-hidden="true" />
-                <span>GitHub</span>
-                <span className="text-[11px] text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/suraj-rawat-30513b340/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Suraj Rawat on LinkedIn"
-                title="LinkedIn"
-                className="group/link inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-white hover:border-accent/50 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
-              >
-                <FaLinkedinIn className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover/link:scale-110" aria-hidden="true" />
-                <span>LinkedIn</span>
-                <span className="text-[11px] text-accent transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">↗</span>
-              </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200"
-              >
-                <span>Email</span>
-                <span className="text-[11px] text-accent">↗</span>
-              </a>
-              <button
-                type="button"
-                aria-label={`Copy ${site.email} to clipboard`}
-                onClick={() => {
-                  navigator.clipboard.writeText(site.email);
-                  setCopiedToast(true);
-                }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-mid hover:bg-elevated hover:text-accent hover:border-accent/40 text-gray-soft font-bold-serif text-xs uppercase tracking-[0.12em] transition-all duration-200 cursor-pointer"
-              >
-                <span>Copy Email</span>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div
-        role="status"
-        aria-live="polite"
-        className={`fixed bottom-8 right-8 z-[9998] pointer-events-none transition-all duration-300 ${
-          copiedToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-        }`}
-        style={{
-          background: '#34D399',
-          color: '#0A0F0D',
-          fontFamily: 'var(--font-serif)',
-          fontWeight: 700,
-          fontSize: '0.72rem',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          padding: '0.75rem 1.25rem',
-          borderRadius: '9999px',
-        }}
-      >
-        ✓ Copied to clipboard
       </div>
     </section>
   );
