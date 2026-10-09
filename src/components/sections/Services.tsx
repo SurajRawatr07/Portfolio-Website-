@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP } from '@/lib/gsap';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 import { Layers, Sparkles, Server, Palette, Users } from 'lucide-react';
 
 interface ServiceItem {
@@ -60,10 +61,15 @@ const SERVICES_DATA: ServiceItem[] = [
 
 const Services = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
 
   useGSAP(
     () => {
       const items = gsap.utils.toArray<HTMLElement>('.service-row');
+      if (reduced) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
       items.forEach((item, index) => {
         gsap.fromTo(
           item,
@@ -83,7 +89,7 @@ const Services = () => {
         );
       });
     },
-    { scope: sectionRef },
+    { scope: sectionRef, dependencies: [reduced] },
   );
 
   const headingWords = [

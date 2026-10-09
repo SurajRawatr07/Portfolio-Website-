@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { gsap, useGSAP } from '@/lib/gsap';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import ScrollWordReveal from '@/components/ui/ScrollWordReveal';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 export interface TechItem {
   name: string;
@@ -88,6 +89,7 @@ const TechStack = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+  const reduced = useReducedMotion();
 
   const headingWords = [
     { t: 'MY' },
@@ -117,6 +119,12 @@ const TechStack = () => {
         if (!section) return;
         const items = section.querySelectorAll('.tech-item');
         const title = titleRefs.current[index];
+
+        if (reduced) {
+          if (title) gsap.set(title, { opacity: 1, y: 0 });
+          if (items.length > 0) gsap.set(items, { opacity: 1, y: 0 });
+          return;
+        }
 
         if (title) {
           gsap.fromTo(
@@ -158,7 +166,7 @@ const TechStack = () => {
         }
       });
     },
-    { scope: containerRef, dependencies: [activeFilter] },
+    { scope: containerRef, dependencies: [activeFilter, reduced] },
   );
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {

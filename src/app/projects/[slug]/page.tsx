@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
     title: project.title,
     description: project.description,
     openGraph: {
-      title: `${project.title} - Aitezaz Sikandar`,
+      title: `${project.title} - Suraj Rawat`,
       description: project.description,
       images: [
         {
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${project.title} - Aitezaz Sikandar`,
+      title: `${project.title} - Suraj Rawat`,
       description: project.description,
       images: [project.hoverImage || project.images[0]],
     },

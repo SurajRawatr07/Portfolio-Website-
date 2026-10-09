@@ -263,8 +263,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
           // Individual scroll trigger for each experience item
           ScrollTrigger.create({
             trigger: item,
-            start: 'top 86%',
-            end: 'top 20%',
+            start: 'top 88%',
             onEnter: () => {
               // Enters into focal spotlight
               gsap.to(card, {
@@ -284,26 +283,8 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                 overwrite: 'auto',
               });
             },
-            onLeave: () => {
-              // As user scrolls past toward next card, recedes gracefully
-              gsap.to(card, {
-                opacity: 0.45,
-                scale: 0.985,
-                y: -10,
-                duration: 0.6,
-                ease: 'power2.out',
-                overwrite: 'auto',
-              });
-              gsap.to(dot, {
-                opacity: 0.45,
-                scale: 0.9,
-                duration: 0.5,
-                ease: 'power2.out',
-                overwrite: 'auto',
-              });
-            },
             onEnterBack: () => {
-              // Scrolling back up: restore full focal brilliance
+              // Scrolling back up into view
               gsap.to(card, {
                 opacity: 1,
                 y: 0,
@@ -328,14 +309,14 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                 y: yOffset,
                 x: xOffset,
                 scale: 0.96,
-                duration: 0.6,
+                duration: 0.5,
                 ease: 'power2.in',
                 overwrite: 'auto',
               });
               gsap.to(dot, {
                 opacity: 0.25,
                 scale: 0.7,
-                duration: 0.4,
+                duration: 0.35,
                 ease: 'power2.in',
                 overwrite: 'auto',
               });
@@ -363,38 +344,40 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
         }
       }
 
-      gsap.fromTo(
-        '.cred-section-label',
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.7,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: tableRef.current,
-            start: 'top 92%',
-            once: true,
-          },
-        },
-      );
-
-      const expHeading = tableRef.current?.querySelector('.experience-heading');
-      if (expHeading) {
+      if (!reduced) {
         gsap.fromTo(
-          expHeading,
-          { y: 24, opacity: 0 },
+          '.cred-section-label',
+          { opacity: 0 },
           {
-            y: 0,
             opacity: 1,
-            duration: 0.85,
-            ease: 'power3.out',
+            duration: 0.7,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: tableRef.current,
-              start: 'top 85%',
+              start: 'top 92%',
               once: true,
             },
           },
         );
+
+        const expHeading = tableRef.current?.querySelector('.experience-heading');
+        if (expHeading) {
+          gsap.fromTo(
+            expHeading,
+            { y: 24, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.85,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: tableRef.current,
+                start: 'top 85%',
+                once: true,
+              },
+            },
+          );
+        }
       }
     },
     { scope: sectionRef, dependencies: [reduced] },
@@ -446,7 +429,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
 
           <div ref={tableRef} className="pt-10 md:pt-14 border-t border-white/10">
             <div className="mb-6 text-center md:mb-10">
-              <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block opacity-0">
+              <span className="cred-section-label font-bold-serif text-xs uppercase tracking-[0.2em] text-accent inline-block">
                 (Experience)
               </span>
               <h3 className="experience-heading mt-2 font-bold-serif text-[clamp(1.5rem,2.8vw,2.25rem)] tracking-[-0.02em] leading-tight text-light max-w-2xl mx-auto">
@@ -455,11 +438,11 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
             </div>
 
             {/* Experience Timeline */}
-            <div className="relative max-w-3xl mx-auto pl-6 min-[380px]:pl-7 sm:pl-9 md:pl-11">
+            <div className="relative max-w-3xl mx-auto pl-7 sm:pl-10">
               {/* Subtle Left-Side Continuous Timeline Track */}
               <div
                 aria-hidden="true"
-                className="timeline-line absolute left-[11px] sm:left-[13px] md:left-[15px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/50 via-white/15 to-white/5 pointer-events-none origin-top"
+                className="timeline-line absolute left-[14px] sm:left-[20px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent/40 via-white/15 to-white/5 pointer-events-none origin-top -translate-x-1/2"
               />
 
               <div className="space-y-6 sm:space-y-8">
@@ -471,7 +454,7 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                     {/* Timeline Node Dot */}
                     <div
                       aria-hidden="true"
-                      className="timeline-dot absolute -left-[23px] sm:-left-[26px] md:-left-[32px] top-5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-ink border-2 border-accent/70 group-hover:border-accent group-hover:scale-110 transition-transform duration-300 shadow-[0_0_8px_rgba(52,211,153,0.4)] flex items-center justify-center z-10"
+                      className="timeline-dot absolute -left-[14px] sm:-left-[20px] -translate-x-1/2 top-5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#111A16] border border-accent/60 group-hover:border-accent group-hover:scale-110 transition-transform duration-300 shadow-sm flex items-center justify-center z-10"
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                     </div>
@@ -560,15 +543,15 @@ Founder of Tech Circle and active open-source contributor. Dedicated to shipping
                             {item.responsibilities.slice(0, 3).map((resp, i) => (
                               <li
                                 key={i}
-                                className="grid grid-cols-[1fr_auto] items-center gap-2.5 py-0.5 border-b border-white/[0.03] last:border-b-0"
+                                className="flex items-start gap-2.5 py-0.5"
                               >
+                                <span
+                                  className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 mt-1.5"
+                                  aria-hidden="true"
+                                />
                                 <span className="text-gray-soft/95 leading-normal text-[11.5px] sm:text-xs">
                                   {resp}
                                 </span>
-                                <span
-                                  className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"
-                                  aria-hidden="true"
-                                />
                               </li>
                             ))}
                           </ul>

@@ -7,6 +7,7 @@ import { gsap, useGSAP } from '@/lib/gsap';
 import { useRouter } from 'next/navigation';
 import AnimatedHeading from '@/components/ui/AnimateHeading';
 import { getAllProjects, Project } from '@/lib/projects';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 const useHoverPreview = (containerRef?: React.RefObject<HTMLDivElement | null>) => {
   const floatingRef = useRef<HTMLDivElement | null>(null);
@@ -234,10 +235,23 @@ interface MobileSnapProjectsProps {
 function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const reduced = useReducedMotion();
 
   useGSAP(
     () => {
       if (!sectionRef.current || !projects.length) return;
+      if (reduced) {
+        const cards = cardRefs.current.filter((card): card is HTMLAnchorElement => card !== null);
+        cards.forEach((card) => {
+          gsap.set(card, { opacity: 1, y: 0 });
+          const imgWrap = card.querySelector('.mc-img-wrap');
+          if (imgWrap) gsap.set(imgWrap, { clipPath: 'inset(0% 0 0 0 round 14px)' });
+          const elements = card.querySelectorAll('.mc-img, .mc-num, .mc-tag, .mc-title, .mc-cta');
+          gsap.set(elements, { opacity: 1, y: 0, scale: 1 });
+        });
+        return;
+      }
+
       const mm = gsap.matchMedia();
 
       mm.add('(max-width: 767px)', () => {
@@ -288,7 +302,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
 
       return () => mm.revert();
     },
-    { scope: sectionRef, dependencies: [projects] },
+    { scope: sectionRef, dependencies: [projects, reduced] },
   );
 
   return (
@@ -320,7 +334,7 @@ function MobileSnapProjects({ projects, router }: MobileSnapProjectsProps) {
             <div className="p-2.5 sm:p-3 pb-0">
               <div
                 className="mc-img-wrap relative overflow-hidden rounded-2xl"
-                style={{ aspectRatio: '16 / 10', clipPath: 'inset(100% 0 0 0 round 14px)' }}
+                style={{ aspectRatio: '16 / 10' }}
               >
                 <Image
                   src={project.hoverImage || project.images[0]}
@@ -405,6 +419,7 @@ export default function ProjectsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const sliderReelRef = useRef<HTMLDivElement>(null);
   const activeIndexRef = useRef<number>(-1);
+  const reduced = useReducedMotion();
 
   const {
     setFloatingRef,
@@ -421,6 +436,10 @@ export default function ProjectsPage() {
       if (projects.length === 0) return;
       const rows = containerRef.current?.querySelectorAll('.project-row-desktop');
       if (!rows?.length) return;
+      if (reduced) {
+        gsap.set(rows, { y: 0, opacity: 1 });
+        return;
+      }
       rows.forEach((row, index) => {
         const rect = row.getBoundingClientRect();
         const alreadyVisible = rect.top < window.innerHeight * 0.95;
@@ -431,7 +450,7 @@ export default function ProjectsPage() {
         }
       });
     },
-    { scope: containerRef, dependencies: [projects] },
+    { scope: containerRef, dependencies: [projects, reduced] },
   );
 
   const activateRow = useCallback(
